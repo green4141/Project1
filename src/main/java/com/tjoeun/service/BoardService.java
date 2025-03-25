@@ -62,6 +62,11 @@ public class BoardService {
 	public List<BoardDTO> getBoardList(int board_id){
 		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id);
 		return boardDTOList;
-	}	
+	}
+	
+	public BoardDTO getBoardInfo(int idx) {
+		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
+		return boardDTO;
+	}
 	
 }
