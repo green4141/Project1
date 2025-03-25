@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +24,7 @@
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
 		<div class="card-body">
-			<h4 class="card-title">게시판 이름</h4>
+			<h4 class="card-title">${name }</h4>
 			<table class="table table-hover" id='board_list'>
 				<thead>
 					<tr>
@@ -30,79 +32,19 @@
 						<th class="w-50">제목</th>
 						<th class="text-center d-none d-md-table-cell">작성자</th>
 						<th class="text-center d-none d-md-table-cell">작성날짜</th>
+                        <th class="text-center d-none d-md-table-cell">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='${root }board/read'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
-						
-					</tr>
+                    <c:forEach var="boardDTO" items="${boardDTOList }" >
+    					<tr>
+    						<td class="text-center d-none d-md-table-cell">${boardDTO.idx }</td>
+    						<td><a href='${root }board/read'>${boardDTO.title }</a></td>
+    						<td class="text-center d-none d-md-table-cell">${boardDTO.writer_name }</td>
+    						<td class="text-center d-none d-md-table-cell"><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
+                            <td class="text-center d-none d-md-table-cell">${boardDTO.hits }</td>
+    					</tr>
+                    </c:forEach>
 				</tbody>
 			</table>
 			

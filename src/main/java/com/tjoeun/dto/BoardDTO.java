@@ -15,8 +15,9 @@ public class BoardDTO {
 	private Date date;
 	private int user;
 	private String file;
-	private MultipartFile upload_file;
 	private int hits;
+	
+	private MultipartFile upload_file;
 	
 	private String writer_name;
 }
