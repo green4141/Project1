@@ -17,14 +17,9 @@ public class UserService {
 	@Resource(name="loginUserDTO")
 	private UserDTO loginUserDTO;
 	
-	
-	// Service 에서
-	// 사용자가 회원가입하면서 입력한 아이디로
-	// DB 에서 가져온 이름이 조회되는지 비교하기
 	public boolean checkUserId(String id) {
 		String username = userDAO.checkUserId(id);
-		// 사용자가 입력한 아이디로 가입한 회원이 없음
-		// else <-- 이미 존재하는 아이디입니다
+
 		if (username == null) {
 			return true;
 		}else {
@@ -36,20 +31,18 @@ public class UserService {
 		userDAO.addUserInfo(joinUserDTO);
 	}
 	
-	// Service 에서
-	// DB 에서 가져온 로그인한 회원의 정보를,
-	// Session Scope 에 (Spring Framework)가 미리 생성해 놓은
-	// UserDTO loginUserDTO 에 저장함
+
 	public void getLoginUserInfo(UserDTO loginProcUserDTO) {
 		UserDTO loginProcUserDTO2 = userDAO.getLoginUserInfo(loginProcUserDTO);
 		
-		// loginUserDTO <-- Session Scope 에 생성된 UserDTO
-		// DB 로부터 로그인한 회원의 정보를 정상적으로 가져온 경우
+
 		if(loginProcUserDTO2 != null) {
-		  loginUserDTO.setIdx(loginProcUserDTO2.getIdx());
+			loginUserDTO.setIdx(loginProcUserDTO2.getIdx());
 		  loginUserDTO.setUsername(loginProcUserDTO2.getUsername());
-		  // loginUserDTO.setUser_id(loginProcUserDTO2.getUser_id());
-		  // loginUserDTO.setUser_pw(loginProcUserDTO2.getUser_pw());
+		  loginUserDTO.setName(loginProcUserDTO2.getName());
+		  loginUserDTO.setId(loginProcUserDTO2.getId());
+		  loginUserDTO.setPassword(loginProcUserDTO2.getPassword());
+		  loginUserDTO.setRole(loginProcUserDTO2.getRole());
 		  loginUserDTO.setUserLogin(true);
 		}
 		
