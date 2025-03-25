@@ -1,5 +1,7 @@
 package com.tjoeun.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,13 @@ public class BoardDAO {
 		boardMapper.addBoardInfo(writeBoardDTO);
 	}
 	
+	public String getBoardInfoName(int board_id) {
+		String name = boardMapper.getBoardInfoName(board_id);
+		return name;
+	}
 	
+	public List<BoardDTO> getBoardList(int board_id){
+		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id);
+		return boardDTOList;
+	}
 }

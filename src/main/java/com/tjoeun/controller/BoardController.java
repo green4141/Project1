@@ -1,5 +1,7 @@
 package com.tjoeun.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,14 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
-										 Model model) {
+			               Model model) {
+		
+		String name = boardService.getBoardInfoName(board_id);
+		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id);
 		
 		model.addAttribute("board_id", board_id);
+		model.addAttribute("name", name);
+		model.addAttribute("boardDTOList", boardDTOList);
 		
 		return "board/main";
 	}
