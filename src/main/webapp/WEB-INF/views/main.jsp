@@ -62,14 +62,14 @@
 						</tbody>
 					</table>
 					
-					<a href="${root }board/main" class="btn btn-primary">더보기</a>
+					<a href="${root }board/main?board_id=0" class="btn btn-primary">더보기</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
 				<div class="card-body">
-					<h4 class="card-title">유머게시판</h4>
+					<h4 class="card-title">선생님 게시판</h4>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -107,12 +107,12 @@
 						</tbody>
 					</table>
 					
-					<a href="board_main.html" class="btn btn-primary">더보기</a>
+					<a href="${root }board/main?board_id=1" class="btn btn-primary">더보기</a>
 				</div>
 			</div>
 		
 		</div>
-		<div class="col-lg-6" style="margin-top:20px">
+		<!--<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
 				<div class="card-body">
 					<h4 class="card-title">정치게시판</h4>
@@ -153,7 +153,7 @@
 						</tbody>
 					</table>
 					
-					<a href="board_main.html" class="btn btn-primary">더보기</a>
+					<a href="${root }board/main?board_id=1" class="btn btn-primary">더보기</a>
 				</div>
 			</div>
 		</div>
@@ -201,7 +201,7 @@
 					<a href="board_main.html" class="btn btn-primary">더보기</a>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </div>
 
