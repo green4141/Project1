@@ -9,21 +9,21 @@ import com.tjoeun.dto.BoardDTO;
 
 public interface BoardMapper {
 	@Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
-					"values(#{board_id}, #{title}, #{content}, 5, #{file})")
+					"values(#{board_id}, #{title}, #{content}, #{user}, #{file})")
 		void addBoardInfo(BoardDTO writeBoardDTO);
 	
-	/*
+
 	@Select("SELECT name " + 
 					"FROM boardinfo " + 
 					"WHERE board_id=#{board_id}")
 	String getBoardInfoName(int board_id);
 	
-	@Select("SELECT c.content_idx, c.content_subject, u.user_name content_writer_name, "+
-		  "       to_char(c.content_date, 'YYYY-MM-DD') content_date "+
-		  "  FROM content_table c, user_table u "+
-		  " WHERE c.content_writer_idx = u.user_idx "+
-		  "   AND c.content_board_idx = #{board_id} "+
-		  "ORDER BY c.content_idx desc")	
+	@Select("SELECT b.idx, b.title, u.name writer_name, "+
+		  		"to_char(b.date, 'YYYY-MM-DD') date "+
+		  		"FROM board b, user u "+
+		  		"WHERE b.user = u.idx "+
+		  		"AND b.board_id = #{board_id} "+
+		  		"ORDER BY b.idx desc")	
 	List<BoardDTO> getBoardList(int board_id);
-	*/
+
 }

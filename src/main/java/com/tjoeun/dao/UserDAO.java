@@ -25,4 +25,6 @@ public class UserDAO {
 		UserDTO loginProcUserDTO2 = userMapper.getLoginUserInfo(loginProcUserDTO);
 		return loginProcUserDTO2;
 	}
+	
+	
 }
