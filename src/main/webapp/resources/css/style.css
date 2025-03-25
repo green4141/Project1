@@ -5,8 +5,20 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-.wrapper {
-  min-height: calc(100vh - 100px); /* 화면 높이에서 footer 높이만큼 빼줌 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
 }
 
 .card {

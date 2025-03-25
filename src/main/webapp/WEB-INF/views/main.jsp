@@ -17,13 +17,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="page-wrapper">
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- 게시판 미리보기 부분 -->
-<div class="container" style="margin-top:100px">
+<div class="container page-content" style="margin-top:100px">
 	<div class="row">
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
