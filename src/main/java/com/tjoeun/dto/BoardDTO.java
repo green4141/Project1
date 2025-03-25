@@ -19,5 +19,5 @@ public class BoardDTO {
 	
 	private MultipartFile upload_file;
 	
-	private String writer_name;
+	private String username;
 }

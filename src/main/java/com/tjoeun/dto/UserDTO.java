@@ -33,7 +33,7 @@ public class UserDTO {
 
 	private int role; // 0: 학생, 1: 선생
 	@Min(0)
-	@Max(1)
+	@Max(2)
 	public int getRole() {
 	    return role;
 	}

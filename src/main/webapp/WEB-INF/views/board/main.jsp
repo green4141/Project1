@@ -39,8 +39,8 @@
                     <c:forEach var="boardDTO" items="${boardDTOList }" >
     					<tr>
     						<td class="text-center d-none d-md-table-cell">${boardDTO.idx }</td>
-    						<td><a href='${root }board/read'>${boardDTO.title }</a></td>
-    						<td class="text-center d-none d-md-table-cell">${boardDTO.writer_name }</td>
+    						<td><a href="${root }board/read?board_id=${board_id}&idx=${boardDTO.idx}">${boardDTO.title }</a></td>
+    						<td class="text-center d-none d-md-table-cell">${boardDTO.username }</td>
     						<td class="text-center d-none d-md-table-cell"><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
                             <td class="text-center d-none d-md-table-cell">${boardDTO.hits }</td>
     					</tr>
