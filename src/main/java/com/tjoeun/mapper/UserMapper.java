@@ -19,11 +19,8 @@ public interface UserMapper {
 	
 	@Select("SELECT * " +
 	        "FROM user " +
-	        "WHERE id = #{id} AND password = ${password}")
+	        "WHERE id = #{id} AND password = #{password}")
 	UserDTO getLoginUserInfo(UserDTO loginProcUserDTO);
 
 	
 }
-
-
-
