@@ -121,5 +121,13 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 	
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res = 
+				new ReloadableResourceBundleMessageSource();
+		res.setBasename("/WEB-INF/properties/error");
+		return res;
+	}
+	
 	
 }
