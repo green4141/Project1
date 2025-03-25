@@ -1,9 +1,16 @@
 package com.tjoeun.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.annotation.SessionScope;
 
-//Spring MVC project에서 사용하는 Bean들을 등록함
+import com.tjoeun.dto.UserDTO;
+
 @Configuration
 public class RootAppContext {
-
+	@Bean("loginUserDTO")
+	@SessionScope
+	public UserDTO loginUserDTO() {
+		return new UserDTO();
+	}
 }
