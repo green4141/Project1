@@ -3,7 +3,9 @@ package com.tjoeun.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.tjoeun.dto.BoardDTO;
 
@@ -23,13 +25,10 @@ public interface BoardMapper {
 			+ "ORDER BY idx DESC")
 	List<BoardDTO> getBoardList(int board_id);
 	
-	@Select("SELECT u.name writer_name, " +
-					"to_char(b.date, 'YYYY-MM-DD') date, " +
-					"b.title, b.content, b.file " +
-					"FROM board b, user u " +
-					"WHERE b.user = u.idx " +
-					"AND b.idx = #{idx} " +
-					"ORDER BY b.idx desc")
+	@Select("select * from tjoeun.v_board_user where idx=#{idx}")
 	BoardDTO getBoardInfo(int idx);
+	
+	@Update("UPDATE board SET hits = #{hits} WHERE idx = #{idx}")
+	void updateHits(@Param("hits") int hits, @Param("idx") int idx);
 
 }

@@ -27,7 +27,7 @@
 				<div class="card-body">
 					<div class="form-group">
 						<label for="board_writer_name">작성자</label>
-						<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="${readBoardDTO.writer_name }" disabled="disabled"/>
+						<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="${readBoardDTO.username }" disabled="disabled"/>
 					</div>
 					<div class="form-group">
 						<label for="board_date">작성날짜</label>

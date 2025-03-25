@@ -30,6 +30,7 @@ public class BoardDAO {
 	
 	public BoardDTO getBoardInfo(int idx) {
 		BoardDTO boardDTO = boardMapper.getBoardInfo(idx);
+		boardMapper.updateHits(boardDTO.getHits()+1, boardDTO.getIdx());
 		return boardDTO;
 	}
 }
