@@ -20,6 +20,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style>
+    .error { color:red; font-size:12px; font-weight:bold; }
+</style>
 </head>
 <body class="page-wrapper">
 
@@ -37,10 +40,12 @@
 					<div class="form-group">
 						<form:label path="title">제목</form:label>
 						<form:input path="title" class="form-control"/>
+                        <span class="error"><form:errors path="title" /></span>
 					</div>
 					<div class="form-group">
 						<form:label path="content">내용</form:label>
 						<form:textarea path="content" class="form-control" rows="10" style="resize:none"></form:textarea>
+                        <span class="error"><form:errors path="content" /></span>
 					</div>
 					<div class="form-group">
 						<form:label path="upload_file">첨부 이미지</form:label>

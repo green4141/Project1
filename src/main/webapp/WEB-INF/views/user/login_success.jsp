@@ -21,7 +21,7 @@
   <body>
 
     <script>
-      alert("로그인 성공하셨습니다 !!!");
+      alert("로그인에 성공하였습니다");
       location.href="${root}main";
     </script>
   </body>
