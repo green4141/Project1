@@ -15,8 +15,11 @@
 	<link rel="stylesheet" href="/css/style.css"/>
     
   </head>
+
   <body class="page-wrapper">
-    <h1>login_success.jsp</h1>
+
+  <body>
+
     <script>
       alert("로그인 성공하셨습니다 !!!");
       location.href="${root}main";
