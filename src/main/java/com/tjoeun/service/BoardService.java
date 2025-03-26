@@ -39,19 +39,20 @@ public class BoardService {
 		return file_name;
 	}
 	
-	public void addBoardInfo(BoardDTO writeBoardDTO) {
+	public int addBoardInfo(BoardDTO writeBoardDTO) {
 		
 		MultipartFile upload_file = writeBoardDTO.getUpload_file();
 		
 		if(upload_file.getSize() > 0) {
 			String file_name = saveUploadFile(upload_file);
-			System.out.println("파일이름 : " + file_name);
-			
+			//System.out.println("파일이름 : " + file_name);
+			//System.out.println("board_id: " + writeBoardDTO.getBoard_id());
+			//System.out.println("idx: " + writeBoardDTO.getIdx());
 			writeBoardDTO.setFile(file_name);
 		}
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
 		
-		boardDAO.addBoardInfo(writeBoardDTO);
+		return boardDAO.addBoardInfo(writeBoardDTO);
 	}
 	
 	public String getBoardInfoName(int board_id) {

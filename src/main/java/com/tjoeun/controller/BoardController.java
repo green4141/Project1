@@ -53,6 +53,9 @@ public class BoardController {
 	public String write(@ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
 											@RequestParam("board_id") int board_id) {
 		writeBoardDTO.setBoard_id(board_id);
+		
+		//System.out.println("board_id: " + writeBoardDTO.getBoard_id());
+		//System.out.println("idx: " + writeBoardDTO.getIdx());
 		return "board/write";
 	}
 	
