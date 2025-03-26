@@ -43,6 +43,8 @@ public class UserDAO {
 		userMapper.modifyUserInfo(modifyUserDTO);
 	}
 	
-	
+	public int getAllUserCount() {
+		return userMapper.getAllUserCount();
+	}
 
 }

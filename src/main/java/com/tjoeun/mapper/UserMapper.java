@@ -42,5 +42,8 @@ public interface UserMapper {
 	@Update("UPDATE user SET password = #{password} WHERE idx = #{idx}")
 	void modifyUserInfo(UserDTO modifyUserDTO);
 	
-
+	// 전체 회원 수 구하기
+	@Select("SELECT count(*) FROM user")
+	int getAllUserCount();
+	
 }
