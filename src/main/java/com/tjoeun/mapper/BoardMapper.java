@@ -3,7 +3,9 @@ package com.tjoeun.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.tjoeun.dto.BoardDTO;
 
@@ -22,5 +24,11 @@ public interface BoardMapper {
 			+ "WHERE board_id = #{board_id} "
 			+ "ORDER BY idx DESC")
 	List<BoardDTO> getBoardList(int board_id);
+	
+	@Select("select * from tjoeun.v_board_user where idx=#{idx}")
+	BoardDTO getBoardInfo(int idx);
+	
+	@Update("UPDATE board SET hits = #{hits} WHERE idx = #{idx}")
+	void updateHits(@Param("hits") int hits, @Param("idx") int idx);
 
 }
