@@ -44,7 +44,10 @@
   
   function resetUserIdExist(){
   	$("#userIdExist").val("false");
-  } // resetUserIdExist
+ // resetUserIdExist
+ 
+ 
+  } 
   
 </script>
 </head>
@@ -115,10 +118,8 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
 <!-- footer -->  
 <c:import url="/WEB-INF/views/include/bottom_info.jsp" ></c:import>
-
 
 </body>
 </html>

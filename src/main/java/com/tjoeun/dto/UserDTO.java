@@ -2,6 +2,7 @@ package com.tjoeun.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -32,14 +33,6 @@ public class UserDTO {
 	private String username; // 닉네임
 
 	private int role; // 0: 학생, 1: 선생
-	@Min(0)
-	@Max(2)
-	public int getRole() {
-	    return role;
-	}
-	public void setRole(int role) {
-	    this.role = role;
-	}
 	
 	// 회원 가입 여부 저장
 	private boolean userIdExist = false;
