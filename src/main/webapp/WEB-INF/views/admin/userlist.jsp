@@ -39,6 +39,7 @@
 						<th class="text-center d-none d-md-table-cell">이름</th>
 						<th class="text-center d-none d-md-table-cell">닉네임</th>
 						<th class="text-center d-none d-md-table-cell">등급</th>
+						<th class="text-center d-none d-md-table-cell">수정하기</th>
 
 					</tr>
 				</thead>
@@ -56,6 +57,7 @@
                             	<c:otherwise>관리자</c:otherwise>
                             </c:choose>
                             </td>
+                            <td class="text-center d-none d-md-table-cell"><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
     					</tr>
                     </c:forEach>
 				</tbody>

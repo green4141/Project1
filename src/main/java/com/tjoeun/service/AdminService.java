@@ -35,4 +35,8 @@ public class AdminService {
 		int userCount = userDAO.getAllUserCount();
 		return new PageDTO(userCount, page, page_listcount, pagenation_count);
 	}
+	
+	public UserDTO getUserByIdx(int idx) {
+		return userDAO.getModifyUserInfo(idx);
+	}
 }

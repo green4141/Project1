@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.AdminService;
-import com.tjoeun.service.UserService;
-
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -34,9 +32,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("/userdetail")
-	public String userDetail(@ModelAttribute("loginUserDTO")UserDTO userDTO, Model model) {
+	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO, Model model) {
 		// TODO: load target user dto
-		model.addAttribute("targetUser", userDTO);
+		model.addAttribute("user", adminService.getUserByIdx(idx));
 		return "admin/userdetail";
 	}
 	
