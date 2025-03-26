@@ -116,6 +116,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");
 		
+		//로그아웃 시 접근제한
 		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserDTO);
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);		
 		reg2.addPathPatterns("/user/modify","/user/logout");

@@ -34,6 +34,17 @@
 						<form:label path="name">이름</form:label>
 						<form:input path="name" class="form-control" readonly="true"/>
 					</div>
+                    <div class="form-group">
+                      <form:label path="username">닉네임</form:label>
+                      <form:input path="username" class="form-control" readonly="true"/>
+                    </div>
+                    <div class="form-group">
+                    <!-- 지위 또한 form:input 처리하려고 했으나 summit가 제대로 작동하지 않아 span 처리-->
+                      <form:label path="role">지위</form:label>
+                      <span class="form-control-plaintext">
+                          ${modifyUserDTO.role == 0 ? '학생' : (modifyUserDTO.role == 1 ? '선생님' : 'Unknown')}
+                      </span>
+                  </div>
 					<div class="form-group">
 						<form:label path="id">아이디</form:label>
 						<form:input path="id" class="form-control" readonly="true"/>
