@@ -2,7 +2,6 @@ package com.tjoeun.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjoeun.dto.BoardDTO;
-import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.BoardService;
 
 @Controller
@@ -26,19 +24,16 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@Resource(name="loginUserDTO")
-	private UserDTO loginUserDTO;
-	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
 			               Model model) {
+		
 		String name = boardService.getBoardInfoName(board_id);
 		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id);
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
 		model.addAttribute("boardDTOList", boardDTOList);
-		model.addAttribute("loginUserDTO", loginUserDTO);
 		
 		return "board/main";
 	}
@@ -50,7 +45,6 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("readBoardDTO", readBoardDTO);
-		model.addAttribute("loginUserDTO", loginUserDTO);
 		return "board/read";
 	}
 	
@@ -79,15 +73,5 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete() {
 		return "board/delete";
-	}
-	
-	@GetMapping("/not_teacher")
-	public String notTeacher() {		
-		return "board/not_teacher";
-	}
-	
-	@GetMapping("/not_writer")
-	public String notWriter() {
-		return "board/not_writer";
 	}
 }

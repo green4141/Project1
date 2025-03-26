@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.SessionScope;
 
-import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 
 @Configuration
@@ -13,11 +12,5 @@ public class RootAppContext {
 	@SessionScope
 	public UserDTO loginUserDTO() {
 		return new UserDTO();
-	}
-
-	@Bean(name = "teacherBoardDTO")
-	@SessionScope
-	public BoardDTO teacherBoardDTO() {
-	    return new BoardDTO();
 	}
 }
