@@ -20,8 +20,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-<body class="page-wrapper">
 
+<body class="page-wrapper">
+<div id="slide-wrapper">
+  <div id="background"></div>
+</div>
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
@@ -216,6 +219,9 @@
 
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
+
+<!-- 자바스크립트 -->
+<script src="/js/background.js"></script>
 
 </body>
 </html>
