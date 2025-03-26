@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tjoeun.dao.UserDAO;
 import com.tjoeun.dto.UserDTO;
-//전체수정완료
+
 @Service
 public class UserService {
 	
@@ -46,14 +46,13 @@ public class UserService {
 		  loginUserDTO.setUserLogin(true);
 		}
 		
-		System.out.println("loginUserDTO : " + loginUserDTO);
+		//System.out.println("loginUserDTO : " + loginUserDTO);
 		
 		
 		return;
 	}
 	
-//로그아웃할 때 loginUserDTOloginUserDTO 의 userLogin 은 false 로 하고
-	// 로그인했전 회원정보 초기화하기
+	//로그인 정보 초기화
 	public void deleteUserLoginInfo(){
 		loginUserDTO.setUserLogin(false);
 		loginUserDTO.setIdx(0);
@@ -63,5 +62,25 @@ public class UserService {
 		loginUserDTO.setPassword("");
 		loginUserDTO.setRole(-1);
 	}
+	
+	//
+	public void getModifyUserInfo(UserDTO modifyUserDTO) {
+		UserDTO tmpModifyUserDTO = userDAO.getModifyUserInfo(loginUserDTO.getIdx());
+		
+		modifyUserDTO.setIdx(tmpModifyUserDTO.getIdx());
+		modifyUserDTO.setName(tmpModifyUserDTO.getName());
+		modifyUserDTO.setUsername(tmpModifyUserDTO.getUsername());
+		modifyUserDTO.setId(tmpModifyUserDTO.getId());
+		modifyUserDTO.setRole(tmpModifyUserDTO.getRole());
+		
+		return;
+	}
+	
+	//패스워드 변경
+	public void modifyUserInfo(UserDTO modifyUserDTO) {
+		modifyUserDTO.setIdx(loginUserDTO.getIdx());
+		userDAO.modifyUserInfo(modifyUserDTO);
+	}
+	
    
 }
