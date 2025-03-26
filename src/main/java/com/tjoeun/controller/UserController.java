@@ -105,6 +105,12 @@ public class UserController {
 			return "user/logout";
 	}
 	
+	@GetMapping("/cannot_login")
+	public String cannot_login(){
+	  // user 폴더의 cannot_login.jsp 로 이동함
+		return "user/cannot_login";
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		UserValidator validator1 = new UserValidator();
