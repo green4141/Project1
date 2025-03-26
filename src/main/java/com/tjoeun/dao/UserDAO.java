@@ -26,5 +26,14 @@ public class UserDAO {
 		return loginProcUserDTO2;
 	}
 	
+	public UserDTO getModifyUserInfo(int idx){
+		UserDTO modifyUserDTO = userMapper.getModifyUserInfo(idx);
+		return modifyUserDTO;		
+    }
+	
+	public void modifyUserInfo(UserDTO modifyUserDTO) {
+		userMapper.modifyUserInfo(modifyUserDTO);
+	}
+	
 	
 }

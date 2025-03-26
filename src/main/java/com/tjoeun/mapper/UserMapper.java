@@ -2,6 +2,7 @@ package com.tjoeun.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.tjoeun.dto.UserDTO;
 
@@ -22,5 +23,12 @@ public interface UserMapper {
 	        "WHERE id = #{id} AND password = #{password}")
 	UserDTO getLoginUserInfo(UserDTO loginProcUserDTO);
 
+	// 회원정보 조회
+	@Select("SELECT * FROM user WHERE idx = #{idx}")
+	UserDTO getModifyUserInfo(int idx);
+	
+	// 패스워드 업데이트
+	@Update("UPDATE user SET password = #{password} WHERE idx = #{idx}")
+	void modifyUserInfo(UserDTO modifyUserDTO);
 	
 }
