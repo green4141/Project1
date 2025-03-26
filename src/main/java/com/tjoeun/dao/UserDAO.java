@@ -29,7 +29,20 @@ public class UserDAO {
 		return loginProcUserDTO2;
 	}
 	
+
 	public List<UserDTO> getAllUserList(RowBounds rowBounds) {
 		return userMapper.getAllUserInfo(rowBounds);
 	}
+
+	public UserDTO getModifyUserInfo(int idx){
+		UserDTO modifyUserDTO = userMapper.getModifyUserInfo(idx);
+		return modifyUserDTO;		
+    }
+	
+	public void modifyUserInfo(UserDTO modifyUserDTO) {
+		userMapper.modifyUserInfo(modifyUserDTO);
+	}
+	
+	
+
 }

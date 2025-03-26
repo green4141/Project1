@@ -49,22 +49,13 @@ public class UserController {
 		}
 		
 		// 로그인 성공 - 유효성 검사 통과함
-		
-		// Service 에서
-		// DB 에서 가져온 로그인한 회원의 정보를,
-		// Session Scope 에 (Spring Framework)가 미리 생성해 놓은
-		// UserDTO loginUserDTO 에 저장함
 		userService.getLoginUserInfo(loginProcUserDTO);
-		
-		// Service 에서  loginUserDTO.setUserLogin(true); 를 작성하면
-	  // 로그인에 성공하면 private boolean userLogin 가 true 가 됨
+
 		if(loginUserDTO.isUserLogin() == true) {
 			return "user/login_success";			
 		}else {
 			return "user/login_failure";
-		}
-		
-		
+		}	
 	}
 	
 	
@@ -76,33 +67,43 @@ public class UserController {
 	@PostMapping("/join_procedure")
 	public String join_procedure(@Valid @ModelAttribute("joinUserDTO") UserDTO joinUserDTO,
 			                         BindingResult result) {
-		// 유효성 검사 통과 못함
 		if(result.hasErrors()) {
 			return "user/join";
 		}
-		
 		userService.addUserInfo(joinUserDTO);
-		
-		// 유효성 검사 통과함
 		return "user/join_success";
 	}
-	
+	// 회원정보 확인
 	@GetMapping("/modify")
-	public String modify() {
+	public String modify(@ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO) {
+		userService.getModifyUserInfo(modifyUserDTO);
 		return "user/modify";
-	}	
+	}
+	
+	// 비밀번호 변경
+	@PostMapping("/modifyProcedure")
+	public String modifyProcedure(@Valid @ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO,
+		                          BindingResult result){
+		if(result.hasErrors()){
+			return "user/modify";			
+	  }
+		userService.modifyUserInfo(modifyUserDTO);
+		return "user/modify_success";
+	}
+	
+	// 로그아웃
 	@GetMapping("/logout")
 	public String logout() {
-	// userService.deleteUserLoginInfo() 에서 처리함
-			// loginUserDTO.setUserLogin(false);		
-			// Session Scope 에 있는 회원 정보 삭제하기
 			userService.deleteUserLoginInfo();
-
-		  // 로그아웃한 후 Session 에 있는 loginUserDTO 에 저장된
-			// 회원 정보 확인하기
 			System.out.println("loginUserDTO : " + loginUserDTO);
 
 			return "user/logout";
+	}
+	
+	// 접근제한
+	@GetMapping("/cannot_login")
+	public String cannot_login(){
+		return "user/cannot_login";
 	}
 	
 	@InitBinder
