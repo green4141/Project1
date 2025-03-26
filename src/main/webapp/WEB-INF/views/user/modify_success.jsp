@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath }/" />
 <html>
   <head>
     <meta charset="UTF-8">
@@ -10,9 +10,8 @@
   </head>
   <body>
     <script>
-      alert("로그인 실패했습니다.");
-      location.href="${root}user/login?fail=true";
-    </script>
+      alert("회원 정보가 수정되었습니다");
+      location.href="${root}user/modify";
+    </script> 
   </body>
 </html>
-

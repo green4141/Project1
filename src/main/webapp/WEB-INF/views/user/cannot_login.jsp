@@ -5,13 +5,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Insert title here</title>
   </head>
   <body>
     <script>
+
     	alert("로그인이 필요한 서비스입니다");
     	location.href="${root}user/login";
+
+
     </script>
   </body>
 </html>

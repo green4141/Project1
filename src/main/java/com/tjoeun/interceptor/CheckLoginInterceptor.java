@@ -1,5 +1,6 @@
 package com.tjoeun.interceptor;
 
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.tjoeun.dto.UserDTO;
 
-public class CheckLoginInterceptor implements HandlerInterceptor {
+
+public class CheckLoginInterceptor implements HandlerInterceptor{
+	
 
 	private UserDTO loginUserDTO;
 	
@@ -17,6 +20,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 		this.loginUserDTO = loginUserDTO;
 	}
 	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getRequestURI();

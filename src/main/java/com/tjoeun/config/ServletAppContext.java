@@ -25,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.interceptor.CheckBoardInterceptor;
+import com.tjoeun.interceptor.AdminInterceptor;
 import com.tjoeun.interceptor.CheckLoginInterceptor;
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
@@ -55,6 +56,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Autowired
 	private TopMenuService topMenuService;
 	
+
 	@Resource(name="loginUserDTO")
 	private UserDTO loginUserDTO;
 	
@@ -111,25 +113,23 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+
 		WebMvcConfigurer.super.addInterceptors(registry);
-		
-		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService);
-		
+		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService, loginUserDTO);
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
-		
 		reg1.addPathPatterns("/**");
+
 		
 		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserDTO);
-		
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
-		
 		reg2.addPathPatterns("/user/modify", "/user/logout", "/board/**");
-		
 		CheckBoardInterceptor checkBoardInterceptor = new CheckBoardInterceptor();
-		
 		InterceptorRegistration reg3 = registry.addInterceptor(checkBoardInterceptor);
-		
 		reg3.addPathPatterns("/board/**");
+		AdminInterceptor adminInterceptor = new AdminInterceptor(loginUserDTO);
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");		
+
+
 	}
 	
 	
@@ -141,6 +141,14 @@ public class ServletAppContext implements WebMvcConfigurer{
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res = 
+				new ReloadableResourceBundleMessageSource();
+		res.setBasename("/WEB-INF/properties/error");
+		return res;
 	}
 	
 	
