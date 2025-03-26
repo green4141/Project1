@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tjoeun.dao.BoardDAO;
 import com.tjoeun.dao.UserDAO;
+import com.tjoeun.dto.PageDTO;
 import com.tjoeun.dto.UserDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,17 @@ public class AdminService {
 	private final BoardDAO boardDAO;
 	@Value("${page.listcount}")
 	private int page_listcount;
-
+	@Value("${page.pagenationcount}")
+	private int pagenation_count;
+	
 	public List<UserDTO> getAllUserList(int page) {
 		int start = (page - 1) * page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
 		return userDAO.getAllUserList(rowBounds);
+	}
+	
+	public PageDTO getUserPageDTO(int page) {
+		int userCount = userDAO.getAllUserCount();
+		return new PageDTO(userCount, page, page_listcount, pagenation_count);
 	}
 }
