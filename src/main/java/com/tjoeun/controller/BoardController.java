@@ -38,6 +38,7 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
 		model.addAttribute("boardDTOList", boardDTOList);
+		model.addAttribute("loginUserDTO", loginUserDTO);
 		
 		return "board/main";
 	}
@@ -49,6 +50,7 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("readBoardDTO", readBoardDTO);
+		model.addAttribute("loginUserDTO", loginUserDTO);
 		return "board/read";
 	}
 	
@@ -80,7 +82,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/not_teacher")
-	public String not_teacher() {		
+	public String notTeacher() {		
 		return "board/not_teacher";
+	}
+	
+	@GetMapping("/not_writer")
+	public String notWriter() {
+		return "board/not_writer";
 	}
 }

@@ -50,6 +50,7 @@ public class UserController {
 		
 		// 로그인 성공 - 유효성 검사 통과함
 		userService.getLoginUserInfo(loginProcUserDTO);
+		System.out.println("loginUserDTO : " + loginUserDTO);
 
 		if(loginUserDTO.isUserLogin() == true) {
 			return "user/login_success";			
