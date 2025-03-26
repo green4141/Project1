@@ -10,7 +10,7 @@
   </head>
   <body>
     <script>
-      alert("로그인 실패했습니다.");
+      alert("로그인에 실패하였습니다");
       location.href="${root}user/login?fail=true";
     </script>
   </body>

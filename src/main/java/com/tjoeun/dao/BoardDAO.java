@@ -37,4 +37,8 @@ public class BoardDAO {
 	public void modifyBoardInfo(BoardDTO modifyBoardDTO) {
 		boardMapper.modifyBoardInfo(modifyBoardDTO);
 	}
+	
+	public void deleteBoardInfo(int idx) {
+		boardMapper.deleteBoardInfo(idx);
+	}
 }

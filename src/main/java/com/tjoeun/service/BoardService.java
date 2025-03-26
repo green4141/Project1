@@ -83,4 +83,8 @@ public class BoardService {
 		boardDAO.modifyBoardInfo(modifyBoardDTO);
 	}
 	
+	public void deleteBoardInfo(int idx) {
+		boardDAO.deleteBoardInfo(idx);
+	}
+	
 }

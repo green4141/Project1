@@ -94,6 +94,7 @@ public class BoardController {
 		
 		return "board/modify";
 	}
+	
 	@PostMapping("/modifyProcedure")
 	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 															 BindingResult result) {
@@ -107,7 +108,14 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete() {
+	public String delete(@RequestParam("board_id") int board_id,
+											 @RequestParam("idx") int idx,
+											 Model model) {
+		
+		boardService.deleteBoardInfo(idx);
+		
+		model.addAttribute("board_id", board_id);
+		
 		return "board/delete";
 	}
 	

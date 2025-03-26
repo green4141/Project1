@@ -10,8 +10,8 @@
   </head>
   <body>
     <script>
-      alert("DELETE!!!!");
-      location.href="${root}board/main";
+      alert("게시글이 삭제되었습니다");
+      location.href="${root}board/main?board_id=${board_id}";
     </script>
   </body>
 </html>
