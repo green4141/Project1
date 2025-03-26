@@ -1,5 +1,8 @@
 package com.tjoeun.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +29,11 @@ public class UserDAO {
 		return loginProcUserDTO2;
 	}
 	
+
+	public List<UserDTO> getAllUserList(RowBounds rowBounds) {
+		return userMapper.getAllUserInfo(rowBounds);
+	}
+
 	public UserDTO getModifyUserInfo(int idx){
 		UserDTO modifyUserDTO = userMapper.getModifyUserInfo(idx);
 		return modifyUserDTO;		
@@ -36,4 +44,5 @@ public class UserDAO {
 	}
 	
 	
+
 }

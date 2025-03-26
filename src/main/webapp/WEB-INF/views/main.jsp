@@ -7,19 +7,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
+
+<!-- 커스텀 CSS 추가 -->
+<link rel="stylesheet" href="css/style.css"/>
+
 <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="page-wrapper">
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- 게시판 미리보기 부분 -->
-<div class="container" style="margin-top:100px">
+<div class="container page-content" style="margin-top:100px">
 	<div class="row">
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">

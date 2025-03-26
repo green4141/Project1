@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+body {
+  background-color: rgb(255, 255, 255);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background-color: #fff; /* 밑줄 색상 */
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 128, 192);
+  margin-bottom: 20px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgb(234, 244, 244);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 991px) {
+  .card-title {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .btn-primary {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+}
