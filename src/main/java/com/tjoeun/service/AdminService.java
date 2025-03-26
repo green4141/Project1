@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.tjoeun.dao.BoardDAO;
 import com.tjoeun.dao.UserDAO;
+<<<<<<< HEAD
 import com.tjoeun.dto.PageDTO;
+=======
+>>>>>>> b309f82 (admin)
 import com.tjoeun.dto.UserDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ public class AdminService {
 	private final BoardDAO boardDAO;
 	@Value("${page.listcount}")
 	private int page_listcount;
+
 	@Value("${page.pagenationcount}")
 	private int pagenation_count;
 	

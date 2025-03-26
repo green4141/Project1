@@ -30,6 +30,7 @@ public class UserDAO {
 	}
 	
 
+
 	public List<UserDTO> getAllUserList(RowBounds rowBounds) {
 		return userMapper.getAllUserInfo(rowBounds);
 	}
@@ -46,5 +47,6 @@ public class UserDAO {
 	public int getAllUserCount() {
 		return userMapper.getAllUserCount();
 	}
+
 
 }
