@@ -63,7 +63,7 @@ public class UserService {
 		loginUserDTO.setRole(-1);
 	}
 	
-	//
+	//회원정보 가져오기
 	public void getModifyUserInfo(UserDTO modifyUserDTO) {
 		UserDTO tmpModifyUserDTO = userDAO.getModifyUserInfo(loginUserDTO.getIdx());
 		
