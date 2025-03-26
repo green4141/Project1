@@ -1,5 +1,7 @@
 package com.tjoeun.config;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -20,6 +22,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.UserDTO;
+import com.tjoeun.interceptor.CheckLoginInterceptor;
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
 import com.tjoeun.mapper.TopMenuMapper;
@@ -48,6 +53,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Autowired
 	private TopMenuService topMenuService;
+	
+	@Resource(name="loginUserDTO")
+	private UserDTO loginUserDTO;
 	
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -109,7 +117,14 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		
 		reg1.addPathPatterns("/**");
+		
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserDTO);
+		
+		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);
+		
+		reg2.addPathPatterns("/user/modify", "/user/logout", "/board/**");
 	}
+	
 	
 	@Bean
 	public StandardServletMultipartResolver multipartResolver() {

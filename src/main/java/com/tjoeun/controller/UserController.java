@@ -63,8 +63,6 @@ public class UserController {
 		}else {
 			return "user/login_failure";
 		}
-		
-		
 	}
 	
 	
@@ -111,5 +109,8 @@ public class UserController {
 		binder.addValidators(validator1);
 	}
 	
-	
+	@GetMapping("/cannot_login")
+	public String cannot_login() {
+		return "user/cannot_login";
+	}
 }
