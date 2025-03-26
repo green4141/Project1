@@ -50,15 +50,12 @@ public class UserController {
 		
 		// 로그인 성공 - 유효성 검사 통과함
 		userService.getLoginUserInfo(loginProcUserDTO);
-		System.out.println("loginUserDTO : " + loginUserDTO);
 
 		if(loginUserDTO.isUserLogin() == true) {
 			return "user/login_success";			
 		}else {
 			return "user/login_failure";
-
 		}	
-
 	}
 	
 	
@@ -114,5 +111,6 @@ public class UserController {
 		UserValidator validator1 = new UserValidator();
 		binder.addValidators(validator1);
 	}
+	
 	
 }

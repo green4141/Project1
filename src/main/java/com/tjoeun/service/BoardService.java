@@ -69,4 +69,22 @@ public class BoardService {
 		return boardDTO;
 	}
 	
+	public void modifyBoardInfo(BoardDTO modifyBoardDTO) {
+		
+		MultipartFile upload_file = modifyBoardDTO.getUpload_file();
+		
+		if(upload_file.getSize() > 0) {
+			String file_name = saveUploadFile(upload_file);
+			//System.out.println("파일이름 : " + file_name);
+			
+			modifyBoardDTO.setFile(file_name);
+		}
+		
+		boardDAO.modifyBoardInfo(modifyBoardDTO);
+	}
+	
+	public void deleteBoardInfo(int idx) {
+		boardDAO.deleteBoardInfo(idx);
+	}
+	
 }

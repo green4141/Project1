@@ -8,18 +8,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
+
+<!-- 파비콘 -->
+<c:import url="/WEB-INF/views/include/favicon.jsp" />
+
+<!-- 커스텀 CSS 추가 -->
+<link rel="stylesheet" href="/css/style.css"/>
+
 <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style>
+    .error { color:red; font-size:12px; font-weight:bold; }
+</style>
 </head>
-<body>
+<body class="page-wrapper">
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
-
-<div class="container" style="margin-top:100px">
+<div class="page-content">
+	<div class="container" style="margin-top:100px">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
@@ -30,10 +40,12 @@
 					<div class="form-group">
 						<form:label path="title">제목</form:label>
 						<form:input path="title" class="form-control"/>
+                        <span class="error"><form:errors path="title" /></span>
 					</div>
 					<div class="form-group">
 						<form:label path="content">내용</form:label>
 						<form:textarea path="content" class="form-control" rows="10" style="resize:none"></form:textarea>
+                        <span class="error"><form:errors path="content" /></span>
 					</div>
 					<div class="form-group">
 						<form:label path="upload_file">첨부 이미지</form:label>
@@ -52,7 +64,7 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-
+</div>
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 

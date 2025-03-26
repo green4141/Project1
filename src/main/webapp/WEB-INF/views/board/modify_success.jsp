@@ -10,8 +10,8 @@
   </head>
   <body>
     <script>
-    	alert("글을 쓴 사람만 글을 삭제할 수 있습니다");
-    	location.href="${root}main";
+    	alert("수정이 완료되었습니다");
+    	location.href="${root}board/read?board_id=${modifyBoardDTO.board_id}&idx=${modifyBoardDTO.idx}";
     </script>
   </body>
 </html>
