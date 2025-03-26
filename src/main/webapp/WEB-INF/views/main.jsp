@@ -8,6 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
 
+<!-- 파비콘 -->
+<link rel="icon" type="image/x-icon" href="images/fav.ico">
+
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="css/style.css"/>
 
