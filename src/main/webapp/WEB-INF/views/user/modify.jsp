@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+<style>
+  #error { color: red; font-size: 16px; font-weight: bold; }
+</style>
 </head>
 <body>
 
@@ -25,30 +29,32 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form action="modify_user.html" method="post">
+					<form:form action="${root }user/modifyProcedure" modelAttribute="modifyUserDTO" method="post">
 					<div class="form-group">
-						<label for="user_name">이름</label>
-						<input type="text" id="user_name" name="user_name" class="form-control" value="홍길동" disabled="disabled"/>
+						<form:label path="name">이름</form:label>
+						<form:input path="name" class="form-control" readonly="true"/>
 					</div>
 					<div class="form-group">
-						<label for="user_id">아이디</label>
-						<input type="text" id="user_id" name="user_id" class="form-control" value="abc" disabled="disabled"/>
+						<form:label path="id">아이디</form:label>
+						<form:input path="id" class="form-control" readonly="true"/>
 					</div>
 					<div class="form-group">
-						<label for="user_pw">비밀번호</label>
-						<input type="password" id="user_pw" name="user_pw" class="form-control" value="1234"/>
+						<form:label path="password">비밀번호</form:label>
+						<form:password path="password" class="form-control" />
+						<span id="error"><form:errors path="password" /></span>
 					</div>
 					<div class="form-group">
-						<label for="user_pw2">비밀번호 확인</label>
-						<input type="password" id="user_pw2" name="user_pw2" class="form-control" value="1234"/>
+						<form:label path="password2">비밀번호 확인</form:label>
+						<form:password path="password2" class="form-control"/>
+						<span id="error"><form:errors path="password2" /></span>
 					</div>
 					<div class="form-group">
 						<div class="text-right">
-							<button type="submit" class="btn btn-primary">정보수정</button>
+							<form:button class="btn btn-primary">정보수정</form:button>
 						</div>
 					</div>
 					
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>
