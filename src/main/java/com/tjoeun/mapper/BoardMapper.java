@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -13,7 +14,8 @@ import com.tjoeun.dto.BoardDTO;
 public interface BoardMapper {
 	@Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
 					"values(#{board_id}, #{title}, #{content}, #{user}, #{file})")
-		void addBoardInfo(BoardDTO writeBoardDTO);
+	@Options(useGeneratedKeys = true, keyProperty = "idx")
+	int addBoardInfo(BoardDTO writeBoardDTO);
 	
 
 	@Select("SELECT name " + 
