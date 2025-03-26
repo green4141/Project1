@@ -2,6 +2,8 @@ package com.tjoeun.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -10,7 +12,11 @@ import lombok.Data;
 public class BoardDTO {
 	private int idx;
 	private int board_id;
+	
+	@NotBlank
 	private String title;
+	
+	@NotBlank
 	private String content;
 	private Date date;
 	private int user;
