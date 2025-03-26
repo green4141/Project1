@@ -9,7 +9,6 @@
     <title>Insert title here</title>
   </head>
   <body>
-    <h1>login_success.jsp</h1>
     <script>
       alert("로그인 성공하셨습니다 !!!");
       location.href="${root}main";

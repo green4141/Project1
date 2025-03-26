@@ -15,6 +15,11 @@
                     <a href="${root }board/main?board_id=${menu.board_id}" class="nav-link">${menu.name}</a>
                 </li>               
             </c:forEach>
+            <c:if test="${loginUserDTO.role == 2 }">
+            <li class="nav-item">
+                    <a href="${root }admin/user" class="nav-link">유저 목록</a>
+                </li>
+                </c:if>
 		</ul>
 		
 		<ul class="navbar-nav ml-auto">
