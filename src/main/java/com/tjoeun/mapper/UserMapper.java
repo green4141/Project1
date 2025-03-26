@@ -1,7 +1,10 @@
 package com.tjoeun.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
 
 import com.tjoeun.dto.UserDTO;
 //전체수정완료
@@ -22,5 +25,7 @@ public interface UserMapper {
 	        "WHERE id = #{id} AND password = #{password}")
 	UserDTO getLoginUserInfo(UserDTO loginProcUserDTO);
 
-	
+	// 전체 회원 목록 가져오기
+	@Select("SELECT * FROM user")
+	List<UserDTO> getAllUserInfo(RowBounds rowBounds);
 }
