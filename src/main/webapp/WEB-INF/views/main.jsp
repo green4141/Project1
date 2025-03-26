@@ -9,7 +9,7 @@
 <title>TJOEUN</title>
 
 <!-- 파비콘 -->
-<link rel="icon" type="image/x-icon" href="images/fav.ico">
+<c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="css/style.css"/>
@@ -25,8 +25,9 @@
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
-<!-- 게시판 미리보기 부분 -->
-<div class="container page-content" style="margin-top:100px">
+<div class="page-content">
+	<!-- 게시판 미리보기 부분 -->
+	<div class="container page-content" style="margin-top:100px">
 	<div class="row">
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
@@ -210,6 +211,7 @@
 			</div>
 		</div>-->
 	</div>
+</div>
 </div>
 
 <!-- footer -->
