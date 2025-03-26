@@ -23,11 +23,8 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.tjoeun.dto.UserDTO;
-<<<<<<< HEAD
 import com.tjoeun.interceptor.CheckLoginInterceptor;
-=======
 import com.tjoeun.interceptor.AdminInterceptor;
->>>>>>> b309f82 (admin)
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
 import com.tjoeun.mapper.TopMenuMapper;

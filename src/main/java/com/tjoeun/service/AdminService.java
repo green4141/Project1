@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tjoeun.dao.BoardDAO;
 import com.tjoeun.dao.UserDAO;
-<<<<<<< HEAD
 import com.tjoeun.dto.PageDTO;
-=======
->>>>>>> b309f82 (admin)
 import com.tjoeun.dto.UserDTO;
 
 import lombok.RequiredArgsConstructor;
