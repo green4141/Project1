@@ -2,6 +2,7 @@ package com.tjoeun.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.BoardService;
 
 @Controller
@@ -24,10 +26,12 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Resource(name="loginUserDTO")
+	private UserDTO loginUserDTO;
+	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
 			               Model model) {
-		
 		String name = boardService.getBoardInfoName(board_id);
 		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id);
 		
@@ -73,5 +77,10 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete() {
 		return "board/delete";
+	}
+	
+	@GetMapping("/not_teacher")
+	public String not_teacher() {		
+		return "board/not_teacher";
 	}
 }
