@@ -65,6 +65,7 @@
 			
 			<div class="d-none d-md-block">
 				<ul class="pagination justify-content-center">
+
 					<c:choose> 
                       <c:when test="${pageDTO.previousPage <= 0 }">   
 					    <li class="page-item disabled">
@@ -107,7 +108,7 @@
                     </c:choose>
 				</ul>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

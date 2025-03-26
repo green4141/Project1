@@ -22,6 +22,7 @@ public class AdminService {
 	private final BoardDAO boardDAO;
 	@Value("${page.listcount}")
 	private int page_listcount;
+
 	@Value("${page.pagenationcount}")
 	private int pagenation_count;
 	

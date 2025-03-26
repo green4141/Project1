@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -46,4 +47,5 @@ public interface UserMapper {
 	@Select("SELECT count(*) FROM user")
 	int getAllUserCount();
 	
+
 }

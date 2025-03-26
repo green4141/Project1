@@ -63,7 +63,7 @@ public class UserService {
 		loginUserDTO.setRole(-1);
 	}
 	
-	//
+	//회원정보 가져오기
 	public void getModifyUserInfo(UserDTO modifyUserDTO) {
 		UserDTO tmpModifyUserDTO = userDAO.getModifyUserInfo(loginUserDTO.getIdx());
 		
@@ -72,8 +72,6 @@ public class UserService {
 		modifyUserDTO.setUsername(tmpModifyUserDTO.getUsername());
 		modifyUserDTO.setId(tmpModifyUserDTO.getId());
 		modifyUserDTO.setRole(tmpModifyUserDTO.getRole());
-		
-		return;
 	}
 	
 	//패스워드 변경

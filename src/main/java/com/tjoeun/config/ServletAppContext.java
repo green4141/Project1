@@ -23,8 +23,9 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.tjoeun.dto.UserDTO;
-import com.tjoeun.interceptor.AdminInterceptor;
+
 import com.tjoeun.interceptor.CheckLoginInterceptor;
+import com.tjoeun.interceptor.AdminInterceptor;
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
 import com.tjoeun.mapper.TopMenuMapper;
@@ -117,13 +118,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService, loginUserDTO);
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");
-		reg1.order(0);
-		AdminInterceptor adminInterceptor = new AdminInterceptor(loginUserDTO);
-		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**").order(1);		
+
+		//로그아웃 시 접근제한
 		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserDTO);
 		InterceptorRegistration reg2 = registry.addInterceptor(checkLoginInterceptor);		
 		reg2.addPathPatterns("/user/modify","/user/logout");
-    reg2.order(2);
+
+
+		AdminInterceptor adminInterceptor = new AdminInterceptor(loginUserDTO);
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**").order(1);
+
 	}
 	
 	@Bean
