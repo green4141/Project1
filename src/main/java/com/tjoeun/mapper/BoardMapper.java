@@ -20,9 +20,9 @@ public interface BoardMapper {
 					"WHERE board_id=#{board_id}")
 	String getBoardInfoName(int board_id);
 	
-	@Select("SELECT * FROM v_board_user "
-			+ "WHERE board_id = #{board_id} "
-			+ "ORDER BY idx DESC")
+	@Select("SELECT * FROM v_board_user " +
+					"WHERE board_id = #{board_id} " +
+					"ORDER BY idx DESC")
 	List<BoardDTO> getBoardList(int board_id);
 	
 	@Select("select * from tjoeun.v_board_user where idx=#{idx}")
@@ -31,4 +31,10 @@ public interface BoardMapper {
 	@Update("UPDATE board SET hits = #{hits} WHERE idx = #{idx}")
 	void updateHits(@Param("hits") int hits, @Param("idx") int idx);
 
+	@Update("UPDATE board " +
+					"SET title = #{title}, " +
+					"content = #{content}, " +
+					"file = #{file, jdbcType=VARCHAR} " +
+					"WHERE idx = #{idx}")
+	void modifyBoardInfo(BoardDTO modifyBoardDTO);
 }

@@ -1,5 +1,6 @@
 package com.tjoeun.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -72,10 +73,39 @@ public class BoardController {
 		
 		return "board/write_success";
 	}
+
 	@GetMapping("/modify")
-	public String modify() {
+	public String modify(@RequestParam("board_id") int board_id,
+										 	 @RequestParam("idx") int idx,
+										 	 @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
+										 	 Model model) {
+		
+		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx);
+		
+		modifyBoardDTO.setUsername(tmpBoardDTO.getUsername());
+		modifyBoardDTO.setDate(tmpBoardDTO.getDate());
+		modifyBoardDTO.setContent(tmpBoardDTO.getContent());
+		modifyBoardDTO.setTitle(tmpBoardDTO.getTitle());
+		modifyBoardDTO.setFile(tmpBoardDTO.getFile());
+		modifyBoardDTO.setUser(tmpBoardDTO.getUser());
+		
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("idx", idx);
+		
 		return "board/modify";
 	}
+	@PostMapping("/modifyProcedure")
+	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
+															 BindingResult result) {
+		if(result.hasErrors()) {
+			return "board/modify";
+		}
+		
+		boardService.modifyBoardInfo(modifyBoardDTO);
+		
+		return "board/modify_success";
+	}
+	
 	@GetMapping("/delete")
 	public String delete() {
 		return "board/delete";

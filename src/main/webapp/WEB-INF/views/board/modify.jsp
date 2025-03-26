@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style>
+    .error { color:red; font-size:12px; font-weight:bold; }
+</style>
 </head>
 <body>
 
@@ -24,35 +29,43 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form action="${root }board/read" method="get">
+					<form:form action="${root }board/modifyProcedure" modelAttribute="modifyBoardDTO" method="post" enctype="multipart/form-data">
+                        <form:hidden path="idx" />
+                        <form:hidden path="board_id" />
 						<div class="form-group">
-							<label for="board_writer_name">작성자</label>
-							<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="홍길동" disabled="disabled"/>
+							<form:label path="username">작성자</form:label>
+							<form:input path="username" class="form-control" readonly="true"/>
 						</div>
 						<div class="form-group">
-							<label for="board_date">작성날짜</label>
-							<input type="text" id="board_date" name="board_date" class="form-control" value="2018-7-20" disabled="disabled"/>
+							<form:label path="date">작성날짜</form:label>
+							<fmt:formatDate value="${modifyBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate"/>
+                            <input type="text" class="form-control" value="${formattedDate}" readonly="true"/>
 						</div>
 						<div class="form-group">
-							<label for="board_subject">제목</label>
-							<input type="text" id="board_subject" name="board_subject" class="form-control" value="제목입니다"/>
+							<form:label path="title">제목</form:label>
+							<form:input path="title" class="form-control"/>
+                            <span class="error"><form:errors path="title" /></span>
 						</div>
 						<div class="form-group">
-							<label for="board_content">내용</label>
-							<textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none">본문입니다</textarea>
+							<form:label path="content">내용</form:label>
+							<form:textarea path="content" class="form-control" rows="10" style="resize:none" />
+                            <span class="error"><form:errors path="content" /></span>
 						</div>
 						<div class="form-group">
-							<label for="board_file">첨부 이미지</label>
-							<img src="${root }images/tjoeun.jpg" width="100%"/>	
-							<input type="file" name="board_file" id="board_file" class="form-control" accept="image/*"/>					
+							<form:label path="upload_file">첨부 이미지</form:label>
+                            <c:if test="${modifyBoardDTO.file != null }">
+    							<img src="${root }upload/${modifyBoardDTO.file}" width="100%"/>
+                                <form:hidden path="file" />
+                            </c:if>
+                            <form:input type="file" path="upload_file" class="form-control" accept="images/*"/>
 						</div>
 						<div class="form-group">
 							<div class="text-right">
-								<button type="submit" class="btn btn-primary">수정완료</button>
-								<a href="${root }board/read" class="btn btn-info">취소</a>
+								<form:button class="btn btn-primary">수정완료</form:button>
+								<a href="${root }board/read?board_id=${board_id}&idx=${idx}" class="btn btn-info">취소</a>
 							</div>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

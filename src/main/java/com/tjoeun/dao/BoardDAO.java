@@ -33,4 +33,8 @@ public class BoardDAO {
 		boardMapper.updateHits(boardDTO.getHits()+1, boardDTO.getIdx());
 		return boardDTO;
 	}
+	
+	public void modifyBoardInfo(BoardDTO modifyBoardDTO) {
+		boardMapper.modifyBoardInfo(modifyBoardDTO);
+	}
 }
