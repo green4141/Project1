@@ -27,9 +27,9 @@ public class AdminController {
 	
 	@GetMapping("/user")
 	public String user(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
-		// TODO: user role check, if(!=2) reject
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("userList", adminService.getAllUserList(page));
+		model.addAttribute("pageDTO", adminService.getUserPageDTO(page));
 		return "admin/userlist";
 	}
 	

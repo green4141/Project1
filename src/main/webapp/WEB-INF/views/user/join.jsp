@@ -75,10 +75,10 @@
                       <div class="form-group">
                           <form:label path="role">역할 선택</form:label>
                           <div>
-                              <form:radiobutton path="role" value="0" id="student" />
+                              <form:radiobutton path="role" value="0" id="student"/>
                               <label for="student">학생</label>
                       
-                              <form:radiobutton path="role" value="1" id="teacher" />
+                              <form:radiobutton path="role" value="1" id="teacher"/>
                               <label for="teacher">교사</label>
                           </div>
                           <span class="error"><form:errors path="role" /></span>
