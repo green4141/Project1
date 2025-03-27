@@ -46,7 +46,7 @@ public class UserService {
 		  loginUserDTO.setUserLogin(true);
 		}
 		
-		//System.out.println("loginUserDTO : " + loginUserDTO);
+		System.out.println("loginUserDTO : " + loginUserDTO);
 		
 		
 		return;

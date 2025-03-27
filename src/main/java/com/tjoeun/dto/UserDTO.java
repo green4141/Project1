@@ -1,8 +1,6 @@
 package com.tjoeun.dto;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -32,7 +30,11 @@ public class UserDTO {
 	@Pattern(regexp="^[가-힣A-Za-z0-9]+$")
 	private String username; // 닉네임
 
-	private int role; // 0: 학생, 1: 선생
+	//role=-1로 수정하면 이게 값이 사라진다.
+	//private int role; // 0: 학생, 1: 선생
+	@Min(0)
+	@Max(2)
+  private int role = -1;
 	
 	// 회원 가입 여부 저장
 	private boolean userIdExist = false;

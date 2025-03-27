@@ -45,8 +45,6 @@
   function resetUserIdExist(){
   	$("#userIdExist").val("false");
  // resetUserIdExist
- 
- 
   } 
   
 </script>

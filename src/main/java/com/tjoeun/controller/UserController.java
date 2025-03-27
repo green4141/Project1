@@ -40,8 +40,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/loginProcedure")
-	public String login(@Valid @ModelAttribute("loginProcUserDTO") UserDTO loginProcUserDTO, 
+	public String login(@ModelAttribute("loginProcUserDTO") UserDTO loginProcUserDTO, 
 			                BindingResult result) {
+		
+		new UserValidator().validate(loginProcUserDTO, result);
 		
 		// 로그인 실패 - 유효성 검사 통과 못함
 		if(result.hasErrors()) {
@@ -58,7 +60,6 @@ public class UserController {
 		}	
 	}
 	
-	
 	@GetMapping("/join")
 	public String join(@ModelAttribute("joinUserDTO") UserDTO joinUserDTO) {
 		return "user/join";
@@ -73,6 +74,7 @@ public class UserController {
 		userService.addUserInfo(joinUserDTO);
 		return "user/join_success";
 	}
+	
 	// 회원정보 확인
 	@GetMapping("/modify")
 	public String modify(@ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO) {
@@ -108,8 +110,7 @@ public class UserController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		UserValidator validator1 = new UserValidator();
-		binder.addValidators(validator1);
+		binder.addValidators(new UserValidator());
 	}
 	
 	
