@@ -30,6 +30,7 @@ import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
 import com.tjoeun.mapper.TopMenuMapper;
 import com.tjoeun.mapper.UserMapper;
+import com.tjoeun.service.BoardService;
 import com.tjoeun.service.TopMenuService;
 
 @Configuration
@@ -54,6 +55,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Autowired
 	private TopMenuService topMenuService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	//추가
 	@Resource(name="loginUserDTO")

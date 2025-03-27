@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import com.tjoeun.dto.BoardDTO;
 
@@ -26,7 +27,7 @@ public interface BoardMapper {
 	@Select("SELECT * FROM v_board_user " +
 					"WHERE board_id = #{board_id} " +
 					"ORDER BY idx DESC")
-	List<BoardDTO> getBoardList(int board_id);
+	List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds);
 	
 	@Select("select * from tjoeun.v_board_user where idx=#{idx}")
 	BoardDTO getBoardInfo(int idx);
@@ -43,4 +44,9 @@ public interface BoardMapper {
 	
 	@Delete("DELETE FROM board WHERE idx = ${idx}")
 	void deleteBoardInfo(int idx);
+	
+	@Select("SELECT count(*) " +
+					"FROM board " +
+					"WHERE board_id = #{board_id}")
+	int getBoardCount(int board_id);
 }

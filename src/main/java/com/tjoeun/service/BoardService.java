@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tjoeun.dao.BoardDAO;
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.PageDTO;
 import com.tjoeun.dto.UserDTO;
 
 @Service
@@ -21,6 +23,12 @@ public class BoardService {
 	
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Value("${page.listcount}")
+	private int page_listcount;
+	
+	@Value("${page.pagenationcount}")
+	private int page_pagenationcount;
 	
 	@Autowired
 	private BoardDAO boardDAO;
@@ -60,8 +68,19 @@ public class BoardService {
 		return name;
 	}
 
-	public List<BoardDTO> getBoardList(int board_id){
-		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id);
+	public List<BoardDTO> getBoardList(int board_id, int page){
+		
+		/*
+		  0(page) ->  0(start)   
+		  1(page) -> 10(start)
+		  2(page) -> 20(start)
+		  한 page 당 게시글의 개수 : page_listcount (10)
+		*/
+		int start = (page - 1) * this.page_listcount;
+		RowBounds rowBounds = new RowBounds(start, page_listcount);
+		
+		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds);
+		
 		return boardDTOList;
 	}
 	
@@ -86,6 +105,13 @@ public class BoardService {
 	
 	public void deleteBoardInfo(int idx) {
 		boardDAO.deleteBoardInfo(idx);
+	}
+	
+	public PageDTO getBoardCount(int board_id, int currentPage) {
+		int contentCount = boardDAO.getBoardCount(board_id);
+		PageDTO pageDTO = new PageDTO(contentCount, currentPage, this.page_listcount, this.page_pagenationcount);
+		
+		return pageDTO;
 	}
 	
 }

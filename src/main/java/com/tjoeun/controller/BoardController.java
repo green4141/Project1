@@ -1,6 +1,5 @@
 package com.tjoeun.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.PageDTO;
 import com.tjoeun.service.BoardService;
 
 @Controller
@@ -27,14 +27,22 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
+			 							 @RequestParam(value="page", defaultValue="1") int page,
 			               Model model) {
 		
 		String name = boardService.getBoardInfoName(board_id);
-		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id);
+		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page);
+
+		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
+		
+		//System.out.println(pageDTO);
+		
+		
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
 		model.addAttribute("boardDTOList", boardDTOList);
+		model.addAttribute("pageDTO", pageDTO);
 		
 		return "board/main";
 	}
