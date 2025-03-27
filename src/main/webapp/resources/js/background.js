@@ -1,26 +1,21 @@
-const images = [
-  '/images/20220818_155357.jpg',
-  '/images/interior_img21.jpg'
-];
+document.addEventListener('DOMContentLoaded', function () {
+  const images = [
+    '/images/20220818_155357.jpg',
+    '/images/interior_img21.jpg'
+  ];
 
-let index = 0;
-const background = document.getElementById('background');
+  let currentIndex = 0;
+  const slideImg = document.getElementById('slide-img');
 
-function changeBackground() {
-  // 페이드아웃
-  background.style.opacity = 0;
+  setInterval(() => {
+    // 먼저 opacity를 0으로 줄여서 사라지게
+    slideImg.style.opacity = 0;
 
-  setTimeout(() => {
-    background.style.backgroundImage = `url('${images[index]}')`;
-    background.style.opacity = 1;
-    index = (index + 1) % images.length;
-  }, 1000); // 페이드아웃 완료 후 이미지 변경 (1초 간격)
-}
-
-// 초기에 설정
-background.style.backgroundImage = `url('${images[index]}')`;
-background.style.opacity = 1;
-index = (index + 1) % images.length;
-
-// 5초마다 전환
-setInterval(changeBackground, 5000);
+    // 1초 후 이미지 바꾸고 다시 나타나게
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      slideImg.src = images[currentIndex];
+      slideImg.style.opacity = 1;
+    }, 1000);
+  }, 5000); // 5초마다
+});
