@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.tjoeun.dto.UserDTO;
-//전체수정완료
+
 public class UserValidator implements Validator{
 
 	@Override
@@ -27,10 +27,6 @@ public class UserValidator implements Validator{
 			if (userDTO.isUserIdExist() == false) {
 				errors.rejectValue("id", "DidntCheckUserId");
 			}
-			
 		}
-		
 	}
-	
-
 }
