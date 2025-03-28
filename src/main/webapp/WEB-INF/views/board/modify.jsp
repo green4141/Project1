@@ -16,16 +16,15 @@
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="/css/style.css"/>
 
-<style>
-    .error { color:red; font-size:12px; font-weight:bold; }
-</style>
 </head>
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
+
+
 <div class="page-content">
-	<div class="container" style="margin-top:100px">
+	<div class="main-layout">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
@@ -73,7 +72,7 @@
 		</div>
 		<div class="col-sm-3"></div>
 	</div>
-</div>
+	</div>
 </div>
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>

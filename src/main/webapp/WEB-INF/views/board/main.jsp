@@ -17,14 +17,14 @@
 <link rel="stylesheet" href="/css/style.css"/>
 
 </head>
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- 게시글 리스트 -->
 <div class="page-content">
-	<div class="container" style="margin-top:100px">
+	<div class="board-container">
 		<h4>${name }</h4>
 		<table id='board_list'>
 			<thead>
@@ -49,7 +49,7 @@
 			</tbody>
 		</table>
 		<div>
-			<ul>
+			<ul class="page-list">
 				<li><a href="#">이전</a></li>
 				<li><a href="#">1</a></li>
 				<li><a href="#">2</a></li>
@@ -61,12 +61,6 @@
 				<li><a href="#">8</a></li>
 				<li><a href="#">9</a></li>
 				<li><a href="#">10</a></li>
-				<li><a href="#">다음</a></li>
-			</ul>
-		</div>
-		<div>
-			<ul>
-				<li><a href="#">이전</a></li>
 				<li><a href="#">다음</a></li>
 			</ul>
 		</div>

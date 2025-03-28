@@ -179,3 +179,9 @@ html, body {
   margin-left: auto;
 }
 
+/* 게시판 */
+
+.board-container {
+  margin-top: 100px;
+}
+
