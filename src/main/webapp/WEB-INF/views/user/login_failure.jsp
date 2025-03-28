@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/css/style.css"/>
     
   </head>
-  <body class="page-wrapper">
+  <body>
     <script>
       alert("로그인에 실패하였습니다");
       location.href="${root}user/login?fail=true";

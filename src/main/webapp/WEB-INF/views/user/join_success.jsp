@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/css/style.css"/>
     
   </head>
-  <body class="page-wrapper">
+  <body>
     <script>
       alert("축하합니다 !! 회원으로 가입하셨습니다 !!");
       location.href="${root}user/login";

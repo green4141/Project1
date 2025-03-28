@@ -26,7 +26,7 @@
 <div class="page-content">
 	<div class="board-container">
 		<h4>${name }</h4>
-		<table id="board_list">
+		<table id="board-list">
 			<thead>
 				<tr>
 					<th>글번호</th>

@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/css/style.css"/>
     
   </head>
-  <body class="page-wrapper">
+  <body>
     <script>
       alert("회원 정보가 수정되었습니다");
       location.href="${root}user/modify";

@@ -238,3 +238,66 @@ html, body {
 .write-button:hover {
   background: #555;
 }
+
+/* 글 작성 */
+
+input[disabled], textarea[disabled] {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px;
+  width: 100%;
+  font-size: 1rem;
+  resize: none;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.btn-primary {
+  background: #333;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #555;
+}
+
+.btn-info {
+  background: #007bff;
+  color: #fff;
+}
+.btn-info:hover {
+  background: #0056b3;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+.btn-danger:hover {
+  background: #b02a37;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* read.jsp용 박스 스타일 */
+.box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  padding: 30px;
+  flex: 1;
+}
+
+/* read.jsp용 입력 필드 블럭 */
+.form-block {
+  margin-bottom: 20px;
+}
+

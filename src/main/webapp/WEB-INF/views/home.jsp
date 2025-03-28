@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
   </head>
-  <body class="page-wrapper">
+  <body>
     <h1>home.jsp - java</h1>
     
     <button onclick="location.href='${root }test1'">test1</button><br>

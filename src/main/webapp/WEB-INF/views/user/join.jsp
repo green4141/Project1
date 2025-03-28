@@ -56,65 +56,63 @@
 <!-- 상단부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
 
-<div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
-					<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
-                        <form:hidden path="userIdExist" />
-						<div class="form-group">
-							<form:label path="username">닉네임</form:label>
-							<form:input type="text" path="username" class="form-control"/>
-                            <span class="error"><form:errors path="username" /></span>
-						</div>
-                      <div class="form-group">
-                            <form:label path="name">실명</form:label>
-                            <form:input type="text" path="name" class="form-control"/>
-                            <span class="error"><form:errors path="name" /></span>
-                      </div>
-                      <div class="form-group">
-                          <form:label path="role">역할 선택</form:label>
-                          <div>
-                              <form:radiobutton path="role" value="0" id="student"/>
-                              <label for="student">학생</label>
-                      
-                              <form:radiobutton path="role" value="1" id="teacher"/>
-                              <label for="teacher">교사</label>
-                          </div>
-                          <span class="error"><form:errors path="role" /></span>
-                      </div>
-						<div class="form-group">
-							<form:label path="id">아이디</form:label>
-							<div class="input-group">
-								<form:input type="text" path="id" id="id" class="form-control" onkeypress="resetUserIdExist()" />
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" onclick="checkUserId()">중복확인</button>         
-								</div>
-							</div>
-                            <span class="error"><form:errors path="id" /></span>
-						</div>
-						<div class="form-group">
-							<form:label path="password">비밀번호</form:label>
-							<form:password path="password" class="form-control"/>
-                            <span class="error"><form:errors path="password" /></span>
-						</div>
-						<div class="form-group">
-							<form:label path="password2">비밀번호 확인</form:label>
-							<form:password path="password2" class="form-control"/>
-                            <span class="error"><form:errors path="password2" /></span>
-						</div>
-						<div class="form-group">
-							<div class="text-right">
-								<form:button class="btn btn-primary">회원가입</form:button>
-							</div>
-						</div>
-					</form:form>
+<div class="board-container">
+	<div class="main-layout">
+		<div class="box">
+			<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
+				<form:hidden path="userIdExist" />
+				
+				<div class="form-block">
+					<form:label path="username">닉네임</form:label>
+					<form:input type="text" path="username"/>
+					<span class="error"><form:errors path="username" /></span>
 				</div>
-			</div>
+				
+				<div class="form-block">
+					<form:label path="name">실명</form:label>
+					<form:input type="text" path="name"/>
+					<span class="error"><form:errors path="name" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="role">역할 선택</form:label>
+					<div>
+						<form:radiobutton path="role" value="0" id="student"/>
+						<label for="student">학생</label>
+						<form:radiobutton path="role" value="1" id="teacher"/>
+						<label for="teacher">교사</label>
+					</div>
+					<span class="error"><form:errors path="role" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="id">아이디</form:label>
+					<div style="display: flex; gap: 10px;">
+						<form:input type="text" path="id" id="id" onkeypress="resetUserIdExist()" />
+						<button type="button" onclick="checkUserId()">중복확인</button>
+					</div>
+					<span class="error"><form:errors path="id" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="password">비밀번호</form:label>
+					<form:password path="password"/>
+					<span class="error"><form:errors path="password" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="password2">비밀번호 확인</form:label>
+					<form:password path="password2"/>
+					<span class="error"><form:errors path="password2" /></span>
+				</div>
+				
+				<div class="form-block">
+					<div class="text-right">
+						<form:button class="btn btn-primary">회원가입</form:button>
+					</div>
+				</div>
+			</form:form>
 		</div>
-		<div class="col-sm-3"></div>
 	</div>
 </div>
 <!-- footer -->  

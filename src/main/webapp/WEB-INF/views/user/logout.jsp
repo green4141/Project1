@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="/css/style.css"/>
     
   </head>
-  <body class="page-wrapper">
+  <body>
     <script>
       alert("LOGOUT!!!!")
       location.href="${root}main"

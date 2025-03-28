@@ -16,8 +16,6 @@
     
   </head>
 
-  <body class="page-wrapper">
-
   <body>
 
     <script>
