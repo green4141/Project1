@@ -21,7 +21,7 @@
 
 </head>
 
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 메뉴 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
