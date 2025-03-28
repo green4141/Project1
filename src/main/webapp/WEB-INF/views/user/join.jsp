@@ -46,17 +46,18 @@
   
   function resetUserIdExist(){
   	$("#userIdExist").val("false");
-  } // resetUserIdExist
+ // resetUserIdExist
+  } 
   
 </script>
 </head>
 
-<body class="page-wrapper">
+<body>
 
 <!-- 상단부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
-<div class="page-content">
-	<div class="container" style="margin-top:100px">
+
+<div class="container" style="margin-top:100px">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
@@ -117,10 +118,8 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-</div>
 <!-- footer -->  
 <c:import url="/WEB-INF/views/include/bottom_info.jsp" ></c:import>
-
 
 </body>
 </html>
