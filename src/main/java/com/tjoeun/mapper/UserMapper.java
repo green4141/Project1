@@ -47,5 +47,24 @@ public interface UserMapper {
 	@Select("SELECT count(*) FROM user")
 	int getAllUserCount();
 	
-
+	// 유저 정보 변경(어드민)
+	@Update({"<script>"
+				+ "UPDATE user "
+				+ "<set>"
+					+ "role = #{role} "
+					+ "<if test = 'username != null'>"
+						+ ", username = #{username} "
+					+ "</if>"
+					+ "<if test='name != null'>"
+						+ ", name = #{name} "
+					+ "</if>"
+					+ "<if test='password != null'>"
+						+ ", password = #{password} "
+					+ "</if>"
+				+ "</set>"
+			
+				+ "where idx = #{idx}"
+			
+			+ "</script>"})
+	void updateUser(UserDTO dto);
 }
