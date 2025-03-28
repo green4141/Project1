@@ -2,6 +2,7 @@ package com.tjoeun.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
@@ -67,4 +68,8 @@ public interface UserMapper {
 			
 			+ "</script>"})
 	void updateUser(UserDTO dto);
+	
+	// 회원 삭제(어드민)
+	@Delete("delete from user where idx = #{idx}")
+	void deleteUser(int idx);
 }

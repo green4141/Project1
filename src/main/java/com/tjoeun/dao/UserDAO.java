@@ -55,4 +55,8 @@ public class UserDAO {
 		if(StringUtils.isBlank(dto.getUsername())) dto.setUsername(null);
 		userMapper.updateUser(dto);
 	}
+	
+	public void deleteUser(int idx) {
+		userMapper.deleteUser(idx);
+	}
 }

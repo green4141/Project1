@@ -45,7 +45,9 @@ public class AdminService {
 	public void userUpdate(UserDTO dto) {
 		userDAO.userUpdate(dto);
 	}
-	
+	public void deleteUser(int idx) {
+		userDAO.deleteUser(idx);
+	}
 	public List<BoardDTO> getAllBoardList(int page) {
 		int start = (page - 1) * page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);

@@ -35,7 +35,7 @@
 						<th class="text-center d-none d-md-table-cell">닉네임</th>
 						<th class="text-center d-none d-md-table-cell">등급</th>
 						<th class="text-center d-none d-md-table-cell">수정하기</th>
-
+						<th class="text-center d-none d-md-table-cell">삭제하기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +53,7 @@
                             </c:choose>
                             </td>
                             <td class="text-center d-none d-md-table-cell"><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
+                            <td class="text-center d-none d-md-table-cell"><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button>
     					</tr>
                     </c:forEach>
 				</tbody>
