@@ -55,7 +55,7 @@
     		<!-- 이전 버튼 -->
     		<c:choose>
     			<c:when test="${pageDTO.previousPage <= 0 }">
-    				<li class="disabled"><span>이전</span></li>
+    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a></li>
     			</c:when>
     			<c:otherwise>
     				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a></li>
@@ -77,7 +77,7 @@
     		<!-- 다음 버튼 -->
     		<c:choose>
     			<c:when test="${pageDTO.max >= pageDTO.pageCount }">
-    				<li class="disabled"><span>다음</span></li>
+    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a></li>
     			</c:when>
     			<c:otherwise>
     				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a></li>
