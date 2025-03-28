@@ -12,5 +12,8 @@ alert("작업이 완료되었습니다.")
 <c:if test="${work == 'userUpdate'}">
 location.href='/admin/userdetail?idx=${idx}'
 </c:if>
+<c:if test="${work == 'boardDelete'}">
+location.href='/admin/board'
+</c:if>
 </script>
 </html>
