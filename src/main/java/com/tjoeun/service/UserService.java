@@ -74,10 +74,13 @@ public class UserService {
 		modifyUserDTO.setRole(tmpModifyUserDTO.getRole());
 	}
 	
-	//패스워드 변경
+	//패스워드 변경 및 닉네임 변경
 	public void modifyUserInfo(UserDTO modifyUserDTO) {
 		modifyUserDTO.setIdx(loginUserDTO.getIdx());
+		modifyUserDTO.setUsername(modifyUserDTO.getUsername2());
 		userDAO.modifyUserInfo(modifyUserDTO);
+		
+		loginUserDTO.setUsername(modifyUserDTO.getUsername2());
 	}
 	
    

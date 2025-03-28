@@ -27,8 +27,11 @@ public class UserDTO {
 	@Size(min=2, max=10)
 	@Pattern(regexp="^[가-힣A-Za-z0-9]+$")
 	private String username; // 닉네임
+	
+	@Size(min=2, max=10)
+	@Pattern(regexp="^[가-힣A-Za-z0-9]+$")
+	private String username2; // 닉네임수정
 
-	//role=-1로 수정하면 이게 값이 사라진다.
   private int role;// 0: 학생, 1: 선생
 	
 	// 회원 가입 여부 저장
