@@ -8,220 +8,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
 
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="css/style.css"/>
 
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
+
 <body class="page-wrapper">
 
-<!-- 상단 부분 -->
+<!-- 상단 메뉴 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <div class="page-content">
-	<!-- 게시판 미리보기 부분 -->
-	<div class="container page-content" style="margin-top:100px">
-	<div class="row">
-		<div class="col-lg-6" style="margin-top:20px">
-			<div class="card shadow">
-				<div class="card-body">
-					<h4 class="card-title">자유게시판</h4>
-					<table class="table table-hover" id='board_list'>
-						<thead>
-							<tr>
-								<th class="text-center w-25">글번호</th>
-								<th>제목</th>
-								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='${root}board/read'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<a href="${root }board/main?board_id=0" class="btn btn-primary">더보기</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6" style="margin-top:20px">
-			<div class="card shadow">
-				<div class="card-body">
-					<h4 class="card-title">선생님 게시판</h4>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th class="text-center w-25">글번호</th>
-								<th>제목</th>
-								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<a href="${root }board/main?board_id=1" class="btn btn-primary">더보기</a>
-				</div>
-			</div>
+	<div class="main-layout">
+		<!-- 왼쪽: 이미지 영역 -->
+		<div class="left-image">
+	    	<img id="slide-img" src="/images/20220818_155357.jpg" alt="학원 내부 이미지">
+	    </div>
+	    <!-- 오른쪽: 게시판 두 개 -->
+		<div class="right-board">
 		
-		</div>
-		<!--<div class="col-lg-6" style="margin-top:20px">
-			<div class="card shadow">
-				<div class="card-body">
-					<h4 class="card-title">정치게시판</h4>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th class="text-center w-25">글번호</th>
-								<th>제목</th>
-								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<a href="${root }board/main?board_id=1" class="btn btn-primary">더보기</a>
+				<!-- 자유게시판 -->
+				<div class="board-box">
+					<h5>자유게시판</h5>
+					<ul class="board-list">
+						<li>
+							<a href="${root}board/read">[1] 제목입니다</a>
+		           			<span class="date">2018-12-12</span>
+		         		</li>
+						<li>
+							<a href="${root}board/read">[2] 제목입니다</a>
+		           			<span class="date">2018-12-12</span>
+		         		</li>
+						<li>
+							<a href="${root}board/read">[3] 제목입니다</a>
+		           			<span class="date">2018-12-12</span>
+		         		</li>
+		         		<li>
+							<a href="${root}board/read">[4] 제목입니다</a>
+		           			<span class="date">2018-12-12</span>
+		         		</li>
+		         		<li>
+							<a href="${root}board/read">[5] 제목입니다</a>
+		           			<span class="date">2018-12-12</span>
+		         		</li>
+					</ul>
+							
+					<div class="more-wrap">
+		          		<a href="${root}board/main?board_id=0" class="more-link">더보기</a>
+		        	</div>
 				</div>
-			</div>
-		</div>
-		<div class="col-lg-6" style="margin-top:20px">
-			<div class="card shadow">
-				<div class="card-body">
-					<h4 class="card-title">스포츠게시판</h4>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th class="text-center w-25">글번호</th>
-								<th>제목</th>
-								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<th><a href='board_read.html'>제목입니다</a></th>
-								<td class="text-center d-none d-xl-table-cell">2018-12-12</td>
-							</tr>
-						</tbody>
-					</table>
-					
-					<a href="board_main.html" class="btn btn-primary">더보기</a>
+				
+				<!-- 선생님 게시판 -->
+				<div class="board-box">
+					<h5>선생님 게시판</h5>
+					<ul class="board-list">
+		            	<li>
+		            		<a href="board_read.html">[1] 제목입니다</a>
+		            		<span class="date">2018-12-12</span>
+		          		</li>
+		         	    <li>
+		        		    <a href="board_read.html">[2] 제목입니다</a>
+		          		    <span class="date">2018-12-11</span>
+		     	        </li>
+		         	    <li>
+		        		    <a href="board_read.html">[3] 제목입니다</a>
+		          		    <span class="date">2018-12-11</span>
+		     	        </li>
+		         	    <li>
+		        		    <a href="board_read.html">[4] 제목입니다</a>
+		          		    <span class="date">2018-12-11</span>
+		     	        </li>
+		         	    <li>
+		        		    <a href="board_read.html">[5] 제목입니다</a>
+		          		    <span class="date">2018-12-11</span>
+		     	        </li>
+		       		</ul>
+			        <div class="more-wrap">
+			        	<a href="${root}board/main?board_id=1" class="more-link">더보기</a>
+			        </div>		
 				</div>
-			</div>
-		</div>-->
+		</div>
 	</div>
-</div>
 </div>
 
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 
+<!-- 자바스크립트 -->
+<script src="/js/background.js"></script>
+
 </body>
 </html>
-
-
-
 
 
 
