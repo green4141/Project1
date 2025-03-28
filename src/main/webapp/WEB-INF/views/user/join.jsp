@@ -42,7 +42,6 @@
         }
       }
     })
-    
   } // checkUserId
   
   function resetUserIdExist(){
