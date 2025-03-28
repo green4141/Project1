@@ -34,14 +34,15 @@ public class AdminController {
 	
 	@GetMapping("/userdetail")
 	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO, Model model) {
-		// TODO: load target user dto
 		model.addAttribute("user", adminService.getUserByIdx(idx));
 		return "admin/userdetail";
 	}
 	
-	@PostMapping("/userdetailproc")
-	public String userDetailProc(@ModelAttribute("targetUserDTO") UserDTO userDTO, Model model) {
-		//TODO: update user
+	@PostMapping("/updateproc")
+	public String userDetailProc(@ModelAttribute("joinUserDTO") UserDTO userDTO, Model model) {
+		model.addAttribute("idx", userDTO.getIdx());
+		model.addAttribute("work", "userUpdate");
+		adminService.userUpdate(userDTO);
 		return "admin/success";
 	}
 }

@@ -40,4 +40,8 @@ public class AdminService {
 	public UserDTO getUserByIdx(int idx) {
 		return userDAO.getModifyUserInfo(idx);
 	}
+	
+	public void userUpdate(UserDTO dto) {
+		userDAO.userUpdate(dto);
+	}
 }
