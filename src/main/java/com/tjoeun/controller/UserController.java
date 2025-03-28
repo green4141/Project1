@@ -81,13 +81,14 @@ public class UserController {
 		return "user/modify";
 	}
 	
-	// 비밀번호 변경
+	// 비밀번호 변경 및 닉네임 변경
 	@PostMapping("/modifyProcedure")
 	public String modifyProcedure(@Valid @ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO,
 		                          BindingResult result){
 		if(result.hasErrors()){
 			return "user/modify";			
 	  }
+
 		userService.modifyUserInfo(modifyUserDTO);
 		return "user/modify_success";
 	}

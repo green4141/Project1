@@ -39,13 +39,32 @@ public interface UserMapper {
 	@Select("SELECT * FROM user WHERE idx = #{idx}")
 	UserDTO getModifyUserInfo(int idx);
 	
-	// 패스워드 업데이트
-	@Update("UPDATE user SET password = #{password} WHERE idx = #{idx}")
+	//패스워드 및 닉네임 업데이트
+	@Update("UPDATE user SET password = #{password}, username = #{username2} WHERE idx = #{idx}")
 	void modifyUserInfo(UserDTO modifyUserDTO);
 	
 	// 전체 회원 수 구하기
 	@Select("SELECT count(*) FROM user")
 	int getAllUserCount();
 	
-
+	// 유저 정보 변경(어드민)
+	@Update({"<script>"
+				+ "UPDATE user "
+				+ "<set>"
+					+ "role = #{role} "
+					+ "<if test = 'username != null'>"
+						+ ", username = #{username} "
+					+ "</if>"
+					+ "<if test='name != null'>"
+						+ ", name = #{name} "
+					+ "</if>"
+					+ "<if test='password != null'>"
+						+ ", password = #{password} "
+					+ "</if>"
+				+ "</set>"
+			
+				+ "where idx = #{idx}"
+			
+			+ "</script>"})
+	void updateUser(UserDTO dto);
 }

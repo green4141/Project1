@@ -40,6 +40,11 @@
                       <form:input path="username" class="form-control" readonly="true"/>
                     </div>
                     <div class="form-group">
+                      <form:label path="username2">신규닉네임</form:label>
+                      <form:input path="username2" class="form-control"/>
+                      <span id="error"><form:errors path="username2" /></span>
+                    </div>
+                    <div class="form-group">
                         <form:label path="role">지위</form:label>
                         <div>
                             <form:radiobutton path="role" value="0" disabled="true" /> 학생
