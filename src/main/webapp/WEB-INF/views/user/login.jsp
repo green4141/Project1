@@ -33,11 +33,11 @@
 			<form:form action="${root }user/loginProcedure" modelAttribute="loginProcUserDTO" method="post">
 				<div class="form-block">
 					<form:input path="id" placeholder="아이디"/>
-					<div class="error-message"><form:errors path="id" /></div>
+					<div class="error"><form:errors path="id" /></div>
 				</div>
 				<div class="form-block">
 					<form:password path="password" placeholder="비밀번호"/>
-					<div class="error-message"><form:errors path="password" /></div>
+					<div class="error"><form:errors path="password" /></div>
 				</div>
 				<div class="form-block login-buttons">
 					<form:button class="btn btn-primary">로그인</form:button>

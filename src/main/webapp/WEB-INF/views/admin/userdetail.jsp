@@ -13,7 +13,6 @@
   .error { color:red; font-size:12px; font-weight:bold; }
 </style>
 
-</script>
 </head>
 
 <body>
