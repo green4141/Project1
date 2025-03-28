@@ -2,6 +2,7 @@ package com.tjoeun.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,8 @@ public class BoardDAO {
 		return name;
 	}
 	
-	public List<BoardDTO> getBoardList(int board_id){
-		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id);
+	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds){
+		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id, rowBounds);
 		return boardDTOList;
 	}
 	
@@ -40,5 +41,10 @@ public class BoardDAO {
 	
 	public void deleteBoardInfo(int idx) {
 		boardMapper.deleteBoardInfo(idx);
+	}
+	
+	public int getBoardCount(int board_id) {
+		int boardPageCount = boardMapper.getBoardCount(board_id);
+		return boardPageCount;
 	}
 }
