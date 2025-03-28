@@ -55,6 +55,8 @@ public class AdminService {
 		int boardCount = boardDAO.getAllBoardCount();
 		return new PageDTO(boardCount, page, page_listcount, pagenation_count);
 	}
-	
+	public void deleteBoard(int idx) {
+		boardDAO.deleteBoardInfo(idx);
+	}
 	
 }

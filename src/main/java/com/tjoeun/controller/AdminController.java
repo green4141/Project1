@@ -54,4 +54,11 @@ public class AdminController {
 		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page));
 		return "admin/boardlist";
 	}
+	
+	@GetMapping("/delete")
+	public String deleteBoard(@RequestParam int idx, Model model) {
+		adminService.deleteBoard(idx);
+		model.addAttribute("work", "boardDelete");
+		return "admin/success";
+	}
 }
