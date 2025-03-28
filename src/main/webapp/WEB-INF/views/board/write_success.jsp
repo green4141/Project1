@@ -18,7 +18,7 @@
   <body class="page-wrapper">
     <script>
     	alert("성공적으로 업로드 되었습니다.");
-    	location.href="${root}board/read?board_id=${writeBoardDTO.board_id}&idx=${writeBoardDTO.idx}";
+    	location.href="${root}board/read?board_id=${writeBoardDTO.board_id}&idx=${writeBoardDTO.idx}&page=${page}";
     </script>
   </body>
 </html>

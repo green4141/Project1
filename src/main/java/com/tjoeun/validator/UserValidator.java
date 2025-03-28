@@ -17,7 +17,6 @@ public class UserValidator implements Validator{
 		UserDTO userDTO = (UserDTO)target;
 		
 		String beanName = errors.getObjectName();
-		// System.out.println("beanName : " + beanName);
 		
 		if(beanName.equals("joinUserDTO")) {
 			if(userDTO.getPassword().equals(userDTO.getPassword2()) == false) {

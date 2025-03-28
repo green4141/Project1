@@ -34,6 +34,7 @@
 					<form:form action="${root }board/modifyProcedure" modelAttribute="modifyBoardDTO" method="post" enctype="multipart/form-data">
                         <form:hidden path="idx" />
                         <form:hidden path="board_id" />
+                        <input type="hidden" name="page" value="${page }" />
 						<div class="form-group">
 							<form:label path="username">작성자</form:label>
 							<form:input path="username" class="form-control" readonly="true"/>
@@ -64,7 +65,7 @@
 						<div class="form-group">
 							<div class="text-right">
 								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root }board/read?board_id=${board_id}&idx=${idx}" class="btn btn-info">취소</a>
+								<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">취소</a>
 							</div>
 						</div>
 					</form:form>
