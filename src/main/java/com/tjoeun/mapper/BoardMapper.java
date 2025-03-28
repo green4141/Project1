@@ -49,4 +49,10 @@ public interface BoardMapper {
 					"FROM board " +
 					"WHERE board_id = #{board_id}")
 	int getBoardCount(int board_id);
+	
+	@Select("Select * FROM board order by idx desc")
+	List<BoardDTO> getAllUserInfo(RowBounds rowBounds);
+	
+	@Select("select count(*) from board")
+	int getAllUserCount();
 }

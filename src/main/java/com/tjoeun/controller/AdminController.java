@@ -45,4 +45,13 @@ public class AdminController {
 		adminService.userUpdate(userDTO);
 		return "admin/success";
 	}
+	
+	@GetMapping("/board")
+	public String board(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
+
+		model.addAttribute("loginUserDTO", loginUserDTO);
+		model.addAttribute("boardDTOList", adminService.getAllBoardList(page));
+		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page));
+		return "admin/boardlist";
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.UserDTO;
 import com.tjoeun.mapper.BoardMapper;
 
 @Repository
@@ -46,5 +47,13 @@ public class BoardDAO {
 	public int getBoardCount(int board_id) {
 		int boardPageCount = boardMapper.getBoardCount(board_id);
 		return boardPageCount;
+	}
+	
+	public List<BoardDTO> getAllBoardList(RowBounds rowBounds) {
+		return boardMapper.getAllUserInfo(rowBounds);
+	}
+	
+	public int getAllBoardCount() {
+		return boardMapper.getAllUserCount();
 	}
 }
