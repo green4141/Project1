@@ -46,6 +46,12 @@ public class AdminController {
 		return "admin/success";
 	}
 	
+	@GetMapping("/userdelete")
+	public String userdelete(@RequestParam int idx, Model model) {
+		adminService.deleteUser(idx);
+		model.addAttribute("work", "userDelete");
+		return "admin/success";
+	}
 	@GetMapping("/board")
 	public String board(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
 
