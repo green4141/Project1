@@ -15,5 +15,8 @@ location.href='/admin/userdetail?idx=${idx}'
 <c:if test="${work == 'boardDelete'}">
 location.href='/admin/board'
 </c:if>
+<c:if test="${work == 'userDelete'}">
+location.href='/admin/user'
+</c:if>
 </script>
 </html>
