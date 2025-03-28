@@ -37,6 +37,7 @@
 							<th class="text-center d-none d-md-table-cell">작성날짜</th>
 	                        <th class="text-center d-none d-md-table-cell">조회수</th>
 	                        <th class="text-center d-none d-md-table-cell">게시판명</th>
+	                        <th class="text-center d-none d-md-table-cell">삭제하기</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,6 +54,7 @@
 			                            <c:otherwise>선생님 게시판</c:otherwise>
 		                            </c:choose>
 	                            </td>
+	                            <td class="text-center d-none d-md-table-cell"><button type="button" onClick="location.href='/admin/delete?idx=${boardDTO.idx}'">삭제하기</button></td>
 	    					</tr>
 	                    </c:forEach>
 					</tbody>
