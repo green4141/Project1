@@ -1,11 +1,9 @@
 package com.tjoeun.dto;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-//전체 수정했음
+
 @Data
 public class UserDTO {
 	private int idx;
@@ -31,10 +29,7 @@ public class UserDTO {
 	private String username; // 닉네임
 
 	//role=-1로 수정하면 이게 값이 사라진다.
-	//private int role; // 0: 학생, 1: 선생
-	@Min(0)
-	@Max(2)
-  private int role = -1;
+  private int role;// 0: 학생, 1: 선생
 	
 	// 회원 가입 여부 저장
 	private boolean userIdExist = false;
