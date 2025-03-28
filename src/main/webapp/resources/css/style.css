@@ -185,3 +185,56 @@ html, body {
   margin-top: 100px;
 }
 
+/* 페이지네이션 */
+
+.page-list {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.page-list li {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.page-list li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.page-list li:hover {
+  background-color: #eee;
+}
+
+.page-list li.active {
+  background-color: #333;
+  color: white;
+  pointer-events: none;
+}
+
+.page-list li.disabled {
+  color: #aaa;
+  pointer-events: none;
+  border-color: #eee;
+}
+
+/* 글쓰기 버튼 */
+.write-button {
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.write-button:hover {
+  background: #555;
+}
