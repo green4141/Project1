@@ -9,10 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
-
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="/css/style.css"/>
 
@@ -42,13 +40,12 @@
         }
       }
     })
-  } // checkUserId
+  }
   
   function resetUserIdExist(){
   	$("#userIdExist").val("false");
  // resetUserIdExist
-  } 
-  
+  }  
 </script>
 </head>
 
