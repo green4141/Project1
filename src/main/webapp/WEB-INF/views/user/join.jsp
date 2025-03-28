@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
@@ -120,7 +121,6 @@
 </div>
 <!-- footer -->  
 <c:import url="/WEB-INF/views/include/bottom_info.jsp" ></c:import>
-
 </body>
 </html>
 
