@@ -128,7 +128,7 @@ $(document).ready(() => {
 		success: (arg) => {
 			let html = "";
 			arg.forEach((item) => {
-				html += `<tr><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
+				html += `<tr class="tr-\${item.idx}"><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
 				if(${loginUserDTO.idx} == item.user_idx) {
 					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
 				} else {
@@ -196,7 +196,7 @@ if(confirm("정말로 삭제하시겠습니까?"))
 		contentType: "application/json; charset=utf-8",
 		success: () => {
 			alert("삭제에 성공했습니다.")
-			location.reload()
+			$(`.tr-\${idx}`).remove()
 		}
 	})
 	else return false;
