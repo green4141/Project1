@@ -17,60 +17,58 @@
 <link rel="stylesheet" href="/css/style.css"/>
 
 </head>
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- 게시글 리스트 -->
-<div class="page-content">
-	<div class="container" style="margin-top:100px">
-		<div class="card shadow">
-			<div class="card-body">
-				<h4 class="card-title">${name }</h4>
-				<table class="table table-hover" id='board_list'>
+<div class="board-container">
+	<div class="main-layout">
+				<h4>${name }</h4>
+				<table id='board-list'>
 					<thead>
 						<tr>
-							<th class="text-center d-none d-md-table-cell">글번호</th>
-							<th class="w-50">제목</th>
-							<th class="text-center d-none d-md-table-cell">작성자</th>
-							<th class="text-center d-none d-md-table-cell">작성날짜</th>
-	                        <th class="text-center d-none d-md-table-cell">조회수</th>
-	                        <th class="text-center d-none d-md-table-cell">게시판명</th>
-	                        <th class="text-center d-none d-md-table-cell">삭제하기</th>
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성날짜</th>
+	                        <th>조회수</th>
+	                        <th>게시판명</th>
+	                        <th>삭제하기</th>
 						</tr>
 					</thead>
 					<tbody>
 	                    <c:forEach var="boardDTO" items="${boardDTOList }" >
 	    					<tr>
-	    						<td class="text-center d-none d-md-table-cell">${boardDTO.idx }</td>
+	    						<td>${boardDTO.idx }</td>
 	    						<td><a href="${root }board/read?board_id=${board_id}&idx=${boardDTO.idx}&page=${page}">${boardDTO.title }</a></td>
-	    						<td class="text-center d-none d-md-table-cell">${boardDTO.username }</td>
-	    						<td class="text-center d-none d-md-table-cell"><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
-	                            <td class="text-center d-none d-md-table-cell">${boardDTO.hits }</td>
-	                            <td class="text-center d-none d-md-table-cell">
+	    						<td>${boardDTO.username }</td>
+	    						<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
+	                            <td>${boardDTO.hits }</td>
+	                            <td>
 		                            <c:choose>
 			                            <c:when test="${boardDTO.board_id == 0 }">자유 게시판</c:when>
 			                            <c:otherwise>선생님 게시판</c:otherwise>
 		                            </c:choose>
 	                            </td>
-	                            <td class="text-center d-none d-md-table-cell"><button type="button" onClick="location.href='/admin/delete?idx=${boardDTO.idx}'">삭제하기</button></td>
+	                            <td><button type="button" onClick="location.href='/admin/delete?idx=${boardDTO.idx}'">삭제하기</button></td>
 	    					</tr>
 	                    </c:forEach>
 					</tbody>
 				</table>
 				
-				<div class="d-none d-md-block">
-    				<ul class="pagination justify-content-center">
+					<!-- 페이지네이션 -->
+    				<ul class="page-list">
                         <c:choose>
                           <c:when test="${pageDTO.previousPage <= 0 }">
-        					<li class="page-item disabled">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}" class="page-link">이전</a>
+        					<li class="disabled">
+        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a>
         					</li>
                           </c:when>
                           <c:otherwise>
-        					<li class="page-item">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}" class="page-link">이전</a>
+        					<li>
+        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
@@ -78,13 +76,13 @@
                         <c:forEach var="index" begin="${pageDTO.min }" end="${pageDTO.max }">
                           <c:choose>
                             <c:when test="${index == pageDTO.currentPage }">
-            					<li class="page-item active">
-            						<a href="${root }board/main?board_id=${board_id}&page=${index}" class="page-link">${index}</a>
+            					<li class="active">
+            						<a href="${root }board/main?board_id=${board_id}&page=${index}">${index}</a>
             					</li>
                             </c:when>
                             <c:otherwise>
-            					<li class="page-item">
-            						<a href="${root }board/main?board_id=${board_id}&page=${index}" class="page-link">${index}</a>
+            					<li>
+            						<a href="${root }board/main?board_id=${board_id}&page=${index}">${index}</a>
             					</li>
                             </c:otherwise>
                           </c:choose>
@@ -92,36 +90,30 @@
                         
                         <c:choose>
                           <c:when test="${pageDTO.max >= pageDTO.pageCount }">
-        					<li class="page-item disabled">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}" class="page-link">다음</a>
+        					<li class="disabled">
+        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a>
         					</li>
                           </c:when>
                           <c:otherwise>
-        					<li class="page-item">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}" class="page-link">다음</a>
+        					<li>
+        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
     				</ul>
-    			</div>
 				
-				<div class="d-block d-md-none">
-					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<a href="#" class="page-link">이전</a>
+					<ul class="page-list">
+						<li>
+							<a href="#">이전</a>
 						</li>
-						<li class="page-item">
-							<a href="#" class="page-link">다음</a>
+						<li>
+							<a href="#">다음</a>
 						</li>
 					</ul>
-				</div>
 				
 				<div class="text-right">
-					<a href="${root }board/write?board_id=${board_id}" class="btn btn-primary">글쓰기</a>
+					<a href="${root }board/write?board_id=${board_id}" class="write-button">글쓰기</a>
 				</div>
-				
-			</div>
-		</div>
 	</div>
 </div>
 <!-- footer -->

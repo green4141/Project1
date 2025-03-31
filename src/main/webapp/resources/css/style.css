@@ -301,3 +301,18 @@ input[disabled], textarea[disabled] {
   margin-bottom: 20px;
 }
 
+.form-button {
+  background: #333;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form-button:hover {
+  background: #555;
+}
