@@ -122,14 +122,14 @@ html, body {
   margin-top: 80px;
 }
 
+/* 표 전체 크기 제한 및 가운데 정렬 */
 .board-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  max-width: 1200px;
+  max-width: 900px; /* 원하는 표 가로 길이 설정 */
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
 }
 
 .board-content {
@@ -142,13 +142,19 @@ html, body {
   font-size: 1.5rem;
   border-bottom: 2px solid #bbb;
   padding-bottom: 10px;
+  margin-bottom: 30px; /* 표와의 간격 추가 */
   font-weight: 600;
   color: #222;
+  width: 70%;        /* border 길이 제한 */
+  max-width: 850px;   /* 표 크기에 맞춰 조정 (표와 동일하게 설정) */
+  margin-left: 0 auto;
+  margin-right: auto;
 }
 
 /* 게시판 테이블 */
 #board-list {
-  width: 100%;
+  table-layout: fixed;
+  width: 70%;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
@@ -163,8 +169,8 @@ html, body {
 }
 
 #board-list th {
-  text-align: left;
-  padding: 14px 18px;
+  text-align: center;
+  padding: 12px 8px;
   font-weight: 600;
   font-size: 1rem;
   color: #444;
@@ -179,15 +185,40 @@ html, body {
 
 /* 테이블 본문 */
 #board-list td {
-  padding: 10px 14px;
+  text-align: center;
+  padding: 8px 8px;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   font-size: 0.95rem;
 }
 
+#board-list td:nth-child(2) {
+  text-align: left;
+}
+
 /* 마지막 열의 오른쪽 선 제거 (깔끔함 유지) */
 #board-list td:last-child {
   border-right: none;
+}
+
+#board-list th:nth-child(1), #board-list td:nth-child(1) {
+  width: 14%; /* 글번호 너비 */
+}
+
+#board-list th:nth-child(2), #board-list td:nth-child(2) {
+  width: 42%; /* 제목 너비 넓게 */
+}
+
+#board-list th:nth-child(3), #board-list td:nth-child(3) {
+  width: 12%; /* 작성자 너비 */
+}
+
+#board-list th:nth-child(4), #board-list td:nth-child(4) {
+  width: 20%; /* 작성날짜 너비 */
+}
+
+#board-list th:nth-child(5), #board-list td:nth-child(5) {
+  width: 14%; /* 조회수 너비 */
 }
 
 #board-list tbody tr:last-child td {
@@ -285,18 +316,25 @@ html, body {
 
 /* 페이지네이션 & 글쓰기 버튼 레이아웃 */
 .pagination-and-write {
+  max-width: 850px;  /* 표 크기와 동일하게 맞추기 */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;  /* 표와 버튼 사이 간격 */
+}
+
+/* 글쓰기 버튼 정렬 */
+.pagination-and-write {
+  width: 70%; /* 테이블과 동일 너비 유지 */
+  margin: 30px auto 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* 가운데 정렬 */
   align-items: center;
-  margin-top: 30px;
 }
 
 .page-list {
   display: flex;
-  justify-content: center;
   gap: 6px;
-  list-style: none;
-  margin-top: 20px;
+  margin: 0; /* 추가로 여백 없애기 */
   padding: 0;
 }
 
@@ -337,8 +375,14 @@ html, body {
   border-color: #eee;
 }
 
-/* 글쓰기 버튼 */
+/* 글쓰기 버튼 오른쪽 끝으로 고정 */
 .write-button {
+  position: static;
+  margin-top: 30px;
+  margin-left: 120px;
+  right: 0;           /* 오른쪽 끝으로 정렬 */
+  top: 50%;           /* 세로 중앙 정렬 */
+  transform: translateY(-50%); /* 정확한 세로 중앙 */
   background: #333;
   color: #fff;
   text-decoration: none;

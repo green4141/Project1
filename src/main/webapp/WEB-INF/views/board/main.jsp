@@ -10,6 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
 
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
@@ -88,9 +93,7 @@
 		    	</ul>
 		    	
 		    	<!-- 글쓰기 버튼 -->
-		    	<div style="text-align: right; margin-top: 20px;">
 		    		<a href="${root }board/write?board_id=${board_id}" class="write-button">글쓰기</a>
-		    	</div>
 		    </div>
 	    </div>
 	</div>
