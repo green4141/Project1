@@ -34,6 +34,7 @@
 					<th>작성자</th>
 					<th>작성날짜</th>
 					<th>조회수</th>
+                    <th>좋아요</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,11 +45,11 @@
 	    				<td>${boardDTO.username }</td>
 	    				<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 	    				<td>${boardDTO.hits }</td>
+                        <td>${boardDTO.favorite }</td>
 	    			</tr>
 	    		</c:forEach>
 			</tbody>
 		</table>
-		
 		<!-- 페이지네이션 -->
     	<ul class="page-list">
     	

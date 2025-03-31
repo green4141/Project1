@@ -22,7 +22,7 @@ public class CheckWriterInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String strIdx = request.getParameter("idx");
 		int boardIdx = Integer.parseInt(strIdx);
-		BoardDTO currentBoardDTO = boardService.getBoardInfo(boardIdx);
+		BoardDTO currentBoardDTO = boardService.getBoardInfo(boardIdx, loginUserDTO.getIdx());
 		if(currentBoardDTO.getUser() != loginUserDTO.getIdx()) {
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/board/not_writer");

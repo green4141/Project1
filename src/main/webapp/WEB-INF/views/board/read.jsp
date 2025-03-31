@@ -14,6 +14,25 @@
 
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="/css/style.css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function toggleFavorite(isFavorite, board_idx) {
+        const url = "/board/toggleFavBoard?board_idx=" + board_idx;
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(response) {
+                if (response) {
+                    $('#favoriteImage').attr('src', '/images/heart_full.png');
+                    $('#favoriteImage').attr('onclick', 'toggleFavorite(true, ' + boardIdx + ')');
+                } else {
+                    $('#favoriteImage').attr('src', '/images/heart_empty.png');
+                    $('#favoriteImage').attr('onclick', 'toggleFavorite(false, ' + boardIdx + ')');
+                }
+            }
+        });
+    }
+</script>
 
 </head>
 <body class="page-wrapper">
@@ -44,6 +63,17 @@
 						<label for="board_subject">제목</label>
 						<input type="text" id="board_subject" name="board_subject" class="form-control" value="${readBoardDTO.title }" disabled="disabled"/>
 					</div>
+                    <c:choose>
+                        <c:when test="${readBoardDTO.exist_favorite == true && loginUserDTO.idx != 0}">
+                            <img src="/images/heart_full.png" alt="좋아요" id="favoriteImage" style="cursor: pointer;" onclick="toggleFavorite(true, ${readBoardDTO.idx})">
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${loginUserDTO.idx != 0}">
+                                <img src="/images/heart_empty.png" alt="좋아요" id="favoriteImage" style="cursor: pointer;" onclick="toggleFavorite(false, ${readBoardDTO.idx})">
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+
 					<div class="form-group">
 						<label for="board_content">내용</label>
 						<textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none" disabled="disabled">${readBoardDTO.content }</textarea>
