@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
@@ -36,7 +36,7 @@
 
 </head>
 <body class="page-wrapper">
-	
+
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 <div class="page-content">
@@ -84,6 +84,22 @@
     						<img src="${root}upload/${readBoardDTO.file }" width="100%"/>						
     					</div>
                     </c:if>
+                    <div class="form-group" id="reply">
+                    	<table>
+	                    	<tbody>
+	                    	</tbody>
+	                    	<c:if test="${loginUserDTO.userLogin }">
+	                    	<tfoot class="reply_useronly">
+		                    	<tr>
+		                    		<td><span id="reply_username">${loginUserDTO.username }</span></td>
+		                    		<td><input type="text" id="reply_content"/></td>
+		                    		<td><button type="button" id="reply_commit" onclick="replyCommit()">댓글쓰기</button>
+		                    		<td></td>
+		                    	</tr>
+	                    	</tfoot>
+	                    	</c:if>
+                    	</table>
+                    </div>
 					<div class="form-group">
 						<div class="text-right">
 							<a href="${root }board/main?board_id=${board_id}&page=${page}" class="btn btn-primary">목록보기</a>
@@ -104,4 +120,86 @@
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 
 </body>
+<script>
+$(document).ready(() => {
+	$.ajax({
+		url: "${root}reply/select?board_idx=${readBoardDTO.idx}",
+		type: "GET",
+		success: (arg) => {
+			let html = "";
+			arg.forEach((item) => {
+				html += `<tr><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
+				if(${loginUserDTO.idx} == item.user_idx) {
+					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
+				} else {
+					html += `<td></td><td></td>`
+				}
+				html += `</tr>`
+			})	
+			$("#reply tbody").append(html)
+
+		}
+	})
+})
+const replyCommit = () => {
+const content = $("#reply_content").val()
+	const data = {
+		user_idx: ${loginUserDTO.idx },
+		board_idx: ${readBoardDTO.idx},
+		content: content
+	}
+	$.ajax({
+		url: "${root}reply/insert",
+		type: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json; charset=utf-8",
+		success: (arg) => {
+			$("tbody").append("<tr><td>${loginUserDTO.username}</td><td><span id='content-" + arg + "'>" + content + "</span></td><td class='reply_useronly'><button type='button' onclick='replyupdate(arg)' id='reply_update_" + arg + "'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(arg)'>삭제하기</button></td></tr>")
+			
+		}
+	})
+}
+const replyupdate = (idx) => {
+	const $span = $(`#content-\${idx}`)
+	const content = $span.text();
+	const $td = $span.parent();
+	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}"/>`)
+	$(`#reply_update_\${idx}`).attr("onclick", `replyupdateproc(\${idx})`)
+	
+}
+
+const replyupdateproc = (idx) => {
+	const content = $(`#input-content-\${idx}`).val();
+	const data = {
+		content: content,
+		idx: idx
+	}
+	
+	$.ajax({
+		url: "${root}reply/update",
+		type: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json; charset=utf-8",
+		success: () => {
+			const $td = $(`#input-content-\${idx}`).parent()
+			$td.html(`<span id='content-\${idx}'>\${content}</span>`)
+			$(`#reply_update_\${idx}`).attr("onclick", `replyupdate(\${idx})`)
+		}
+	})
+}
+
+const replyDelete = (idx) => {
+if(confirm("정말로 삭제하시겠습니까?"))
+	$.ajax({url: "${root}reply/delete",
+		type: "POST",
+		data: JSON.stringify({idx: idx}),
+		contentType: "application/json; charset=utf-8",
+		success: () => {
+			alert("삭제에 성공했습니다.")
+			location.reload()
+		}
+	})
+	else return false;
+}
+</script>
 </html>

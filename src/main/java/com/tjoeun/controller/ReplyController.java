@@ -21,8 +21,8 @@ public class ReplyController {
 	private final ReplyService replyService;
 
 	@PostMapping("/insert")
-	public void insertReply(@RequestBody ReplyDTO replyDTO) {
-		replyService.insert(replyDTO);
+	public int insertReply(@RequestBody ReplyDTO replyDTO) {
+		return replyService.insert(replyDTO);
 	}
 	@GetMapping("/select")
 	public List<ReplyDTO> selectReply(@RequestParam int board_idx) {
@@ -33,7 +33,7 @@ public class ReplyController {
 		replyService.update(replyDTO);
 	}
 	@PostMapping("/delete")
-	public void deleteReply(@RequestBody ReplyDTO idx) {
-		replyService.delete(idx.getIdx());
+	public void deleteReply(@RequestBody ReplyDTO dto) {
+		replyService.delete(dto.getIdx());
 	}
 }
