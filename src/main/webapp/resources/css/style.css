@@ -221,6 +221,12 @@ html, body {
   width: 14%; /* 조회수 너비 */
 }
 
+#board-list th:nth-child(6), td:nth-child(6),
+#board-list th:nth-child(7), td:nth-child(7) {
+  width: 30%;
+  white-space: nowrap; /* 버튼이 줄바꿈되지 않게 */
+}
+
 #board-list tbody tr:last-child td {
   border-bottom: none;
 }
