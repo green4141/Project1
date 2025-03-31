@@ -91,6 +91,26 @@
 
 </body>
 <script>
+$(document).ready(() => {
+	$.ajax({
+		url: "${root}reply/select?board_idx=${readBoardDTO.idx}",
+		type: "GET",
+		success: (arg) => {
+			let html = "";
+			arg.forEach((item) => {
+				html += `<tr><td>\${item.username}</td><td>\${item.content}</td>`
+				if(${loginUserDTO.idx} == item.user_idx) {
+					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate()' id='reply_update'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete()'>삭제하기</button></td>`
+				} else {
+					html += `<td></td><td></td>`
+				}
+				html += `</tr>`
+			})	
+			$("#reply tbody").append(html)
+			console.log(arg)
+		}
+	})
+})
 const replyCommit = () => {
 const content = $("#reply_content").val()
 	const data = {
@@ -104,7 +124,7 @@ const content = $("#reply_content").val()
 		data: JSON.stringify(data),
 		contentType: "application/json; charset=utf-8",
 		success: () => {
-			$("tbody").prepend("<tr><td>${loginUserDTO.username}</td><td>" + content + "</td><td class='reply_useronly'><button type='button' onclick='replyupdate()' id='reply_update'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete()'>삭제하기</button></td></tr>")
+			$("tbody").append("<tr><td>${loginUserDTO.username}</td><td>" + content + "</td><td class='reply_useronly'><button type='button' onclick='replyupdate()' id='reply_update'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete()'>삭제하기</button></td></tr>")
 		}
 	})
 }
