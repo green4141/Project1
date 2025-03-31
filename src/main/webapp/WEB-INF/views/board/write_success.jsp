@@ -8,14 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert title here</title>
     
+    <!-- 구글 폰트 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    
     <!-- 파비콘 -->
 	<c:import url="/WEB-INF/views/include/favicon.jsp" />
     
     <!-- 커스텀 CSS 추가 -->
-	<link rel="stylesheet" href="/css/style.css"/>
+	<link rel="stylesheet" href="/css/common.css"/>
+	<link rel="stylesheet" href="/css/top_menu.css"/>
+	<link rel="stylesheet" href="/css/board.css"/>
     
   </head>
-  <body class="page-wrapper">
+  <body>
     <script>
     	alert("성공적으로 업로드 되었습니다.");
     	location.href="${root}board/read?board_id=${writeBoardDTO.board_id}&idx=${writeBoardDTO.idx}&page=${page}";

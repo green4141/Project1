@@ -10,11 +10,18 @@
 <title>TJOEUN</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
+
 <!-- 커스텀 CSS 추가 -->
-<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/top_menu.css"/>
+<link rel="stylesheet" href="/css/board.css"/>
 
 <style>
   .error { color:red; font-size:12px; font-weight:bold; }
@@ -56,65 +63,63 @@
 <!-- 상단부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
 
-<div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
-					<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
-                        <form:hidden path="userIdExist" />
-						<div class="form-group">
-							<form:label path="username">닉네임</form:label>
-							<form:input type="text" path="username" class="form-control"/>
-                            <span class="error"><form:errors path="username" /></span>
-						</div>
-                      <div class="form-group">
-                            <form:label path="name">실명</form:label>
-                            <form:input type="text" path="name" class="form-control"/>
-                            <span class="error"><form:errors path="name" /></span>
-                      </div>
-                      <div class="form-group">
-                          <form:label path="role">역할 선택</form:label>
-                          <div>
-                              <form:radiobutton path="role" value="0" id="student"/>
-                              <label for="student">학생</label>
-                      
-                              <form:radiobutton path="role" value="1" id="teacher"/>
-                              <label for="teacher">교사</label>
-                          </div>
-                          <span class="error"><form:errors path="role" /></span>
-                      </div>
-						<div class="form-group">
-							<form:label path="id">아이디</form:label>
-							<div class="input-group">
-								<form:input type="text" path="id" id="id" class="form-control" onkeypress="resetUserIdExist()" />
-								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" onclick="checkUserId()">중복확인</button>         
-								</div>
-							</div>
-                            <span class="error"><form:errors path="id" /></span>
-						</div>
-						<div class="form-group">
-							<form:label path="password">비밀번호</form:label>
-							<form:password path="password" class="form-control"/>
-                            <span class="error"><form:errors path="password" /></span>
-						</div>
-						<div class="form-group">
-							<form:label path="password2">비밀번호 확인</form:label>
-							<form:password path="password2" class="form-control"/>
-                            <span class="error"><form:errors path="password2" /></span>
-						</div>
-						<div class="form-group">
-							<div class="text-right">
-								<form:button class="btn btn-primary">회원가입</form:button>
-							</div>
-						</div>
-					</form:form>
+<div class="board-container">
+	<div class="board-layout">
+		<div class="box">
+			<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
+				<form:hidden path="userIdExist" />
+				
+				<div class="form-block">
+					<form:label path="username">닉네임</form:label>
+					<form:input type="text" path="username"/>
+					<span class="error"><form:errors path="username" /></span>
 				</div>
-			</div>
+				
+				<div class="form-block">
+					<form:label path="name">실명</form:label>
+					<form:input type="text" path="name"/>
+					<span class="error"><form:errors path="name" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="role">역할 선택</form:label>
+					<div>
+						<form:radiobutton path="role" value="0" id="student"/>
+						<label for="student">학생</label>
+						<form:radiobutton path="role" value="1" id="teacher"/>
+						<label for="teacher">교사</label>
+					</div>
+					<span class="error"><form:errors path="role" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="id">아이디</form:label>
+					<div style="display: flex; gap: 10px;">
+						<form:input type="text" path="id" id="id" onkeypress="resetUserIdExist()" />
+						<button type="button" onclick="checkUserId()">중복확인</button>
+					</div>
+					<span class="error"><form:errors path="id" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="password">비밀번호</form:label>
+					<form:password path="password"/>
+					<span class="error"><form:errors path="password" /></span>
+				</div>
+				
+				<div class="form-block">
+					<form:label path="password2">비밀번호 확인</form:label>
+					<form:password path="password2"/>
+					<span class="error"><form:errors path="password2" /></span>
+				</div>
+				
+				<div class="form-block">
+					<div class="text-right">
+						<form:button class="btn btn-primary">회원가입</form:button>
+					</div>
+				</div>
+			</form:form>
 		</div>
-		<div class="col-sm-3"></div>
 	</div>
 </div>
 <!-- footer -->  

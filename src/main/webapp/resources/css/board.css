@@ -1,123 +1,3 @@
-/* 기본 리셋 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* 전체 페이지 */
-html, body {
-  min-width: 1050px;
-  font-family: "Gothic A1", sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-
-
-
-
-/* main.jsp 전용 스타일 */
-
-
-.main-container {
-  margin-top: 80px;
-}
-
-.main-layout {
-  display: flex;
-  gap: 80px;
-  padding: 20px;
-  max-width: 1200px;
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.main-left-image img {
-  width: 600px;
-  height: 600px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  transition: opacity 1s ease-in-out;
-  opacity: 1;
-}
-
-.main-right-board {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.main-right-board > h5 {
-  font-size: 1.4rem;
-}
-
-.main-board-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  background: #fff;
-}
-
-.main-board-list li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.main-board-list li:last-child {
-  border-bottom: none;
-}
-
-.main-board-list a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-
-.main-board-list a:hover {
-  text-decoration: underline;
-}
-
-.main-board-list .date {
-  color: #999;
-  font-size: 0.85rem;
-}
-
-.main-more-wrap {
-  text-align: right;
-  margin-top: 10px;
-}
-
-.main-more-link {
-  background: #333;
-  color: #fff;
-  text-decoration: none;
-  padding: 5px 12px;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.main-more-link:hover {
-  background: #555;
-}
-
-
-
-
-
-/* board/main.jsp 전용 스타일 */
-
 .board-container {
   margin-top: 80px;
 }
@@ -147,8 +27,7 @@ html, body {
   color: #222;
   width: 70%;        /* border 길이 제한 */
   max-width: 850px;   /* 표 크기에 맞춰 조정 (표와 동일하게 설정) */
-  margin-left: 0 auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 /* 게시판 테이블 */
@@ -251,90 +130,12 @@ html, body {
 
 
 
-/* 상단 메뉴바 */
-
-#top-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  height: 60px;
-  padding: 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  border-bottom: 1px solid black;
-}
-
-#top-menu .logo {
-  margin-right: 40px;
-}
-
-#top-menu .menu-start {
-  display: flex;
-  align-items: center;
-  gap: 100px;
-}
-
-/* 자유 게시판, 선생 게시판, 로그인, 회원가입*/
-#top-menu ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* 자유 게시판, 선생 게시판 */
-#top-menu .menu-left {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#top-menu .menu-left li a {
-  font-size: 1.2rem;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-#top-menu .menu-right li a {
-  color: black;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-#top-menu li a:hover {
-  color: #ddd;
-  text-decoration: underline;
-}
-
-#top-menu .menu-right {
-  gap: 20px;
-  margin-left: auto;
-}
-
-
-
 /* 페이지네이션 & 글쓰기 버튼 레이아웃 */
 .pagination-and-write {
   max-width: 850px;  /* 표 크기와 동일하게 맞추기 */
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;  /* 표와 버튼 사이 간격 */
-}
-
-/* 글쓰기 버튼 정렬 */
-.pagination-and-write {
-  width: 70%; /* 테이블과 동일 너비 유지 */
-  margin: 30px auto 0 auto;
-  display: flex;
-  justify-content: flex-start; /* 가운데 정렬 */
-  align-items: center;
 }
 
 .page-list {
@@ -383,7 +184,7 @@ html, body {
 
 /* 글쓰기 버튼 오른쪽 끝으로 고정 */
 .write-button {
-  position: static;
+  position: relative;
   margin-top: 30px;
   margin-left: 120px;
   right: 0;           /* 오른쪽 끝으로 정렬 */

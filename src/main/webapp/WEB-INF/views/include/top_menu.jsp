@@ -23,6 +23,8 @@
 	        <c:if test="${loginUserDTO.role == 2 }">
 	            <li>
 	                <a href="${root }admin/user">유저 목록</a>
+	            </li>
+	            <li>
 	                <a href="${root }admin/board">게시글 목록</a>
 	            </li>
 	        </c:if>
