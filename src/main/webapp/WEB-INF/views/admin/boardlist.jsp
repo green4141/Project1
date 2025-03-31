@@ -115,11 +115,11 @@
 						</li>
 					</ul>
 				</div>
-				 -->
+			
 				<div class="text-right">
 					<a href="${root }board/write?board_id=${board_id}" class="btn btn-primary">글쓰기</a>
 				</div>
-				
+					 -->
 			</div>
 		</div>
 	</div>
