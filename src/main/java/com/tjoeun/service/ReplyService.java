@@ -13,8 +13,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReplyService {
 	private final ReplyDAO replyDAO;
-	public void insert(ReplyDTO replyDTO) {
-		replyDAO.insert(replyDTO);
+	public int insert(ReplyDTO replyDTO) {
+		return replyDAO.insert(replyDTO);
 	}
 	public List<ReplyDTO> select(int board_idx) {
 		return replyDAO.select(board_idx);
