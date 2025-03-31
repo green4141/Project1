@@ -26,4 +26,8 @@ public class BoardDTO {
 	private MultipartFile upload_file;
 	
 	private String username;
+	
+	private boolean exist_favorite;
+	
+	private int favorite;
 }
