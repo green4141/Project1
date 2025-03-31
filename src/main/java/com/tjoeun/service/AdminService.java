@@ -60,5 +60,9 @@ public class AdminService {
 	public void deleteBoard(int idx) {
 		boardDAO.deleteBoardInfo(idx);
 	}
-	
+	public BoardDTO getBoardInfo(int idx) {
+		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
+		
+		return boardDTO;
+	}
 }
