@@ -67,7 +67,7 @@ public class AdminController {
 	@GetMapping("/read")
 	public String read(@RequestParam("idx") int idx,
 			               @RequestParam("page") int page, Model model) {
-		BoardDTO readBoardDTO = boardService.getBoardInfo(idx);
+		BoardDTO readBoardDTO = adminService.getBoardInfo(idx);
 		model.addAttribute("idx", idx);
 		model.addAttribute("readBoardDTO", readBoardDTO);
 		model.addAttribute("loginUserDTO", loginUserDTO);
