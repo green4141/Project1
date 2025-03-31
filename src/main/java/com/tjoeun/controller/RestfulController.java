@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tjoeun.service.UserService;
-//전체수정완료
+//사용자 ID 중복 체크
 @RestController
 public class RestfulController {
 	
