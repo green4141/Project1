@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.FavoriteDTO;
 
 public interface BoardMapper {
 	@Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
@@ -55,4 +56,14 @@ public interface BoardMapper {
 	
 	@Select("select count(*) from board")
 	int getAllUserCount();
+	
+	@Select("SELECT count(*) FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
+	int isFavBoardExists(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
+	
+	@Insert("insert into tjoeun.favorite(user_idx, board_idx) " +
+					"values(#{user_idx}, #{board_idx})")
+	int addFavBoard(FavoriteDTO favBoardDTO);
+	
+	@Delete("DELETE FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
+  void deleteFavBoard(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
 }

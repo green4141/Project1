@@ -39,8 +39,8 @@ public class BoardController {
 		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page);
 
 		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
-		
-		//System.out.println(pageDTO);
+
+		System.out.println(loginUserDTO);
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
@@ -55,7 +55,7 @@ public class BoardController {
 	public String read(@RequestParam("board_id") int board_id,
 										 @RequestParam("idx") int idx,
 			               @RequestParam("page") int page, Model model) {
-		BoardDTO readBoardDTO = boardService.getBoardInfo(idx);
+		BoardDTO readBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("readBoardDTO", readBoardDTO);
@@ -96,7 +96,7 @@ public class BoardController {
 										 	 @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 										 	 Model model) {
 		
-		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx);
+		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		
 		modifyBoardDTO.setUsername(tmpBoardDTO.getUsername());
 		modifyBoardDTO.setDate(tmpBoardDTO.getDate());
