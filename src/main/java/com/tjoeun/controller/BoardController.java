@@ -40,7 +40,7 @@ public class BoardController {
 
 		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
 
-		System.out.println(loginUserDTO);
+		//System.out.println(loginUserDTO);
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
