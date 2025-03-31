@@ -30,6 +30,7 @@ import com.tjoeun.interceptor.AdminInterceptor;
 import com.tjoeun.interceptor.CheckBoardInterceptor;
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
+import com.tjoeun.mapper.ReplyMapper;
 import com.tjoeun.mapper.TopMenuMapper;
 import com.tjoeun.mapper.UserMapper;
 import com.tjoeun.service.BoardService;
@@ -114,7 +115,12 @@ public class ServletAppContext implements WebMvcConfigurer{
 		fatoryBean.setSqlSessionFactory(factory);
 		return fatoryBean;
 	}
-	
+	@Bean
+	public MapperFactoryBean<ReplyMapper> getReplyMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<ReplyMapper> fatoryBean = new MapperFactoryBean<ReplyMapper>(ReplyMapper.class);
+		fatoryBean.setSqlSessionFactory(factory);
+		return fatoryBean;
+	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 
@@ -137,7 +143,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		reg4.addPathPatterns("/board/modify", "/board/delete");
 		
 		AdminInterceptor adminInterceptor = new AdminInterceptor(loginUserDTO);
-		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**").order(1);
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
 
 	}
 	
