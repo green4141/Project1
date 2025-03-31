@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
@@ -17,7 +17,7 @@
 
 </head>
 <body class="page-wrapper">
-	
+
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 <div class="page-content">
@@ -54,6 +54,22 @@
     						<img src="${root}upload/${readBoardDTO.file }" width="100%"/>						
     					</div>
                     </c:if>
+                    <div class="form-group" id="reply">
+                    	<table>
+	                    	<tbody>
+	                    	</tbody>
+	                    	<c:if test="${loginUserDTO.userLogin }">
+	                    	<tfoot>
+		                    	<tr>
+		                    		<td><span id="reply_username">${loginUserDTO.username }</span></td>
+		                    		<td><input type="text" id="reply_content"/></td>
+		                    		<td><button type="button" id="reply_commit" onclick="replyCommit()">댓글쓰기</button>
+		                    		<td class="reply_useronly"><button type="button" class="reply_delete_btn" onclick="replyDelete()">삭제하기</button></td>
+		                    	</tr>
+	                    	</tfoot>
+	                    	</c:if>
+                    	</table>
+                    </div>
 					<div class="form-group">
 						<div class="text-right">
 							<a href="${root }board/main?board_id=${board_id}&page=${page}" class="btn btn-primary">목록보기</a>
@@ -74,4 +90,23 @@
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 
 </body>
+<script>
+const replyCommit = () => {
+const content = $("#reply_content").val()
+	const data = {
+		user_idx: ${loginUserDTO.idx },
+		board_idx: ${readBoardDTO.idx},
+		content: content
+	}
+	$.ajax({
+		url: "${root}reply/insert",
+		type: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json; charset=utf-8",
+		success: () => {
+			$("tbody").prepend("<tr><td>${loginUserDTO.username}</td><td>" + content + "</td><td class='reply_useronly'><button type='button' onclick='replyupdate()' id='reply_update'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete()'>삭제하기</button></td></tr>")
+		}
+	})
+}
+</script>
 </html>
