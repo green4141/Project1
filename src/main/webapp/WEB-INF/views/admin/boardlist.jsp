@@ -44,7 +44,7 @@
 	                    <c:forEach var="boardDTO" items="${boardDTOList }" >
 	    					<tr>
 	    						<td class="text-center d-none d-md-table-cell">${boardDTO.idx }</td>
-	    						<td><a href="${root }board/read?board_id=${board_id}&idx=${boardDTO.idx}&page=${page}">${boardDTO.title }</a></td>
+	    						<td><a href="${root }admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage }">${boardDTO.title }</a></td>
 	    						<td class="text-center d-none d-md-table-cell">${boardDTO.username }</td>
 	    						<td class="text-center d-none d-md-table-cell"><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 	                            <td class="text-center d-none d-md-table-cell">${boardDTO.hits }</td>
@@ -65,12 +65,12 @@
                         <c:choose>
                           <c:when test="${pageDTO.previousPage <= 0 }">
         					<li class="page-item disabled">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}" class="page-link">이전</a>
+        						<a href="${root }admin/board?page=${pageDTO.previousPage}" class="page-link">이전</a>
         					</li>
                           </c:when>
                           <c:otherwise>
         					<li class="page-item">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}" class="page-link">이전</a>
+        						<a href="${root }admin/board?page=${pageDTO.previousPage}" class="page-link">이전</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
@@ -79,12 +79,12 @@
                           <c:choose>
                             <c:when test="${index == pageDTO.currentPage }">
             					<li class="page-item active">
-            						<a href="${root }board/main?board_id=${board_id}&page=${index}" class="page-link">${index}</a>
+            						<a href="${root }admin/board?page=${index}" class="page-link">${index}</a>
             					</li>
                             </c:when>
                             <c:otherwise>
             					<li class="page-item">
-            						<a href="${root }board/main?board_id=${board_id}&page=${index}" class="page-link">${index}</a>
+            						<a href="${root }admin/board?page=${index}" class="page-link">${index}</a>
             					</li>
                             </c:otherwise>
                           </c:choose>
@@ -93,18 +93,18 @@
                         <c:choose>
                           <c:when test="${pageDTO.max >= pageDTO.pageCount }">
         					<li class="page-item disabled">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}" class="page-link">다음</a>
+        						<a href="${root }admin/board?page=${pageDTO.nextPage}" class="page-link">다음</a>
         					</li>
                           </c:when>
                           <c:otherwise>
         					<li class="page-item">
-        						<a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}" class="page-link">다음</a>
+        						<a href="${root }admin/board?page=${pageDTO.nextPage}" class="page-link">다음</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
     				</ul>
     			</div>
-				
+				<!-- 
 				<div class="d-block d-md-none">
 					<ul class="pagination justify-content-center">
 						<li class="page-item">
@@ -115,7 +115,7 @@
 						</li>
 					</ul>
 				</div>
-				
+				 -->
 				<div class="text-right">
 					<a href="${root }board/write?board_id=${board_id}" class="btn btn-primary">글쓰기</a>
 				</div>

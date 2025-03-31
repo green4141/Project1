@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.AdminService;
+import com.tjoeun.service.BoardService;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -20,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private final BoardService boardService;
 	@Resource(name = "loginUserDTO")
 	private UserDTO loginUserDTO;
 	
@@ -60,7 +64,16 @@ public class AdminController {
 		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page));
 		return "admin/boardlist";
 	}
-	
+	@GetMapping("/read")
+	public String read(@RequestParam("idx") int idx,
+			               @RequestParam("page") int page, Model model) {
+		BoardDTO readBoardDTO = boardService.getBoardInfo(idx);
+		model.addAttribute("idx", idx);
+		model.addAttribute("readBoardDTO", readBoardDTO);
+		model.addAttribute("loginUserDTO", loginUserDTO);
+		model.addAttribute("page", page);
+		return "admin/read";
+	}
 	@GetMapping("/delete")
 	public String deleteBoard(@RequestParam int idx, Model model) {
 		adminService.deleteBoard(idx);
