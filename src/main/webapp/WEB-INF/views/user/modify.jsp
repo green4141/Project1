@@ -22,7 +22,7 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <div class="board-container">
-	<div class="main-layout">
+	<div class="board-layout">
 		<div class="box">
 			<form:form action="${root }user/modifyProcedure" modelAttribute="modifyUserDTO" method="post">
 				<div class="form-group">

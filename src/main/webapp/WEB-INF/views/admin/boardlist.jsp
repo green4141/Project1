@@ -24,8 +24,9 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="main-layout">
-				<h4>${name }</h4>
+	<div class="board-layout">
+		<div class="board-content">
+				<h4 class="board-title">${name }</h4>
 				<table id='board-list'>
 					<thead>
 						<tr>
@@ -52,7 +53,7 @@
 			                            <c:otherwise>선생님 게시판</c:otherwise>
 		                            </c:choose>
 	                            </td>
-	                            <td><button type="button" onClick="location.href='/admin/delete?idx=${boardDTO.idx}'">삭제하기</button></td>
+	                            <td><button type="button" class="btn btn-danger" onClick="location.href='/admin/delete?idx=${boardDTO.idx}'">삭제하기</button></td>
 	    					</tr>
 	                    </c:forEach>
 					</tbody>
@@ -114,6 +115,7 @@
 				<div class="text-right">
 					<a href="${root }board/write?board_id=${board_id}" class="write-button">글쓰기</a>
 				</div>
+			</div>
 	</div>
 </div>
 <!-- footer -->

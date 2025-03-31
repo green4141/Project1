@@ -9,6 +9,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
 
+<!-- 파비콘 -->
+<c:import url="/WEB-INF/views/include/favicon.jsp" />
+	
+<!-- 커스텀 CSS 추가 -->
+<link rel="stylesheet" href="/css/style.css"/>
+
 <style>
   .error { color:red; font-size:12px; font-weight:bold; }
 </style>
@@ -20,7 +26,7 @@
 <!-- 상단부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
 <div class="board-container">
-	<div class="main-layout" style="max-width: 600px;">
+	<div class="board-layout" style="max-width: 600px;">
 		<div class="box">
 						<form:form action="${root }admin/updateproc" modelAttribute="joinUserDTO" method="post">
 	                        <form:hidden path="userIdExist" />

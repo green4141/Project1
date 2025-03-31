@@ -22,7 +22,7 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
 
 <div class="board-container">
-	<div class="main-layout">
+	<div class="board-layout">
 		<div class="box">
 			<c:if test="${fail == true }" >
 				<div class="alert-box">

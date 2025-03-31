@@ -26,32 +26,30 @@
 <!-- 상단 메뉴 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
-<div class="page-content">
+<div class="main-container">
 	<div class="main-layout">
+	
 		<!-- 왼쪽: 이미지 영역 -->
-		<div class="left-image">
+		<div class="main-left-image">
 	    	<img id="slide-img" src="/images/20220818_155357.jpg" alt="학원 내부 이미지">
 	    </div>
-	    <!-- 오른쪽: 게시판 두 개 -->
-		<div class="right-board">
-		
-				<!-- 자유게시판 -->
-				<div class="board-box">
-					<h5>${boardInfoList[0].name }</h5>
-					<ul class="board-list">
-                        <c:forEach var="boards" items="${boardDTOList }">
-    						<li>
-    							<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
-                                <fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
-    		           			<span class="date">${formattedDate }</span>
-    		         		</li>
-                        </c:forEach>
-					</ul>
-							
-					<div class="more-wrap">
-		          		<a href="${root}board/main?board_id=0" class="more-link">더보기</a>
-		        	</div>
-				</div>
+	    
+	    <!-- 오른쪽: 자유 게시판 영역 -->
+		<div class="main-right-board">
+			<h5>${boardInfoList[0].name }</h5>
+			<ul class="main-board-list">
+				<c:forEach var="boards" items="${boardDTOList }">
+					<li>
+						<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
+						<fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
+						<span class="date">${formattedDate }</span>
+					</li>
+				</c:forEach>
+			</ul>
+			
+			<div class="main-more-wrap">
+          		<a href="${root}board/main?board_id=0" class="main-more-link">더보기</a>
+        	</div>
 		</div>
 	</div>
 </div>

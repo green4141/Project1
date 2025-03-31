@@ -23,8 +23,8 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="main-layout">
-				<h4>${name }</h4>
+	<div class="board-layout">
+				<h4 class="board-title">${name }</h4>
 				<table id="board-list">
 					<thead>
 						<tr>
@@ -51,8 +51,8 @@
 	                            	<c:otherwise>관리자</c:otherwise>
 	                            </c:choose>
 	                            </td>
-	                            <td><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button></td>
-	                            <td><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button></td>
+	                            <td><button type="button" class="btn btn-info" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button></td>
+	                            <td><button type="button" class="btn btn-danger" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button></td>
 	    					</tr>
 	                    </c:forEach>
 					</tbody>

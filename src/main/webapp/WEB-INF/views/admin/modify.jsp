@@ -40,10 +40,8 @@
 							<label for="user_pw2">비밀번호 확인</label>
 							<input type="password" id="user_pw2" name="user_pw2" value="1234"/>
 						</div>
-						<div class="form-block">
-							<div class="text-right">
+						<div class="form-block text-right">
 								<button type="submit" class="form-button">정보수정</button>
-							</div>
 						</div>
 						
 						</form>
