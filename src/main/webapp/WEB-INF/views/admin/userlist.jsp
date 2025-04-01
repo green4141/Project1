@@ -8,12 +8,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 	
 <!-- 커스텀 CSS 추가 -->
-<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/top_menu.css"/>
+<link rel="stylesheet" href="/css/board.css"/>
 
 </head>
 <body>
@@ -22,55 +28,53 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- 게시글 리스트 -->
-<div class="container" style="margin-top:100px">
-	<div class="card shadow">
-		<div class="card-body">
-			<h4 class="card-title">${name }</h4>
-			<table class="table table-hover" id='board_list'>
+<div class="board-container">
+	<div class="board-layout" style="margin-top:100px">
+			<h4 class="board-title">${name }</h4>
+			<table id='board-list'>
 				<thead>
 					<tr>
-						<th class="text-center d-none d-md-table-cell">번호</th>
-						<th class="text-center d-none d-md-table-cell">아이디</th>
-						<th class="text-center d-none d-md-table-cell">이름</th>
-						<th class="text-center d-none d-md-table-cell">닉네임</th>
-						<th class="text-center d-none d-md-table-cell">등급</th>
-						<th class="text-center d-none d-md-table-cell">수정하기</th>
-						<th class="text-center d-none d-md-table-cell">삭제하기</th>
+						<th>번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>닉네임</th>
+						<th>등급</th>
+						<th>수정하기</th>
+						<th>삭제하기</th>
 					</tr>
 				</thead>
 				<tbody>
                     <c:forEach var="userDTO" items="${userList }" >
     					<tr>
-    						<td class="text-center d-none d-md-table-cell">${userDTO.idx }</td>
-    						<td class="text-center d-none d-md-table-cell">${userDTO.id }</td>
-    						<td class="text-center d-none d-md-table-cell">${userDTO.name }</td>
-    						<td class="text-center d-none d-md-table-cell">${userDTO.username }</td>
-                            <td class="text-center d-none d-md-table-cell">
+    						<td>${userDTO.idx }</td>
+    						<td>${userDTO.id }</td>
+    						<td>${userDTO.name }</td>
+    						<td>${userDTO.username }</td>
+                            <td>
                             <c:choose>
                             	<c:when test="${userDTO.role eq 0 }">학생</c:when>
                             	<c:when test="${userDTO.role eq 1 }">선생님</c:when>
                             	<c:otherwise>관리자</c:otherwise>
                             </c:choose>
                             </td>
-                            <td class="text-center d-none d-md-table-cell"><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
-                            <td class="text-center d-none d-md-table-cell"><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button>
+                            <td><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
+                            <td><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button>
     					</tr>
                     </c:forEach>
 				</tbody>
 			</table>
 			
-			<div class="d-none d-md-block">
-				<ul class="pagination justify-content-center">
+				<ul class="page-list">
 
 					<c:choose> 
                       <c:when test="${pageDTO.previousPage <= 0 }">   
-					    <li class="page-item disabled">
-						  <a href="${root }admin/user?page=${pageDTO.previousPage}" class="page-link">이전</a>
+					    <li class="disabled">
+						  <a href="${root }admin/user?page=${pageDTO.previousPage}">이전</a>
 					    </li>
                         </c:when>
                       <c:otherwise>
-                        <li class="page-item">
-                          <a href="${root }admin/user?page=${pageDTO.previousPage}" class="page-link">이전</a>
+                        <li>
+                          <a href="${root }admin/user?page=${pageDTO.previousPage}">이전</a>
                         </li>
                       </c:otherwise>
                     </c:choose>
@@ -78,13 +82,13 @@
                     
                       <c:choose>
                         <c:when test="${idx == pageDTO.currentPage }">
-    				      <li class="page-item active">
-    					    <a href="${root }admin/user?page=${idx}" class="page-link">${idx}</a>
+    				      <li class="active">
+    					    <a href="${root }admin/user?page=${idx}">${idx}</a>
     				      </li>
                         </c:when>
                         <c:otherwise>
-    				      <li class="page-item">
-    				   	    <a href="${root }admin/user?page=${idx}" class="page-link">${idx}</a>
+    				      <li>
+    				   	    <a href="${root }admin/user?page=${idx}">${idx}</a>
     				      </li>
                         </c:otherwise>
                       </c:choose>
@@ -92,23 +96,19 @@
 					
 					<c:choose> 
                       <c:when test="${pageDTO.max >= pageDTO.pageCount }">   
-					    <li class="page-item disabled">
-						  <a href="${root }admin/user?page=${pageDTO.nextPage}" class="page-link">다음</a>
+					    <li class="disabled">
+						  <a href="${root }admin/user?page=${pageDTO.nextPage}">다음</a>
 					    </li>
                         </c:when>
                       <c:otherwise>
-                        <li class="page-item">
-                          <a href="${root }admin/user?page=${pageDTO.nextPage}" class="page-link">다음</a>
+                        <li>
+                          <a href="${root }admin/user?page=${pageDTO.nextPage}">다음</a>
                         </li>
                       </c:otherwise>
                     </c:choose>
 				</ul>
-			</div>
-
-		</div>
 	</div>
 </div>
-
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 

@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 public class ReplyDAO {
 	private final ReplyMapper replyMapper;
 	
-	public int insert(ReplyDTO replyDTO) {
-		return replyMapper.addReply(replyDTO);
+	public void insert(ReplyDTO replyDTO) {
+		replyMapper.addReply(replyDTO);
 	}
 	
 	public List<ReplyDTO> select(int board_idx) {
