@@ -61,7 +61,6 @@ public class AdminService {
 	}
 	public BoardDTO getBoardInfo(int idx) {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
-		
 		return boardDTO;
 	}
 }

@@ -38,7 +38,6 @@ public class AdminController {
 	
 	@GetMapping("/userdetail")
 	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO, Model model) {
-		// TODO: load target user dto
 		model.addAttribute("user", adminService.getUserByIdx(idx));
 		return "admin/userdetail";
 	}

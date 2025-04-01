@@ -13,6 +13,7 @@
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
+
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
@@ -54,6 +55,7 @@
 						<fmt:formatDate value="${readBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate" />
                         <input type="text" id="board_date" name="board_date" class="form-control" value="${formattedDate}" disabled="disabled" />
 					</div>
+
                     <div class="form-block">
                       <label for="board_hits">조회수</label>
                       <input type="text" id="board_hits" name="board_hits" class="form-control" value="${readBoardDTO.hits }" disabled="disabled"/>
@@ -73,6 +75,7 @@
                         </c:otherwise>
                     </c:choose>
 
+
 					<div class="form-block">
 						<label for="board_content">내용</label>
 						<textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none" disabled="disabled">${readBoardDTO.content }</textarea>
@@ -83,6 +86,7 @@
     						<img src="${root}upload/${readBoardDTO.file }" width="100%"/>						
     					</div>
                     </c:if>
+
                     <div class="form-block" id="reply">
                     	<table>
 	                    	<tbody>
@@ -99,6 +103,7 @@
 	                    	</c:if>
                     	</table>
                     </div>
+
 					<div class="form-block">
 						<div class="text-right">
 							<a href="${root }board/main?board_id=${board_id}&page=${page}" class="btn btn-primary">목록보기</a>

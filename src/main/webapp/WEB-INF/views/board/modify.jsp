@@ -31,30 +31,36 @@
 
 
 
+
 <div class="board-container">
 	<div class="board-layout">
 		<div class="board-content">
 			<h4 class="board-title">게시글 수정</h4>
-		
+
 		<form:form action="${root }board/modifyProcedure" modelAttribute="modifyBoardDTO" method="post" enctype="multipart/form-data">
 			<form:hidden path="idx" />
 			<form:hidden path="board_id" />
 			<input type="hidden" name="page" value="${page }" />
 			
 			<!-- 작성자 -->
+
 			<div class="form-block">
+
 				<form:label path="username">작성자</form:label>
 				<form:input path="username" class="form-control" readonly="true"/>
 			</div>
 			
 			<!-- 작성날짜 -->
+
 			<div class="form-block">
+
 				<form:label path="date">작성날짜</form:label>
 				<fmt:formatDate value="${modifyBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate"/>
 				<input type="text" class="form-control" value="${formattedDate}" readonly="true"/>
 			</div>
 			
 			<!-- 제목 -->
+
 			<div class="form-block">
 				<form:label path="title">제목</form:label>
 				<form:input path="title" class="form-control"/>
@@ -83,9 +89,9 @@
 				<form:button class="btn btn-primary">수정완료</form:button>
 				<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">취소</a>
 			</div>
+
 		</form:form>
 	</div>
-</div>
 </div>
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>

@@ -8,9 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.tjoeun.dto.UserDTO;
 
 public class CheckBoardInterceptor implements HandlerInterceptor {
-	
-	private UserDTO
-	loginUserDTO;
+	private UserDTO loginUserDTO;
 	
 	public CheckBoardInterceptor(UserDTO loginUserDTO) {
 		this.loginUserDTO = loginUserDTO;

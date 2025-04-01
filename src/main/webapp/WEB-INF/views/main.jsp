@@ -37,9 +37,10 @@
 	    <!-- 오른쪽: 게시판 두 개 -->
 		<div class="main-right-board">
 		
-			
+
 					<h5>${boardInfoList[0].name }</h5>
 					<ul class="main-board-list">
+
                         <c:forEach var="boards" items="${boardDTOList }">
     						<li>
     							<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
@@ -64,4 +65,5 @@
 <script src="/js/background.js"></script>
 
 </body>
+
 </html>

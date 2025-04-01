@@ -48,6 +48,7 @@ public class UserDAO {
 	public int getAllUserCount() {
 		return userMapper.getAllUserCount();
 	}
+
 	public void userUpdate(UserDTO dto) {
 		if(StringUtils.isBlank(dto.getName())) dto.setName(null);
 		if(StringUtils.isBlank(dto.getPassword())) dto.setPassword(null);

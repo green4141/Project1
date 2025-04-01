@@ -1,19 +1,24 @@
 package com.tjoeun.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tjoeun.service.BoardService;
 import com.tjoeun.service.UserService;
-//전체수정완료
+//사용자 ID 중복 체크
 @RestController
 public class RestfulController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	@Autowired
 	private BoardService boardService;

@@ -28,18 +28,18 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Resource(name="loginUserDTO")
-	private UserDTO loginUserDTO;
+
+  private UserDTO loginUserDTO;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
-			               Model model, @RequestParam(value="page", defaultValue="1") int page) {
+			 							 @RequestParam(value="page", defaultValue="1") int page,
+			               Model model) {
 		
 		String name = boardService.getBoardInfoName(board_id);
 		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page);
-		
-		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
 
-		
+		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
@@ -52,7 +52,8 @@ public class BoardController {
 	
 	@GetMapping("/read")
 	public String read(@RequestParam("board_id") int board_id,
-										 @RequestParam("idx") int idx, @RequestParam("page") int page, Model model) {
+										 @RequestParam("idx") int idx,
+			               @RequestParam("page") int page, Model model) {
 		BoardDTO readBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
@@ -72,6 +73,7 @@ public class BoardController {
 	
 	@PostMapping("/writeProcedure")
 	public String writeProcedure(@Valid @ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
+
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			BindingResult result,
 			Model model) {
@@ -80,19 +82,22 @@ public class BoardController {
 		}
 		
 		boardService.addBoardInfo(writeBoardDTO);
+
 		model.addAttribute("page", page);
+
 		return "board/write_success";
 	}
 
 	@GetMapping("/modify")
 	public String modify(@RequestParam("board_id") int board_id,
 										 	 @RequestParam("idx") int idx,
+
 										 	@RequestParam("page") int page,
 										 	 @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 										 	 Model model) {
 		
-BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
-		
+    BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
+
 		modifyBoardDTO.setUsername(tmpBoardDTO.getUsername());
 		modifyBoardDTO.setDate(tmpBoardDTO.getDate());
 		modifyBoardDTO.setContent(tmpBoardDTO.getContent());
@@ -113,6 +118,9 @@ BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 			BindingResult result,
 			Model model,
 			@RequestParam("page") int page) {
+
+		model.addAttribute("page", page);
+
 		if(result.hasErrors()) {
 			return "board/modify";
 		}
@@ -133,6 +141,7 @@ BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		
 		return "board/delete";
 	}
+
 	@GetMapping("/not_teacher")
 	public String notTeacher() {		
 		return "board/not_teacher";

@@ -30,10 +30,12 @@
 
 <!-- 게시글 리스트 -->
 
+
 	<div class="board-container">
 		<div class="board-layout">
 		<h4 class="board-title">${name }</h4>
 		<table id="board-list">
+
 			<thead>
 				<tr>
 					<th>글번호</th>
@@ -57,8 +59,10 @@
 	    		</c:forEach>
 			</tbody>
 		</table>
+
 				<!-- 페이지네이션 -->
 		<div class="pagination-and-write">
+
     	<ul class="page-list">
     	
     		<!-- 이전 버튼 -->
@@ -99,8 +103,10 @@
     		<a href="${root }board/write?board_id=${board_id}" class="write-button">글쓰기</a>
     	</div>	
 	</div>
+
     	</div>    
     		</div>	
+
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 

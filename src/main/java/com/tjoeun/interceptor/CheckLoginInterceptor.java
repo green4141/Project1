@@ -16,9 +16,9 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 	}
 	
 	
-  @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-  	
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getRequestURI();
 		String parameter = request.getParameter("board_id");
 		

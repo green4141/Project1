@@ -113,8 +113,9 @@ public class BoardService {
 		int user_idx = loginUserDTO.getIdx();
 
     //좋아요 눌려있는지 확인
+
 	    boolean isFav = boardDAO.isFavBoardExists(user_idx, board_idx);
-	
+
 	    if (isFav) {
 	    	//좋아요 눌려있을때 좋아요 버튼을 누를 경우 좋아요 table에서 delete
 	      boardDAO.deleteFavBoard(user_idx, board_idx);

@@ -21,5 +21,4 @@ public class MainService {
 				boardDAO.getBoardList(board_id, rowBounds);
 		return boardDTOList;		
 	}
-	
 }
