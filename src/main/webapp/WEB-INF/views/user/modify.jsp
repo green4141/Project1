@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/css/modifyUser.css"/>
 
 </head>
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
