@@ -14,7 +14,7 @@ public interface ReplyMapper {
 	@Insert("insert into reply(user_idx, board_idx, content) values ("
 			+ "#{user_idx}, #{board_idx}, #{content})")
 	@Options(useGeneratedKeys = true, keyProperty = "idx")
-	public int addReply(ReplyDTO replyDTO);
+	public void addReply(ReplyDTO replyDTO);
 	
 	@Select("select * from v_reply_user where board_idx = #{board_id}")
 	public List<ReplyDTO> getReplyList(int board_id);

@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
-	private final BoardService boardService;
 	@Resource(name = "loginUserDTO")
 	private UserDTO loginUserDTO;
 	
