@@ -73,10 +73,8 @@ public class BoardController {
 	
 	@PostMapping("/writeProcedure")
 	public String writeProcedure(@Valid @ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
-
-			@RequestParam(value = "page", defaultValue = "1") int page,
-			BindingResult result,
-			Model model) {
+															 BindingResult result, Model model,
+															 @RequestParam(value = "page", defaultValue = "1") int page) {
 		if(result.hasErrors()) {
 			return "board/write";
 		}
