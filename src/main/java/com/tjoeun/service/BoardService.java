@@ -41,6 +41,8 @@ public class BoardService {
 		String file_name = System.currentTimeMillis() + "_" + upload_file.getOriginalFilename();
 		
 		try {
+			File file = new File(path_upload + "/");
+			if(!file.exists()) file.mkdirs();
 			upload_file.transferTo(new File(path_upload + "/" + file_name));
 		}catch(Exception e) {
 			e.printStackTrace();
