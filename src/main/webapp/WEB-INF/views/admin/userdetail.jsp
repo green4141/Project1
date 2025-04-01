@@ -12,36 +12,7 @@
 <style>
   .error { color:red; font-size:12px; font-weight:bold; }
 </style>
-<script>
-  function checkUserId(){
-    let id = $("#id").val();
-    
-    if(id.length === 0){
-      alert("아이디를 입력해 주세요");
-      return;
-    }
-    
-    $.ajax({
-      url : "${root}user/checkUserId/" + id,
-      type : "get",
-      dataType : "text",
-      success : function(result){
-        if(result.trim() === "true"){
-          alert("사용할 수 있는 아이디입니다");
-          $("#userIdExist").val("true");
-        }else{
-          alert("이미 존재하는 아이디입니다");
-          $("#userIdExist").val("false");
-        }
-      }
-    })
-    
-  } // checkUserId
-  
-  function resetUserIdExist(){
-  	$("#userIdExist").val("false");
-  } // resetUserIdExist
-  
+
 </script>
 </head>
 
@@ -56,9 +27,9 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-				<p>${user}</p>
-					<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
+					<form:form action="${root }admin/updateproc" modelAttribute="joinUserDTO" method="post">
                         <form:hidden path="userIdExist" />
+                        <form:hidden path="idx" value="${user.idx }"/>
 						<div class="form-group">
 							<form:label path="username">닉네임</form:label>
 							<form:input type="text" path="username" class="form-control" value="${user.username }"/>
@@ -85,12 +56,13 @@
 						<div class="form-group">
 							<form:label path="id">아이디</form:label>
 							<div class="input-group">
-								<form:input type="text" path="id" id="id" class="form-control" onkeypress="resetUserIdExist()" value="${user.id }"/>
-								<div class="input-group-append">
+								<form:hidden path="id" id="id" class="form-control" value="${user.id }"/>
+								<span>${user.id }</span>
+							<!-- 	<div class="input-group-append">
 									<button type="button" class="btn btn-primary" onclick="checkUserId()">중복확인</button>         
-								</div>
+								</div> -->
 							</div>
-                            <span class="error"><form:errors path="id" /></span>
+                           <!--  <span class="error"><form:errors path="id" /></span> -->
 						</div>
 						<div class="form-group">
 							<form:label path="password">비밀번호</form:label>
@@ -121,5 +93,4 @@
 
 </body>
 </html>
-
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tjoeun.dao.BoardDAO;
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.FavoriteDTO;
+import com.tjoeun.dto.PageDTO;
 import com.tjoeun.dto.UserDTO;
 
 @Service
@@ -21,6 +24,12 @@ public class BoardService {
 	
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Value("${page.listcount}")
+	private int page_listcount;
+	
+	@Value("${page.pagenationcount}")
+	private int page_pagenationcount;
 	
 	@Autowired
 	private BoardDAO boardDAO;
@@ -45,9 +54,6 @@ public class BoardService {
 		
 		if(upload_file.getSize() > 0) {
 			String file_name = saveUploadFile(upload_file);
-			//System.out.println("파일이름 : " + file_name);
-			//System.out.println("board_id: " + writeBoardDTO.getBoard_id());
-			//System.out.println("idx: " + writeBoardDTO.getIdx());
 			writeBoardDTO.setFile(file_name);
 		}
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
@@ -60,13 +66,20 @@ public class BoardService {
 		return name;
 	}
 
-	public List<BoardDTO> getBoardList(int board_id){
-		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id);
+	public List<BoardDTO> getBoardList(int board_id, int page){
+		int start = (page - 1) * this.page_listcount;
+		RowBounds rowBounds = new RowBounds(start, page_listcount);
+		
+		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds);
+		
 		return boardDTOList;
 	}
 	
-	public BoardDTO getBoardInfo(int idx) {
+	public BoardDTO getBoardInfo(int idx, int user_idx) {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
+		
+		boardDTO.setExist_favorite(boardDAO.isFavBoardExists(user_idx, idx));
+		
 		return boardDTO;
 	}
 	
@@ -88,4 +101,31 @@ public class BoardService {
 		boardDAO.deleteBoardInfo(idx);
 	}
 	
+	public PageDTO getBoardCount(int board_id, int currentPage) {
+		int contentCount = boardDAO.getBoardCount(board_id);
+		PageDTO pageDTO = new PageDTO(contentCount, currentPage, this.page_listcount, this.page_pagenationcount);
+		
+		return pageDTO;
+	}
+	
+	public boolean toggleFavBoard(int board_idx) {
+    //로그인 되어 있는지 체크
+		int user_idx = loginUserDTO.getIdx();
+
+    //좋아요 눌려있는지 확인
+	    boolean isFav = boardDAO.isFavBoardExists(user_idx, board_idx);
+	
+	    if (isFav) {
+	    	//좋아요 눌려있을때 좋아요 버튼을 누를 경우 좋아요 table에서 delete
+	      boardDAO.deleteFavBoard(user_idx, board_idx);
+	      return false;
+	    } else {
+	    	//좋아요 안 눌려있을때 좋아요 버튼을 누를 경우 좋아요 table에 insert
+	      FavoriteDTO favBoardDTO = new FavoriteDTO();
+	      favBoardDTO.setUser_idx(user_idx);
+	      favBoardDTO.setBoard_idx(board_idx);
+	      boardDAO.addFavBoard(favBoardDTO);
+	      return true;
+	    }
+	}
 }

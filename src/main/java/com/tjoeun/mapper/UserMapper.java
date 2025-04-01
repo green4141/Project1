@@ -2,10 +2,9 @@ package com.tjoeun.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.session.RowBounds;
-
 import org.apache.ibatis.session.RowBounds;
 
 import org.apache.ibatis.annotations.Update;
@@ -47,5 +46,28 @@ public interface UserMapper {
 	@Select("SELECT count(*) FROM user")
 	int getAllUserCount();
 	
-
+	// 유저 정보 변경(어드민)
+	@Update({"<script>"
+				+ "UPDATE user "
+				+ "<set>"
+					+ "role = #{role} "
+					+ "<if test = 'username != null'>"
+						+ ", username = #{username} "
+					+ "</if>"
+					+ "<if test='name != null'>"
+						+ ", name = #{name} "
+					+ "</if>"
+					+ "<if test='password != null'>"
+						+ ", password = #{password} "
+					+ "</if>"
+				+ "</set>"
+			
+				+ "where idx = #{idx}"
+			
+			+ "</script>"})
+	void updateUser(UserDTO dto);
+	
+	// 회원 삭제(어드민)
+	@Delete("delete from user where idx = #{idx}")
+	void deleteUser(int idx);
 }

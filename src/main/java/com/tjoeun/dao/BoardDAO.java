@@ -2,10 +2,12 @@ package com.tjoeun.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.FavoriteDTO;
 import com.tjoeun.mapper.BoardMapper;
 
 @Repository
@@ -23,8 +25,8 @@ public class BoardDAO {
 		return name;
 	}
 	
-	public List<BoardDTO> getBoardList(int board_id){
-		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id);
+	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds){
+		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id, rowBounds);
 		return boardDTOList;
 	}
 	
@@ -41,4 +43,28 @@ public class BoardDAO {
 	public void deleteBoardInfo(int idx) {
 		boardMapper.deleteBoardInfo(idx);
 	}
+	public int getBoardCount(int board_id) {
+		int boardPageCount = boardMapper.getBoardCount(board_id);
+		return boardPageCount;
+	}
+	
+	public List<BoardDTO> getAllBoardList(RowBounds rowBounds) {
+		return boardMapper.getAllUserInfo(rowBounds);
+	}
+	
+	public int getAllBoardCount() {
+		return boardMapper.getAllUserCount();
+	}
+	
+	public boolean isFavBoardExists(int user_idx, int board_idx) {
+	    return boardMapper.isFavBoardExists(user_idx, board_idx) > 0;
+	}
+		
+	public int addFavBoard(FavoriteDTO favBoardDTO) {
+		return boardMapper.addFavBoard(favBoardDTO);
+	}
+	
+    public void deleteFavBoard(int user_idx, int board_idx) {
+        boardMapper.deleteFavBoard(user_idx, board_idx);
+    }
 }

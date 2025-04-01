@@ -121,5 +121,3 @@
 <c:import url="/WEB-INF/views/include/bottom_info.jsp" ></c:import>
 </body>
 </html>
-
-

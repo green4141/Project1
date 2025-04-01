@@ -19,23 +19,28 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
   	
-  	// 로그아웃 상태에서는 해당 페이지에 접근하지 못하게 하기  
-  	if(loginUserDTO.isUserLogin() == false) {  		
-  		
-  		String contextPath = request.getContextPath();  		
-  		// UserController 에서 url pattern 이
-  		// "/user/cannot_login" 인 메소드로 이동함
-      response.sendRedirect(contextPath + "/user/cannot_login");  		
-  		
-  		return false;
-  	}
-  	
-  	return true;
-  }
-  
+		String url = request.getRequestURI();
+		String parameter = request.getParameter("board_id");
+		
+		if(loginUserDTO.isUserLogin() == false) {
+			if(url.contains("/main") || url.contains("/read")) {
+				if("0".equals(parameter)) {
+					return true;
+				} else {
+					String contextPath = request.getContextPath();
+					response.sendRedirect(contextPath + "/user/cannot_login");
+					return false;
+				}
+			}else{
+				String contextPath = request.getContextPath();
+				response.sendRedirect(contextPath + "/user/cannot_login");
+				return false;
+			}
+		}
+		return true;
+	}
 }
-
-
+  
 
 
 

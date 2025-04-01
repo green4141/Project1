@@ -52,7 +52,7 @@ public class UserController {
 		userService.getLoginUserInfo(loginProcUserDTO);
 
 		if(loginUserDTO.isUserLogin() == true) {
-			System.out.println("loginUserDTO : " + loginUserDTO); //로그인 값 잘 받는 지 확인용
+		//	System.out.println("loginUserDTO : " + loginUserDTO); //로그인 값 잘 받는 지 확인용
 			return "user/login_success";			
 		}else {
 			return "user/login_failure";
@@ -97,7 +97,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout() {
 			userService.deleteUserLoginInfo();
-			System.out.println("loginUserDTO : " + loginUserDTO);
+			//System.out.println("loginUserDTO : " + loginUserDTO);
 
 			return "user/logout";
 	}

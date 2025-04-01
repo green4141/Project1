@@ -2,6 +2,7 @@ package com.tjoeun.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,15 @@ public class UserDAO {
 	public int getAllUserCount() {
 		return userMapper.getAllUserCount();
 	}
-
+	public void userUpdate(UserDTO dto) {
+		if(StringUtils.isBlank(dto.getName())) dto.setName(null);
+		if(StringUtils.isBlank(dto.getPassword())) dto.setPassword(null);
+		if(StringUtils.isBlank(dto.getUsername())) dto.setUsername(null);
+		userMapper.updateUser(dto);
+	}
+	
+	public void deleteUser(int idx) {
+		userMapper.deleteUser(idx);
+	}
 
 }
