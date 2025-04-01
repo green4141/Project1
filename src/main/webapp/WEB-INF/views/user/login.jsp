@@ -13,7 +13,10 @@
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
-<link rel="stylesheet" href="/css/style.css"/>
+
+<link rel="stylesheet" href="/css/main.css"/>
+<link rel="stylesheet" href="/css/login.css"/>
+
 
 <style>
   #error { color:red; font-size:12px; font-weight:bold; }
