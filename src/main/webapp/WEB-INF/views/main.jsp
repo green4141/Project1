@@ -49,12 +49,13 @@
     		         		</li>
     		         		</c:forEach>
 					</ul>
+										<div class="main-more-wrap">
+		          		<a href="${root}board/main?board_id=${status.index}" class="main-more-link">더보기</a>
+		        	</div>
                 </c:forEach>
 			
 							
-					<div class="main-more-wrap">
-		          		<a href="${root}board/main?board_id=0" class="main-more-link">더보기</a>
-		        	</div>
+
 				</div>
 		</div>
 	</div>
