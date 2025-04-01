@@ -22,7 +22,8 @@ public class ReplyController {
 
 	@PostMapping("/insert")
 	public int insertReply(@RequestBody ReplyDTO replyDTO) {
-		return replyService.insert(replyDTO);
+		replyService.insert(replyDTO);
+		return replyDTO.getIdx();
 	}
 	@GetMapping("/select")
 	public List<ReplyDTO> selectReply(@RequestParam int board_idx) {
