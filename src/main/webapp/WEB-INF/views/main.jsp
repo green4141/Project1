@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 
 </head>
 
-<body class="page-wrapper">
+<body>
 
 <!-- 상단 메뉴 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
@@ -36,63 +37,20 @@
 		
 				<!-- 자유게시판 -->
 				<div class="board-box">
-					<h5>자유게시판</h5>
+					<h5>${boardInfoList[0].name }</h5>
 					<ul class="board-list">
-						<li>
-							<a href="${root}board/read">[1] 제목입니다</a>
-		           			<span class="date">2018-12-12</span>
-		         		</li>
-						<li>
-							<a href="${root}board/read">[2] 제목입니다</a>
-		           			<span class="date">2018-12-12</span>
-		         		</li>
-						<li>
-							<a href="${root}board/read">[3] 제목입니다</a>
-		           			<span class="date">2018-12-12</span>
-		         		</li>
-		         		<li>
-							<a href="${root}board/read">[4] 제목입니다</a>
-		           			<span class="date">2018-12-12</span>
-		         		</li>
-		         		<li>
-							<a href="${root}board/read">[5] 제목입니다</a>
-		           			<span class="date">2018-12-12</span>
-		         		</li>
+                        <c:forEach var="boards" items="${boardDTOList }">
+    						<li>
+    							<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
+                                <fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
+    		           			<span class="date">${formattedDate }</span>
+    		         		</li>
+                        </c:forEach>
 					</ul>
 							
 					<div class="more-wrap">
 		          		<a href="${root}board/main?board_id=0" class="more-link">더보기</a>
 		        	</div>
-				</div>
-				
-				<!-- 선생님 게시판 -->
-				<div class="board-box">
-					<h5>선생님 게시판</h5>
-					<ul class="board-list">
-		            	<li>
-		            		<a href="board_read.html">[1] 제목입니다</a>
-		            		<span class="date">2018-12-12</span>
-		          		</li>
-		         	    <li>
-		        		    <a href="board_read.html">[2] 제목입니다</a>
-		          		    <span class="date">2018-12-11</span>
-		     	        </li>
-		         	    <li>
-		        		    <a href="board_read.html">[3] 제목입니다</a>
-		          		    <span class="date">2018-12-11</span>
-		     	        </li>
-		         	    <li>
-		        		    <a href="board_read.html">[4] 제목입니다</a>
-		          		    <span class="date">2018-12-11</span>
-		     	        </li>
-		         	    <li>
-		        		    <a href="board_read.html">[5] 제목입니다</a>
-		          		    <span class="date">2018-12-11</span>
-		     	        </li>
-		       		</ul>
-			        <div class="more-wrap">
-			        	<a href="${root}board/main?board_id=1" class="more-link">더보기</a>
-			        </div>		
 				</div>
 		</div>
 	</div>
@@ -106,9 +64,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
