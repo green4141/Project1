@@ -38,28 +38,19 @@
 		<div class="main-right-board">
 		
 
-					<h5>${boardInfoList[0].name }</h5>
+                <c:forEach var="boards" items="${boardDTOList }" varStatus="status">
+					<h5>${boardInfoList[status.index].name }</h5>
 					<ul class="main-board-list">
-
-                        <c:forEach var="boards" items="${boardDTOList }">
+					<c:forEach var="board_item" items="${boards }">
     						<li>
-    							<a href="${root}board/read?board_id=${boardInfoList[0].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
-                                <fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
+    							<a href="${root}board/read?board_id=${boardInfoList[status.index].board_id}&idx=${board_item.idx }&page=1">[${board_item.idx }] ${board_item.title }</a>
+                                <fmt:formatDate value="${board_item.date}" pattern="yyyy-MM-dd" var="formattedDate" />
     		           			<span class="date">${formattedDate }</span>
     		         		</li>
-                        </c:forEach>
+    		         		</c:forEach>
 					</ul>
-					<h5>${boardInfoList[1].name }</h5>
-					<ul class="main-board-list">
-
-                        <c:forEach var="boards" items="${boardDTOList }">
-    						<li>
-    							<a href="${root}board/read?board_id=${boardInfoList[1].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
-                                <fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
-    		           			<span class="date">${formattedDate }</span>
-    		         		</li>
-                        </c:forEach>
-					</ul>
+                </c:forEach>
+			
 							
 					<div class="main-more-wrap">
 		          		<a href="${root}board/main?board_id=0" class="main-more-link">더보기</a>
