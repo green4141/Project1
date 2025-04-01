@@ -30,8 +30,6 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 
-
-
 <div class="board-container">
 	<div class="board-layout">
 		<div class="board-content">
@@ -90,8 +88,9 @@
 				<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">취소</a>
 			</div>
 
-		</form:form>
-	</div>
+    		</form:form>
+    	</div>
+    </div>
 </div>
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
