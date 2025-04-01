@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/admin.css"/>
 
 </head>
 <body>
@@ -30,8 +31,8 @@
 <!-- 게시글 리스트 -->
 <div class="board-container">
 	<div class="board-layout" style="margin-top:100px">
-			<h4 class="board-title">${name }</h4>
-			<table id='board-list'>
+			<h4 class="board-title">유저 목록</h4>
+			<table id='admin-list'>
 				<thead>
 					<tr>
 						<th>번호</th>
