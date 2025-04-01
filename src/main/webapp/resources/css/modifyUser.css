@@ -25,11 +25,6 @@
   margin-bottom: 15px;
 }
 
-.form-group div {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* 라디오 버튼과 텍스트 간격 조정 */
-}
 
 .form-control {
   border-radius: 6px;
@@ -77,8 +72,18 @@
 
 /* 수정 불가능한 입력 필드 */
 .form-control[readonly] {
-  background-color: #EAEAEA !important;
+  background-color: #EAEAEA;
   cursor: not-allowed;
   pointer-events: none;
   color: #777;
+}
+
+
+.form-group div {
+  display: flex;
+  align-items: center;
+}
+
+.form-group div input[type="radio"] {
+  width: 10%;
 }
