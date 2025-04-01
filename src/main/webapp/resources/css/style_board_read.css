@@ -1,0 +1,170 @@
+@charset "UTF-8";
+/* 네이버 블로그 스타일 유사하게 적용 */
+body {
+    font-family: "Gothic A1", sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 85%; /* 기존 80%에서 85%로 확장 */
+    max-width: 1800px; /* 1600px에서 1800px로 확장 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+.board-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px; /* 기존보다 여백 증가 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 그림자 강조 */
+    margin-bottom: 20px; /* 하단 간격 추가 */
+}
+
+.board-header h2 {
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.board-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px; /* 간격 증가 */
+}
+
+.board-content {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* 첨부 이미지 스타일 */
+.board-image {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.board-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* 좋아요 버튼 간격 조정 */
+.board-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.favorite-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px; /* 하트와 내용 간격 추가 */
+}
+
+#favoriteImage {
+    cursor: pointer;
+    width: 36px; /* 기존보다 약간 키움 */
+    height: 36px;
+    transition: transform 0.2s ease-in-out;
+}
+
+#favoriteImage:hover {
+    transform: scale(1.1);
+}
+
+/* 댓글 스타일 */
+#reply {
+    margin-top: 30px; /* 상단 간격 추가 */
+}
+
+#reply table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#reply tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#reply td {
+    padding: 12px;
+}
+
+.reply_useronly button {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.reply_delete_btn {
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 10px;
+}
+
+.reply_delete_btn:hover {
+    background-color: #d9534f;
+}
+
+.reply_update_btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+}
+
+.reply_update_btn:hover {
+    background-color: #0056b3;
+}
+
+/* 버튼 스타일 */
+.board-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 18px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}

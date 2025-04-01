@@ -13,7 +13,7 @@
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
-
+<link rel="stylesheet" href="/css/style_board_read.css"/>
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
@@ -43,27 +43,29 @@
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
-<div class="board-container">
-	<div class="main-layout">
-		<div class="box">
-					<div class="form-block">
-						<label for="board_writer_name">작성자</label>
-						<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="${readBoardDTO.username }" disabled="disabled"/>
-					</div>
-					<div class="form-block">
-						<label for="board_date">작성날짜</label>
-						<fmt:formatDate value="${readBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate" />
-                        <input type="text" id="board_date" name="board_date" class="form-control" value="${formattedDate}" disabled="disabled" />
-					</div>
-
-                    <div class="form-block">
-                      <label for="board_hits">조회수</label>
-                      <input type="text" id="board_hits" name="board_hits" class="form-control" value="${readBoardDTO.hits }" disabled="disabled"/>
+<div class="page-content">
+    <div class="container">
+        <div class="board-container">
+            <div class="board-card">
+                <div class="board-header">
+                    <h2>${readBoardDTO.title}</h2>
+                </div>
+                <div class="board-info">
+                    <span class="board-writer">${readBoardDTO.username}</span>
+                    <span class="board-date">
+                        <fmt:formatDate value="${readBoardDTO.date}" pattern="yyyy-MM-dd" />
+                    </span>
+                    <span class="board-hits">조회수 ${readBoardDTO.hits}</span>
+                </div>
+                <div class="board-content">
+                    <p>${readBoardDTO.content}</p>
+                </div>
+                <c:if test="${readBoardDTO.file != null}">
+                    <div class="board-image">
+                        <img src="${root}upload/${readBoardDTO.file}" alt="첨부 이미지">
                     </div>
-					<div class="form-block">
-						<label for="board_subject">제목</label>
-						<input type="text" id="board_subject" name="board_subject" class="form-control" value="${readBoardDTO.title }" disabled="disabled"/>
-					</div>
+                </c:if>
+                <br>
                     <c:choose>
                         <c:when test="${readBoardDTO.exist_favorite == true && loginUserDTO.idx != 0}">
                             <img src="/images/heart_full.png" alt="좋아요" id="favoriteImage" style="cursor: pointer;" onclick="toggleFavorite(true, ${readBoardDTO.idx})">
@@ -74,20 +76,7 @@
                             </c:if>
                         </c:otherwise>
                     </c:choose>
-
-
-					<div class="form-block">
-						<label for="board_content">내용</label>
-						<textarea id="board_content" name="board_content" class="form-control" rows="10" style="resize:none" disabled="disabled">${readBoardDTO.content }</textarea>
-					</div>
-                    <c:if test="${readBoardDTO.file != null }">
-    					<div class="form-block">
-    						<label for="board_file">첨부 이미지</label>
-    						<img src="${root}upload/${readBoardDTO.file }" width="100%"/>						
-    					</div>
-                    </c:if>
-
-                    <div class="form-block" id="reply">
+                    <div class="form-group" id="reply">
                     	<table>
 	                    	<tbody>
 	                    	</tbody>
@@ -103,8 +92,8 @@
 	                    	</c:if>
                     	</table>
                     </div>
-
-					<div class="form-block">
+                    <br>
+					<div class="form-group">
 						<div class="text-right">
 							<a href="${root }board/main?board_id=${board_id}&page=${page}" class="btn btn-primary">목록보기</a>
                             <c:if test="${readBoardDTO.user == loginUserDTO.idx}" >
@@ -116,6 +105,8 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-sm-3"></div>
+	</div>
 
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
