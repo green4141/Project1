@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/admin.css"/>
 
 </head>
 <body>
@@ -32,7 +33,7 @@
 <div class="board-container">
 	<div class="board-layout">
 		<h4 class="board-title">${name }</h4>
-				<table id='board-list'>
+				<table id='admin-list'>
 					<thead>
 						<tr>
 							<th>글번호</th>
