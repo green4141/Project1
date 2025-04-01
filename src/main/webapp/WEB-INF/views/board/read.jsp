@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/css/style_board_read.css"/>
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
-<link rel="stylesheet" href="/css/board.css"/>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -82,7 +82,7 @@
 	                    	</tbody>
 	                    	<c:if test="${loginUserDTO.userLogin }">
 	                    	<tfoot class="reply_useronly">
-		                    	<tr>
+		                    	<tr class="reply_yd">
 		                    		<td><span id="reply_username">${loginUserDTO.username }</span></td>
 		                    		<td><input type="text" id="reply_content"/></td>
 		                    		<td><button type="button" id="reply_commit" onclick="replyCommit()">댓글쓰기</button>
