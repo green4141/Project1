@@ -43,7 +43,7 @@
 
                         <c:forEach var="boards" items="${boardDTOList }">
     						<li>
-    							<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
+    							<a href="${root}board/read?board_id=${boardInfoList[0].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
                                 <fmt:formatDate value="${boards.date}" pattern="yyyy-MM-dd" var="formattedDate" />
     		           			<span class="date">${formattedDate }</span>
     		         		</li>
