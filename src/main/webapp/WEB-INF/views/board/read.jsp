@@ -155,8 +155,8 @@ const content = $("#reply_content").val()
 		data: JSON.stringify(data),
 		contentType: "application/json; charset=utf-8",
 		success: (arg) => {
-			$("tbody").append("<tr><td>${loginUserDTO.username}</td><td><span id='content-" + arg + "'>" + content + "</span></td><td class='reply_useronly'><button type='button' onclick='replyupdate(arg)' id='reply_update_" + arg + "'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(arg)'>삭제하기</button></td></tr>")
-			
+			$("tbody").append("<tr class='tr-" + arg + "'><td>${loginUserDTO.username}</td><td><span id='content-" + arg + "'>" + content + "</span></td><td class='reply_useronly'><button type='button' onclick='replyupdate(" + arg + ")' id='reply_update_" + arg + "'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(" + arg + ")'>삭제하기</button></td></tr>")
+			$("#reply_content").val("");
 		}
 	})
 }
@@ -166,27 +166,29 @@ const replyupdate = (idx) => {
 	const $td = $span.parent();
 	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}"/>`)
 	$(`#reply_update_\${idx}`).attr("onclick", `replyupdateproc(\${idx})`)
-	
 }
 
 const replyupdateproc = (idx) => {
-	const content = $(`#input-content-\${idx}`).val();
-	const data = {
-		content: content,
-		idx: idx
-	}
-	
-	$.ajax({
-		url: "${root}reply/update",
-		type: "POST",
-		data: JSON.stringify(data),
-		contentType: "application/json; charset=utf-8",
-		success: () => {
-			const $td = $(`#input-content-\${idx}`).parent()
-			$td.html(`<span id='content-\${idx}'>\${content}</span>`)
-			$(`#reply_update_\${idx}`).attr("onclick", `replyupdate(\${idx})`)
+	if(confirm("정말로 수정하시겠습니까?")) {
+		const content = $(`#input-content-\${idx}`).val();
+		const data = {
+			content: content,
+			idx: idx
 		}
-	})
+		
+		$.ajax({
+			url: "${root}reply/update",
+			type: "POST",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			success: () => {
+				alert("수정에 성공했습니다.")
+				const $td = $(`#input-content-\${idx}`).parent()
+				$td.html(`<span id='content-\${idx}'>\${content}</span>`)
+				$(`#reply_update_\${idx}`).attr("onclick", `replyupdate(\${idx})`)
+			}
+		})
+	} else return false
 }
 
 const replyDelete = (idx) => {
