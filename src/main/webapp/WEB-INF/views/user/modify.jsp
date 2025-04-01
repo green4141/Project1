@@ -8,12 +8,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TJOEUN</title>
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
 <!-- 파비콘 -->
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
-<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/top_menu.css"/>
+<link rel="stylesheet" href="/css/board.css"/>
 
 <style>
   #error { color: red; font-size: 16px; font-weight: bold; }
@@ -23,13 +29,9 @@
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
-<div class="page-content">
-	<div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
+<div class="board-container">
+	<div class="board-layout">
+		<div class="box">
 					<form:form action="${root }user/modifyProcedure" modelAttribute="modifyUserDTO" method="post">
 					<div class="form-group">
 						<form:label path="name">실명</form:label>
@@ -74,10 +76,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3"></div>
-	</div>
-</div>
-</div>
+
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 
