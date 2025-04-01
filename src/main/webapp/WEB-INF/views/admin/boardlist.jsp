@@ -31,8 +31,8 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="board-layout">
-		<h4 class="board-title">게시글 목록</h4>
+	<div class="admin-layout">
+		<h4 class="admin-title">게시글 목록</h4>
 				<table id='admin-list'>
 					<thead>
 						<tr>

@@ -30,8 +30,8 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="board-layout" style="margin-top:100px">
-			<h4 class="board-title">유저 목록</h4>
+	<div class="admin-layout" style="margin-top:100px">
+			<h4 class="admin-title">유저 목록</h4>
 			<table id='admin-list'>
 				<thead>
 					<tr>
