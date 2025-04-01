@@ -20,18 +20,16 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/modifyUser.css"/>
 
-<style>
-  #error { color: red; font-size: 16px; font-weight: bold; }
-</style>
 </head>
 <body class="page-wrapper">
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
-<div class="board-container">
-	<div class="board-layout">
-		<div class="box">
+        <div class="board-container">
+        	<div class="board-layout">
+        		<div class="box">
 					<form:form action="${root }user/modifyProcedure" modelAttribute="modifyUserDTO" method="post">
 					<div class="form-group">
 						<form:label path="name">실명</form:label>
@@ -76,7 +74,6 @@
 				</div>
 			</div>
 		</div>
-
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
 

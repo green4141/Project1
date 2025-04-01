@@ -1,0 +1,113 @@
+/* 로그인 페이지 스타일 */
+/* 전체 페이지 스크롤 제거 */
+html, body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 스크롤 제거 */
+  font-family: "Gothic A1", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 로그인 페이지 중앙 정렬 */
+.page-content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+/* 로그인 카드 */
+.login-card {
+  width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+/* 입력 필드 스타일 */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-block .form-control {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f2f2f2;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
+
+.form-block .form-control:focus {
+  background: #e8e8e8;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 오류 메시지 스타일 (입력 필드 아래로 정렬) */
+#error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+}
+
+/* 로그인 버튼 스타일 */
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.login-buttons .btn-primary {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-buttons .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* 회원가입 버튼 스타일 */
+.login-buttons .btn-danger {
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  display: block;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.login-buttons .btn-danger:hover {
+  background: black;
+  color: white;
+}
