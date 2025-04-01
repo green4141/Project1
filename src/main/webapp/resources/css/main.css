@@ -1,0 +1,88 @@
+.main-container {
+  margin-top: 80px;
+}
+
+.main-layout {
+  display: flex;
+  gap: 80px;
+  padding: 20px;
+  max-width: 1200px;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-left-image img {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+.main-right-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.main-right-board > h5 {
+  font-size: 1.4rem;
+}
+
+.main-board-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.main-board-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.main-board-list li:last-child {
+  border-bottom: none;
+}
+
+.main-board-list a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.main-board-list a:hover {
+  text-decoration: underline;
+}
+
+.main-board-list .date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.main-more-wrap {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.main-more-link {
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.main-more-link:hover {
+  background: #555;
+}

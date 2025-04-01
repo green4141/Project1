@@ -41,7 +41,6 @@ public class AdminService {
 	public UserDTO getUserByIdx(int idx) {
 		return userDAO.getModifyUserInfo(idx);
 	}
-	
 	public void userUpdate(UserDTO dto) {
 		userDAO.userUpdate(dto);
 	}
@@ -62,7 +61,6 @@ public class AdminService {
 	}
 	public BoardDTO getBoardInfo(int idx) {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
-		
 		return boardDTO;
 	}
 }

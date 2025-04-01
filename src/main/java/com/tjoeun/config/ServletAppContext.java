@@ -115,6 +115,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		fatoryBean.setSqlSessionFactory(factory);
 		return fatoryBean;
 	}
+
 	@Bean
 	public MapperFactoryBean<ReplyMapper> getReplyMapper(SqlSessionFactory factory) throws Exception{
 		MapperFactoryBean<ReplyMapper> fatoryBean = new MapperFactoryBean<ReplyMapper>(ReplyMapper.class);

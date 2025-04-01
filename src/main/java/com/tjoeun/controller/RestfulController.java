@@ -20,6 +20,9 @@ public class RestfulController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private BoardService boardService;
+	
 	@GetMapping("/user/checkUserId/{id}")
 	public String checkUserId(@PathVariable String id){
 		boolean chk = userService.checkUserId(id);

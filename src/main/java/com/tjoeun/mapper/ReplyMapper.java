@@ -24,5 +24,5 @@ public interface ReplyMapper {
 	
 	@Delete("delete from reply where idx = #{idx}")
 	public void deleteReply(int idx);
-	
 }
+

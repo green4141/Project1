@@ -59,4 +59,5 @@ public class UserDAO {
 	public void deleteUser(int idx) {
 		userMapper.deleteUser(idx);
 	}
+
 }

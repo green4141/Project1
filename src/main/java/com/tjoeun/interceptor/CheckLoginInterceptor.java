@@ -16,6 +16,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 	}
 	
 	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getRequestURI();
@@ -38,10 +39,8 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 		}
 		return true;
 	}
-  
 }
-
-
+  
 
 
 

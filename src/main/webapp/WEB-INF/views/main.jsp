@@ -17,7 +17,9 @@
 <c:import url="/WEB-INF/views/include/favicon.jsp" />
 
 <!-- 커스텀 CSS 추가 -->
-<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/top_menu.css"/>
+<link rel="stylesheet" href="/css/main.css"/>
 
 </head>
 
@@ -29,16 +31,16 @@
 <div class="page-content">
 	<div class="main-layout">
 		<!-- 왼쪽: 이미지 영역 -->
-		<div class="left-image">
+		<div class="main-left-image">
 	    	<img id="slide-img" src="/images/20220818_155357.jpg" alt="학원 내부 이미지">
 	    </div>
 	    <!-- 오른쪽: 게시판 두 개 -->
-		<div class="right-board">
+		<div class="main-right-board">
 		
-				<!-- 자유게시판 -->
-				<div class="board-box">
+
 					<h5>${boardInfoList[0].name }</h5>
-					<ul class="board-list">
+					<ul class="main-board-list">
+
                         <c:forEach var="boards" items="${boardDTOList }">
     						<li>
     							<a href="${root}board/read?board_id=${boardInfoList[idx.index].board_id}&idx=${boards.idx }&page=1">[${boards.idx }] ${boards.title }</a>
@@ -48,13 +50,13 @@
                         </c:forEach>
 					</ul>
 							
-					<div class="more-wrap">
-		          		<a href="${root}board/main?board_id=0" class="more-link">더보기</a>
+					<div class="main-more-wrap">
+		          		<a href="${root}board/main?board_id=0" class="main-more-link">더보기</a>
 		        	</div>
 				</div>
 		</div>
 	</div>
-</div>
+
 
 <!-- footer -->
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"></c:import>
@@ -63,4 +65,5 @@
 <script src="/js/background.js"></script>
 
 </body>
+
 </html>

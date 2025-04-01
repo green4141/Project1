@@ -14,56 +14,55 @@ import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.FavoriteDTO;
 
 public interface BoardMapper {
-	@Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
-					"values(#{board_id}, #{title}, #{content}, #{user}, #{file})")
-	@Options(useGeneratedKeys = true, keyProperty = "idx")
-	int addBoardInfo(BoardDTO writeBoardDTO);
-	
+    @Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
+    "values(#{board_id}, #{title}, #{content}, #{user}, #{file})")
+    @Options(useGeneratedKeys = true, keyProperty = "idx")
+    int addBoardInfo(BoardDTO writeBoardDTO);
 
-	@Select("SELECT name " + 
-					"FROM boardinfo " + 
-					"WHERE board_id=#{board_id}")
-	String getBoardInfoName(int board_id);
-	
-	@Select("SELECT * FROM v_board_user " +
-					"WHERE board_id = #{board_id} " +
-					"ORDER BY idx DESC")
-	List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds);
-	
-	@Select("select * from tjoeun.v_board_user where idx=#{idx}")
-	BoardDTO getBoardInfo(int idx);
-	
-	@Update("UPDATE board SET hits = #{hits} WHERE idx = #{idx}")
-	void updateHits(@Param("hits") int hits, @Param("idx") int idx);
+    @Select("SELECT name " + 
+          "FROM boardinfo " + 
+          "WHERE board_id=#{board_id}")
+    String getBoardInfoName(int board_id);
 
-	@Update("UPDATE board " +
-					"SET title = #{title}, " +
-					"content = #{content}, " +
-					"file = #{file, jdbcType=VARCHAR} " +
-					"WHERE idx = #{idx}")
-	void modifyBoardInfo(BoardDTO modifyBoardDTO);
-	
-	@Delete("DELETE FROM board WHERE idx = ${idx}")
-	void deleteBoardInfo(int idx);
-	
-	@Select("SELECT count(*) " +
-					"FROM board " +
-					"WHERE board_id = #{board_id}")
-	int getBoardCount(int board_id);
-	
-	@Select("Select * FROM board order by idx desc")
-	List<BoardDTO> getAllUserInfo(RowBounds rowBounds);
-	
-	@Select("select count(*) from board")
-	int getAllUserCount();
-	
-	@Select("SELECT count(*) FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
-	int isFavBoardExists(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
-	
-	@Insert("insert into tjoeun.favorite(user_idx, board_idx) " +
-					"values(#{user_idx}, #{board_idx})")
-	int addFavBoard(FavoriteDTO favBoardDTO);
-	
-	@Delete("DELETE FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
-  void deleteFavBoard(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
+    @Select("SELECT * FROM v_board_user " +
+          "WHERE board_id = #{board_id} " +
+          "ORDER BY idx DESC")
+    List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds);
+
+    @Select("select * from tjoeun.v_board_user where idx=#{idx}")
+    BoardDTO getBoardInfo(int idx);
+
+    @Update("UPDATE board SET hits = #{hits} WHERE idx = #{idx}")
+    void updateHits(@Param("hits") int hits, @Param("idx") int idx);
+
+    @Update("UPDATE board " +
+          "SET title = #{title}, " +
+          "content = #{content}, " +
+          "file = #{file, jdbcType=VARCHAR} " +
+          "WHERE idx = #{idx}")
+    void modifyBoardInfo(BoardDTO modifyBoardDTO);
+
+    @Delete("DELETE FROM board WHERE idx = ${idx}")
+    void deleteBoardInfo(int idx);
+
+    @Select("SELECT count(*) " +
+          "FROM board " +
+          "WHERE board_id = #{board_id}")
+    int getBoardCount(int board_id);
+
+    @Select("Select * FROM board order by idx desc")
+    List<BoardDTO> getAllUserInfo(RowBounds rowBounds);
+
+    @Select("select count(*) from board")
+    int getAllUserCount();
+
+    @Select("SELECT count(*) FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
+    int isFavBoardExists(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
+
+    @Insert("insert into tjoeun.favorite(user_idx, board_idx) " +
+          "values(#{user_idx}, #{board_idx})")
+    int addFavBoard(FavoriteDTO favBoardDTO);
+
+    @Delete("DELETE FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
+    void deleteFavBoard(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
 }

@@ -43,7 +43,7 @@ public class BoardDAO {
 	public void deleteBoardInfo(int idx) {
 		boardMapper.deleteBoardInfo(idx);
 	}
-	
+
 	public int getBoardCount(int board_id) {
 		int boardPageCount = boardMapper.getBoardCount(board_id);
 		return boardPageCount;
@@ -57,15 +57,18 @@ public class BoardDAO {
 		return boardMapper.getAllUserCount();
 	}
 	
+
   public boolean isFavBoardExists(int user_idx, int board_idx) {
     return boardMapper.isFavBoardExists(user_idx, board_idx) > 0;
   }
 	
+
 	public int addFavBoard(FavoriteDTO favBoardDTO) {
 		return boardMapper.addFavBoard(favBoardDTO);
 	}
 	
   public void deleteFavBoard(int user_idx, int board_idx) {
-    boardMapper.deleteFavBoard(user_idx, board_idx);
-  }
+        boardMapper.deleteFavBoard(user_idx, board_idx);
+    }
+
 }
