@@ -6,3 +6,20 @@
 		<p>사업자번호 : 000-111-222</p>
 	</div>
 </div>
+
+<style>
+  .container-fluid {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    background-color: #030066;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 30px;
+    font-size: 14px;
+  }
+</style>

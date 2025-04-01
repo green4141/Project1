@@ -1,0 +1,84 @@
+/* 전체 폼 컨테이너 */
+.board-container {
+  margin-bottom: 150px; /* footer 높이보다 여유 있게 설정 */
+}
+
+.container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 카드 스타일 */
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* 입력 필드 스타일 */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group div {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 라디오 버튼과 텍스트 간격 조정 */
+}
+
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 오류 메시지 스타일 */
+#error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* 버튼 스타일 */
+.btn {
+  width: 48%;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background: #0080FF;
+  border: none;
+  color: white;
+}
+
+/* 버튼 정렬 */
+.text-right {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 수정 불가능한 입력 필드 */
+.form-control[readonly] {
+  background-color: #EAEAEA !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: #777;
+}

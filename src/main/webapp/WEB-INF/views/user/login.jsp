@@ -20,10 +20,7 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
-
-<style>
-  #error { color:red; font-size:12px; font-weight:bold; }
-</style>
+<link rel="stylesheet" href="/css/login.css"/>
 </head>
 <body>
 
