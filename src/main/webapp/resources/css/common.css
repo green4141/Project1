@@ -12,6 +12,15 @@ html, body {
   background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
-  min-height: 100vh;
+  height: 100%;
   padding-bottom: 125px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.board-container {
+  flex-grow: 1;
+  min-height: 100%;
+  position: relative;
 }

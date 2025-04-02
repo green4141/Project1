@@ -9,7 +9,7 @@
 
 <style>
   .container-fluid-footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -21,5 +21,7 @@
     justify-content: left;
     padding-left: 30px;
     font-size: 14px;
+    margin-top: auto;
+    flex-shrink: 0;
   }
 </style>
