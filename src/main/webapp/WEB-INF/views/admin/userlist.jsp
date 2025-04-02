@@ -30,7 +30,7 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="admin-layout" style="margin-top:100px">
+	<div class="admin-layout">
 			<h4 class="admin-title">유저 목록</h4>
 			<table id='admin-list'>
 				<thead>
@@ -64,7 +64,7 @@
                     </c:forEach>
 				</tbody>
 			</table>
-			
+			<div class="pagination-and-write">
 				<ul class="page-list">
 
 					<c:choose> 
@@ -84,7 +84,7 @@
                       <c:choose>
                         <c:when test="${idx == pageDTO.currentPage }">
     				      <li class="active">
-    					    <a href="${root }admin/user?page=${idx}">${idx}</a>
+    					    <span>${idx}</span>
     				      </li>
                         </c:when>
                         <c:otherwise>
@@ -108,6 +108,7 @@
                       </c:otherwise>
                     </c:choose>
 				</ul>
+				</div>
 	</div>
 </div>
 <!-- footer -->
