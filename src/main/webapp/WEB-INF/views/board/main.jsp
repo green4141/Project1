@@ -66,10 +66,10 @@
 		    		<!-- 이전 버튼 -->
 		    		<c:choose>
 		    			<c:when test="${pageDTO.previousPage <= 0 }">
-		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a></li>
+		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">이전</a></li>
 		    			</c:when>
 		    			<c:otherwise>
-		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}">이전</a></li>
+		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">이전</a></li>
 		    			</c:otherwise>
 		    		</c:choose>
 		    		
@@ -80,7 +80,7 @@
 		    					<li class="active"><span>${index}</span></li>
 		    				</c:when>
 		    				<c:otherwise>
-		    					<li onclick="location.href='${root }board/main?board_id=${board_id}&page=${index}<c:if test="${title != null }">&title=${title }</c:if>'">${index }</li>
+		    					<li onclick="location.href='${root }board/main?board_id=${board_id}&page=${index}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}'">${index }</li>
 		    				</c:otherwise>
 		    			</c:choose>
 		    		</c:forEach>
@@ -88,10 +88,10 @@
 		    		<!-- 다음 버튼 -->
 		    		<c:choose>
 		    			<c:when test="${pageDTO.max >= pageDTO.pageCount }">
-		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a></li>
+		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">다음</a></li>
 		    			</c:when>
 		    			<c:otherwise>
-		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}">다음</a></li>
+		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">다음</a></li>
 		    			</c:otherwise>
 		    		</c:choose>
 		    	</ul>
