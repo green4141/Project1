@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/admin.css"/>
 
 </head>
 <body>
@@ -30,9 +31,9 @@
 
 <!-- 게시글 리스트 -->
 <div class="board-container">
-	<div class="board-layout">
-		<h4 class="board-title">${name }</h4>
-				<table id='board-list'>
+	<div class="admin-layout">
+		<h4 class="admin-title">게시글 목록</h4>
+				<table id='admin-list'>
 					<thead>
 						<tr>
 							<th>글번호</th>
@@ -64,17 +65,17 @@
 					</tbody>
 				</table>
 				
-				<div>
+				<div class="pagination-and-write">
     				<ul class="page-list">
                         <c:choose>
                           <c:when test="${pageDTO.previousPage <= 0 }">
         					<li class="disabled">
-        						<a href="${root }admin/board?page=${pageDTO.previousPage}" class="page-link">이전</a>
+        						<a href="${root }admin/board?page=${pageDTO.previousPage}">이전</a>
         					</li>
                           </c:when>
                           <c:otherwise>
         					<li>
-        						<a href="${root }admin/board?page=${pageDTO.previousPage}" class="page-link">이전</a>
+        						<a href="${root }admin/board?page=${pageDTO.previousPage}">이전</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
@@ -82,13 +83,11 @@
                         <c:forEach var="index" begin="${pageDTO.min }" end="${pageDTO.max }">
                           <c:choose>
                             <c:when test="${index == pageDTO.currentPage }">
-            					<li class="active">
-            						<a href="${root }admin/board?page=${index}" class="page-link">${index}</a>
-            					</li>
+            					<li class="active"><span>${index}</span></li>
                             </c:when>
                             <c:otherwise>
             					<li>
-            						<a href="${root }admin/board?page=${index}" class="page-link">${index}</a>
+            						<a href="${root }admin/board?page=${index}">${index}</a>
             					</li>
                             </c:otherwise>
                           </c:choose>
@@ -97,12 +96,12 @@
                         <c:choose>
                           <c:when test="${pageDTO.max >= pageDTO.pageCount }">
         					<li class="disabled">
-        						<a href="${root }admin/board?page=${pageDTO.nextPage}" class="page-link">다음</a>
+        						<a href="${root }admin/board?page=${pageDTO.nextPage}">다음</a>
         					</li>
                           </c:when>
                           <c:otherwise>
         					<li>
-        						<a href="${root }admin/board?page=${pageDTO.nextPage}" class="page-link">다음</a>
+        						<a href="${root }admin/board?page=${pageDTO.nextPage}">다음</a>
         					</li>
                           </c:otherwise>
                         </c:choose>
