@@ -1,6 +1,9 @@
 package com.tjoeun.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -33,13 +36,32 @@ public class BoardController {
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
-			 							 @RequestParam(value="page", defaultValue="1") int page,
-			               Model model) {
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			Model model) {
+		Map<String, Object> searchParam = new HashMap<>();
+		if(title != null) {
+			searchParam.put("title", title);
+			model.addAttribute("title", title);
+		}
+		if(username != null) {
+			searchParam.put("username", username);
+			model.addAttribute("username", username);
+		}
+		if(startdate != null) {
+			searchParam.put("startdate", new Date(startdate));
+			searchParam.put("enddate", new Date(enddate));
+			model.addAttribute("startdate", startdate);
+			model.addAttribute("enddate", enddate);
+		}
 		
 		String name = boardService.getBoardInfoName(board_id);
-		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page);
+		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam);
 
-		PageDTO pageDTO = boardService.getBoardCount(board_id, page);
+		PageDTO pageDTO = boardService.getBoardCount(board_id, page, searchParam);
 		
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("name", name);
@@ -52,8 +74,9 @@ public class BoardController {
 	
 	@GetMapping("/read")
 	public String read(@RequestParam("board_id") int board_id,
-										 @RequestParam("idx") int idx,
-			               @RequestParam("page") int page, Model model) {
+			@RequestParam("idx") int idx,
+			@RequestParam("page") int page,
+			Model model) {
 		BoardDTO readBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
