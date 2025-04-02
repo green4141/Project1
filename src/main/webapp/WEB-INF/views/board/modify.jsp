@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/modifyBoard.css"/>
 
 </head>
 <body>
@@ -42,20 +43,11 @@
 			
 			<!-- 작성자 -->
 
-			<div class="form-block">
-
-				<form:label path="username">작성자</form:label>
-				<form:input path="username" class="form-control" readonly="true"/>
-			</div>
-			
-			<!-- 작성날짜 -->
-
-			<div class="form-block">
-
-				<form:label path="date">작성날짜</form:label>
-				<fmt:formatDate value="${modifyBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate"/>
-				<input type="text" class="form-control" value="${formattedDate}" readonly="true"/>
-			</div>
+            <div class="form-block writer-date">
+                <fmt:formatDate value="${modifyBoardDTO.date}" pattern="yyyy-MM-dd" var="formattedDate"/>
+                <span class="username">${modifyBoardDTO.username}</span>
+                <span class="date">${formattedDate}</span>
+            </div>
 			
 			<!-- 제목 -->
 
@@ -83,7 +75,7 @@
 			</div>
 			
 			<!-- 수정완료 -->
-			<div class="form-block" style="text-align:right; margin-top:20px;">
+			<div class="form-block board-modify-btn" style="text-align:right; margin-top:20px;">
 				<form:button class="btn btn-primary">수정완료</form:button>
 				<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">취소</a>
 			</div>
