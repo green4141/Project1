@@ -1,0 +1,99 @@
+/* 전체 페이지 스타일 */
+html, body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Gothic A1", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 페이지 레이아웃 */
+.board-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+/* 글쓰기 카드 */
+.box {
+  width: 450px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 입력 필드 스타일 */
+.form-block {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-block label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-block .form-control {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f2f2f2;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
+
+.form-block .form-control:focus {
+  background: #e8e8e8;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* textarea 크기 조정 */
+.form-block textarea {
+  resize: none;
+}
+
+/* 오류 메시지 스타일 */
+.error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+}
+
+/* 버튼 스타일 */
+.text-right {
+  display: flex;
+  justify-content: center;
+}
+
+.text-right .btn-primary {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.text-right .btn-primary:hover {
+  background-color: #0056b3;
+}
