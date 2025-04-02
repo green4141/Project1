@@ -21,6 +21,8 @@
 		<link rel="stylesheet" href="/css/common.css"/>
 		<link rel="stylesheet" href="/css/top_menu.css"/>
 		<link rel="stylesheet" href="/css/board.css"/>
+        <link rel="stylesheet" href="/css/search.css"/>
+    
 		<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 		<script src="${root }js/board.js"></script>
 	</head>
