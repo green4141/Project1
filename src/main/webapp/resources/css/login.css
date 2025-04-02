@@ -34,6 +34,25 @@ html, body {
   text-align: center;
 }
 
+.box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  padding: 30px;
+  flex: 1;
+}
+
+.form-block {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alert-danger {
+	margin-bottom: 15px;
+}
 
 /* 입력 필드 스타일 */
 .form-group {
@@ -59,8 +78,8 @@ html, body {
 }
 
 /* 오류 메시지 스타일 (입력 필드 아래로 정렬) */
-#error {
-  color: red;
+#error span {
+  color: darkgray;
   font-size: 12px;
   font-weight: bold;
   display: block;

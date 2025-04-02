@@ -21,7 +21,6 @@
 <!-- 커스텀 CSS 추가 -->
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
-<link rel="stylesheet" href="/css/board.css"/>
 <link rel="stylesheet" href="/css/modifyBoard.css"/>
 
 </head>
