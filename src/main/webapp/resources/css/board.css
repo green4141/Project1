@@ -165,7 +165,7 @@
 }
 
 .page-list li:hover a {
-  color: white;
+  color: rgb(0, 128, 192);
 }
 
 .page-list li.active {

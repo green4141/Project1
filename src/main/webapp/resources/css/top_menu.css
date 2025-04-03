@@ -54,7 +54,7 @@
 }
 
 #top-menu li a:hover {
-  color: #ddd;
+  color: rgb(0, 128, 192);
   text-decoration: underline;
 }
 
