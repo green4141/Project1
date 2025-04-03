@@ -136,8 +136,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;  /* 표와 버튼 사이 간격 */
-  display: flex;
-  justify-content: space-between; /* 요소들을 양끝으로 배치 */
   align-items: flex-start;
 }
 
