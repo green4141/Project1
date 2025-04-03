@@ -58,7 +58,7 @@
                     </c:if>
 					<div class="form-block">
 						<div class="text-right">
-							<a href="${root }admin/board?page=${page}" class="btn btn-primary">목록보기</a>
+							<a href="${root }admin/board?page=${page}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}" class="btn btn-primary">목록보기</a>
                             
 							  
 							  <a href="${root }admin/delete?idx=${idx}" class="btn btn-danger">삭제하기</a>
