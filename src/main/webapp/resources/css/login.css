@@ -14,15 +14,10 @@ html, body {
   align-items: center;
 }
 
-/* 로그인 페이지 중앙 정렬 */
-.page-content {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f9f9;
+.board-container {
+  margin-top: 300px;
 }
+
 
 /* 로그인 카드 */
 .login-card {

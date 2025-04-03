@@ -9,6 +9,8 @@
 
 /* 폼을 감싸는 박스 */
 .box {
+  padding: 25px;
+  width: 400px;
   background: #fff;
   padding: 40px;
   width: 400px;
