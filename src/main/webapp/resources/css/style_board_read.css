@@ -43,6 +43,12 @@ body {
     font-size: 18px;
     line-height: 1.8;
 }
+.board-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
 
 /* 첨부 이미지 스타일 */
 .board-image {
