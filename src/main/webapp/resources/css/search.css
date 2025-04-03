@@ -1,0 +1,72 @@
+/* 검색 컨테이너 */
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 70%;
+  max-width: 850px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* 드롭다운 스타일 */
+#searchfield {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* 검색 입력 필드 */
+#search {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#search:focus {
+  border-color: #007bff;
+}
+
+/* 날짜 입력 필드 */
+#startdate,
+#enddate {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  display: none;
+}
+
+/* 검색 버튼 */
+#search-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#search-btn:hover {
+  background: #0056b3;
+}
+
+/* 검색창 내부 아이콘 */
+.search-icon {
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+}
