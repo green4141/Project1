@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,11 +43,11 @@ public class BoardController {
 			@RequestParam(required = false) Long enddate,
 			Model model) {
 		Map<String, Object> searchParam = new HashMap<>();
-		if(title != null) {
+		if(!StringUtils.isBlank(title)) {
 			searchParam.put("title", title);
 			model.addAttribute("title", title);
 		}
-		if(username != null) {
+		if(!StringUtils.isBlank(username)) {
 			searchParam.put("username", username);
 			model.addAttribute("username", username);
 		}
