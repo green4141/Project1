@@ -19,7 +19,7 @@ html, body {
 }
 
 
-/* 로그인 카드 *//*
+/* 로그인 카드 */
 .login-card {
   width: 400px;
   padding: 30px;
@@ -47,7 +47,7 @@ html, body {
 
 .alert-danger {
 	margin-bottom: 15px;
-}*/
+}
 
 /* 입력 필드 스타일 */
 .form-group {
