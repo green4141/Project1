@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.form-button:hover {
+  background: #555;
+}
+
 /* 입력 필드 스타일 */
 .form-group {
   margin-bottom: 15px;

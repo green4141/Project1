@@ -31,8 +31,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Resource(name="loginUserDTO")
-
-  private UserDTO loginUserDTO;
+    private UserDTO loginUserDTO;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
@@ -76,6 +75,10 @@ public class BoardController {
 	public String read(@RequestParam("board_id") int board_id,
 			@RequestParam("idx") int idx,
 			@RequestParam("page") int page,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
 			Model model) {
 		BoardDTO readBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 		model.addAttribute("board_id", board_id);
@@ -83,21 +86,26 @@ public class BoardController {
 		model.addAttribute("readBoardDTO", readBoardDTO);
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("page", page);
+		if(title != null) model.addAttribute("title", title);
+		if(username != null) model.addAttribute("username", username);
+		if(startdate != null) {
+			model.addAttribute("startdate", startdate);
+			model.addAttribute("enddate", enddate);
+		}
 		return "board/read";
 	}
 	
 	@GetMapping("/write")
 	public String write(@ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
-											@RequestParam("board_id") int board_id) {
+			@RequestParam("board_id") int board_id) {
 		writeBoardDTO.setBoard_id(board_id);
-		
 			return "board/write";
 	}
 	
 	@PostMapping("/writeProcedure")
 	public String writeProcedure(@Valid @ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
-															 BindingResult result, Model model,
-															 @RequestParam(value = "page", defaultValue = "1") int page) {
+			BindingResult result, Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
 		if(result.hasErrors()) {
 			return "board/write";
 		}
@@ -111,13 +119,11 @@ public class BoardController {
 
 	@GetMapping("/modify")
 	public String modify(@RequestParam("board_id") int board_id,
-										 	 @RequestParam("idx") int idx,
-
-										 	@RequestParam("page") int page,
-										 	 @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
-										 	 Model model) {
-		
-    BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
+			@RequestParam("idx") int idx,
+			@RequestParam("page") int page,
+			@ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
+			Model model) {
+		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 
 		modifyBoardDTO.setUsername(tmpBoardDTO.getUsername());
 		modifyBoardDTO.setDate(tmpBoardDTO.getDate());
@@ -130,7 +136,6 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("page", page);
-		
 		return "board/modify";
 	}
 	
@@ -139,27 +144,18 @@ public class BoardController {
 			BindingResult result,
 			Model model,
 			@RequestParam("page") int page) {
-
 		model.addAttribute("page", page);
-
-		if(result.hasErrors()) {
-			return "board/modify";
-		}
-		
+		if(result.hasErrors()) return "board/modify";
 		boardService.modifyBoardInfo(modifyBoardDTO);
-		
 		return "board/modify_success";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("board_id") int board_id,
-											 @RequestParam("idx") int idx,
-											 Model model) {
-		
+			@RequestParam("idx") int idx,
+			Model model) {
 		boardService.deleteBoardInfo(idx);
-		
 		model.addAttribute("board_id", board_id);
-		
 		return "board/delete";
 	}
 

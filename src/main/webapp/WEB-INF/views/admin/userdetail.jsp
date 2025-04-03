@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="/css/common.css"/>
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" href="/css/modifyUser.css"/>
+
 
 <style>
   .error { color:red; font-size:12px; font-weight:bold; }
@@ -38,17 +40,17 @@
 			<form:form action="${root }admin/updateproc" modelAttribute="joinUserDTO" method="post">
 	                     <form:hidden path="userIdExist" />
 	                     <form:hidden path="idx" value="${user.idx }"/>
-				<div class="form-block">
+				<div class="form-group">
 					<form:label path="username">닉네임</form:label>
-					<form:input type="text" path="username" value="${user.username }"/>
+					<form:input type="text" path="username" class="form-control" readonly="true" value="${user.username }"/>
 	                         <span class="error"><form:errors path="username" /></span>
 				</div>
-	                   <div class="form-block">
+	                   <div class="form-group">
 	                         <form:label path="name">실명</form:label>
-	                         <form:input type="text" path="name" value="${user.name }"/>
+	                         <form:input type="text" path="name" class="form-control" readonly="true" value="${user.name }"/>
 	                         <span class="error"><form:errors path="name" /></span>
 	                   </div>
-	                   <div class="form-block">
+	                   <div class="form-group">
 	                       <form:label path="role">역할 선택</form:label>
 	                       <div>
 	                           <form:radiobutton path="role" value="0" id="student" checked="${user.role == 0? 'checked':'' }"/>
@@ -61,7 +63,7 @@
 	                       </div>
 	                       <span class="error"><form:errors path="role" /></span>
 	                   </div>
-				<div class="form-block">
+				<div class="form-group">
 					<form:label path="id">아이디</form:label>
 					<div class="input-group">
 						<form:hidden path="id" id="id" value="${user.id }"/>
@@ -72,17 +74,17 @@
 					</div>
 	                        <!--  <span class="error"><form:errors path="id" /></span> -->
 				</div>
-				<div class="form-block">
+				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
-					<form:password path="password"/>
+					<form:password path="password" class="form-control"/>
 	                         <span class="error"><form:errors path="password" /></span>
 				</div>
-				<div class="form-block">
+				<div class="form-group">
 					<form:label path="password2">비밀번호 확인</form:label>
-					<form:password path="password2"/>
+					<form:password path="password2" class="form-control"/>
 	                         <span class="error"><form:errors path="password2" /></span>
 				</div>
-				<div class="form-block">
+				<div class="form-group">
 					<div class="text-right">
 						<form:button class="btn btn-primary">수정하기</form:button>
 					</div>

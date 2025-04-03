@@ -95,7 +95,8 @@
                     <br>
 					<div class="form-group">
 						<div class="text-right">
-							<a href="${root }board/main?board_id=${board_id}&page=${page}&title=${request.getParameter("title")}" class="btn btn-primary">목록보기</a>
+
+							<a href="${root }board/main?board_id=${board_id}&page=${page}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}" class="btn btn-primary">목록보기</a>
                             <c:if test="${readBoardDTO.user == loginUserDTO.idx}" >
 							  <a href="${root }board/modify?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">수정하기</a>
 							  <a href="${root }board/delete?board_id=${board_id}&idx=${idx}" class="btn btn-danger">삭제하기</a>
