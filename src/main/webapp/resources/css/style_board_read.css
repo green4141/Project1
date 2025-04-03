@@ -117,8 +117,9 @@ body {
 
 #reply td:nth-child(2) {
     flex: 1;
-    word-wrap: break-word;  /* 댓글 내용 길어지면 자동으로 줄바꿈 */
+    word-wrap: break-word; /* 댓글 내용 길어지면 자동으로 줄바꿈 */
     white-space: pre-wrap; /* 줄바꿈 유지 */
+    word-break: break-word; /* 긴 단어도 줄바꿈 */
 }
 
 .reply_useronly {
