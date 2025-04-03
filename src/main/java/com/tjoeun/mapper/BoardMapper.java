@@ -1,6 +1,7 @@
 package com.tjoeun.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -29,6 +30,24 @@ public interface BoardMapper {
           "ORDER BY idx DESC")
     List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds);
 
+    @Select({"<script>"
+    		+ "SELECT * from v_board_user "
+    		+ "<where>"
+    		+ "<if test='title != null'>"
+    		+ "title like concat('%',#{title},'%')"
+    		+ "</if>"
+    		+ "<if test='username != null'>"
+    		+ "username = #{username}"
+    		+ "</if>"
+    		+ "<if test='startdate != null'>"
+    		+ "date between #{startdate} and #{enddate}"
+    		+ "</if>"
+    		+ "</where>"
+    		+ "and board_id = #{board_id} "
+    		+ "order by idx desc"
+    		+ "</script>"})
+    List<BoardDTO> searchBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
+    
     @Select("select * from tjoeun.v_board_user where idx=#{idx}")
     BoardDTO getBoardInfo(int idx);
 
@@ -49,6 +68,24 @@ public interface BoardMapper {
           "FROM board " +
           "WHERE board_id = #{board_id}")
     int getBoardCount(int board_id);
+    
+    @Select({"<script>"
+    		+ "select count(*) from board "
+    		+ "<where>"
+    		+ "<if test='title != null'>"
+    		+ "title like concat('%', #{title}, '%')"
+    		+ "</if>"
+    		+ "<if test='username != null'>"
+    		+ "username = #{username}"
+    		+ "</if>"
+    		+ "<if test='startdate != null'>"
+    		+ "date between #{startdate} and #{enddate}"
+    		+ "</if>"
+    		+ "</where>"
+    		+ "and board_id = #{board_id} "
+
+    		+ "</script>"})
+    int searchBoardCount(Map<String, Object> searchparam);
 
     @Select("Select * FROM board order by idx desc")
     List<BoardDTO> getAllUserInfo(RowBounds rowBounds);

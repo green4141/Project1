@@ -1,5 +1,6 @@
 package com.tjoeun.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -18,7 +19,7 @@ public class MainService {
 	public List<BoardDTO> getMainList(int board_id){
 		RowBounds rowBounds = new RowBounds(0, 5);
 		List<BoardDTO> boardDTOList = 
-				boardDAO.getBoardList(board_id, rowBounds);
+				boardDAO.getBoardList(board_id, rowBounds, new HashMap<String, Object>());
 		return boardDTOList;		
 	}
 }
