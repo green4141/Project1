@@ -47,7 +47,7 @@ body {
 /* 첨부 이미지 스타일 */
 .board-image {
     margin-top: 25px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .board-image img {
@@ -117,8 +117,9 @@ body {
 
 #reply td:nth-child(2) {
     flex: 1;
-    word-wrap: break-word;  /* 댓글 내용 길어지면 자동으로 줄바꿈 */
+    word-wrap: break-word; /* 댓글 내용 길어지면 자동으로 줄바꿈 */
     white-space: pre-wrap; /* 줄바꿈 유지 */
+    word-break: break-word; /* 긴 단어도 줄바꿈 */
 }
 
 .reply_useronly {
@@ -248,5 +249,3 @@ body {
 .form-group .text-right .btn {
     margin-left: 10px; /* 버튼들 간의 간격 */
 }
-
-
