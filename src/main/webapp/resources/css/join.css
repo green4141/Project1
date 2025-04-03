@@ -11,6 +11,11 @@
 .box {
   padding: 25px;
   width: 400px;
+  background: #fff;
+  padding: 40px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 폼 내부 입력 필드 스타일 */

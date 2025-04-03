@@ -18,6 +18,37 @@ html, body {
   margin-top: 300px;
 }
 
+
+/* 로그인 카드 *//*
+.login-card {
+  width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  padding: 30px;
+  flex: 1;
+}
+
+.form-block {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alert-danger {
+	margin-bottom: 15px;
+}*/
+
 /* 입력 필드 스타일 */
 .form-group {
   margin-bottom: 20px;
