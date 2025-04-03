@@ -217,7 +217,6 @@ input[disabled], textarea[disabled] {
   border-radius: 4px;
   font-weight: bold;
   text-decoration: none;
-  margin-left: 6px;
 }
 
 .btn-primary {
