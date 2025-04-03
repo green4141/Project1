@@ -57,7 +57,7 @@
                     <span class="board-hits">조회수 ${readBoardDTO.hits}</span>
                 </div>
                 <div class="board-content">
-                    <p>${readBoardDTO.content}</p>
+                    <pre>${readBoardDTO.content}</pre>
                 </div>
                 <c:if test="${readBoardDTO.file != null}">
                     <div class="board-image">
