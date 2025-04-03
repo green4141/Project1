@@ -1,5 +1,6 @@
 package com.tjoeun.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,16 +74,47 @@ public class AdminController {
 		return "admin/success";
 	}
 	@GetMapping("/board")
-	public String board(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
-
+	public String board(@RequestParam(required = false, defaultValue = "1")int page,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			Model model) {
+		Map<String, Object> searchParam = new HashMap<>();
+		if(!StringUtils.isBlank(title)) {
+			searchParam.put("title", title);
+			model.addAttribute("title", title);
+		}
+		if(!StringUtils.isBlank(username)) {
+			searchParam.put("username", username);
+			model.addAttribute("username", username);
+		}
+		if(startdate != null) {
+			searchParam.put("startdate", new Date(startdate));
+			searchParam.put("enddate", new Date(enddate));
+			model.addAttribute("startdate", startdate);
+			model.addAttribute("enddate", enddate);
+		}
+		 
 		model.addAttribute("loginUserDTO", loginUserDTO);
-		model.addAttribute("boardDTOList", adminService.getAllBoardList(page));
-		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page));
+		model.addAttribute("boardDTOList", adminService.getBoardList(page, searchParam));
+		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page, searchParam));
 		return "admin/boardlist";
 	}
 	@GetMapping("/read")
 	public String read(@RequestParam("idx") int idx,
-			               @RequestParam("page") int page, Model model) {
+			@RequestParam("page") int page,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			Model model) {
+		if(!StringUtils.isBlank(title)) model.addAttribute("title", title);
+		if(!StringUtils.isBlank(username)) model.addAttribute("username", username);
+		if(startdate != null) {
+			model.addAttribute("startdate", startdate);
+			model.addAttribute("enddate", enddate);
+		}
 		BoardDTO readBoardDTO = adminService.getBoardInfo(idx);
 		model.addAttribute("idx", idx);
 		model.addAttribute("readBoardDTO", readBoardDTO);

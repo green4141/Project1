@@ -102,4 +102,39 @@ public interface BoardMapper {
 
     @Delete("DELETE FROM favorite WHERE user_idx = #{user_idx} AND board_idx = #{board_idx}")
     void deleteFavBoard(@Param("user_idx") int user_idx, @Param("board_idx") int board_idx);
+
+    @Select({"<script>"
+    		+ "SELECT * from v_board_user "
+    		+ "<where>"
+    		+ "<if test='title != null'>"
+    		+ "title like concat('%',#{title},'%')"
+    		+ "</if>"
+    		+ "<if test='username != null'>"
+    		+ "username = #{username}"
+    		+ "</if>"
+    		+ "<if test='startdate != null'>"
+    		+ "date between #{startdate} and #{enddate}"
+    		+ "</if>"
+    		+ "</where>"
+    		+ "order by idx desc"
+    		+ "</script>"})
+    List<BoardDTO> getAdminBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
+    
+    @Select({"<script>"
+    		+ "SELECT count(*) from v_board_user "
+    		+ "<where>"
+    		+ "<if test='title != null'>"
+    		+ "title like concat('%',#{title},'%')"
+    		+ "</if>"
+    		+ "<if test='username != null'>"
+    		+ "username = #{username}"
+    		+ "</if>"
+    		+ "<if test='startdate != null'>"
+    		+ "date between #{startdate} and #{enddate}"
+    		+ "</if>"
+    		+ "</where>"
+    		+ "order by idx desc"
+    		+ "</script>"})
+    int getAdminBoardCount(Map<String, Object> paramMap);
 }
+

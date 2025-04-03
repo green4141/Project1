@@ -49,13 +49,13 @@ public class AdminService {
 	public void deleteUser(int idx) {
 		userDAO.deleteUser(idx);
 	}
-	public List<BoardDTO> getAllBoardList(int page) {
+	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
 		int start = (page - 1) * page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		return boardDAO.getAllBoardList(rowBounds);
+		return boardDAO.getAdminBoardList(rowBounds, searchParam);
 	}
-	public PageDTO getBoardPageDTO(int page) {
-		int boardCount = boardDAO.getAllBoardCount();
+	public PageDTO getBoardPageDTO(int page, Map<String, Object> searchParam) {
+		int boardCount = boardDAO.getAdminBoardCount(searchParam);
 		return new PageDTO(boardCount, page, page_listcount, pagenation_count);
 	}
 	public void deleteBoard(int idx) {

@@ -26,7 +26,7 @@ public class BoardDAO {
 		return name;
 	}
 	
-	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds, Map<String, Object> searchParam){
+	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds, Map<String, Object> searchParam) {
 		if(searchParam.isEmpty()) return boardMapper.getBoardList(board_id, rowBounds);
 		else {
 			searchParam.put("board_id", board_id);
@@ -67,7 +67,7 @@ public class BoardDAO {
 	}
 	
 
-  public boolean isFavBoardExists(int user_idx, int board_idx) {
+	public boolean isFavBoardExists(int user_idx, int board_idx) {
     return boardMapper.isFavBoardExists(user_idx, board_idx) > 0;
   }
 	
@@ -76,8 +76,13 @@ public class BoardDAO {
 		return boardMapper.addFavBoard(favBoardDTO);
 	}
 	
-  public void deleteFavBoard(int user_idx, int board_idx) {
+	public void deleteFavBoard(int user_idx, int board_idx) {
         boardMapper.deleteFavBoard(user_idx, board_idx);
     }
-
+	public List<BoardDTO> getAdminBoardList(RowBounds rowbounds, Map<String, Object> searchParam) {
+		return boardMapper.getAdminBoardList(rowbounds, searchParam);
+	}
+	public int getAdminBoardCount(Map<String, Object> searchParam) {
+		return boardMapper.getAdminBoardCount(searchParam);
+	}
 }
