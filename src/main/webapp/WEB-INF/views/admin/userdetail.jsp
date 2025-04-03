@@ -35,7 +35,7 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp" ></c:import>
 
 <div class="board-container">
-	<div class="board-layout" style="margin-top:100px">
+	<div class="board-layout">
 		<div class="box">
 			<form:form action="${root }admin/updateproc" modelAttribute="joinUserDTO" method="post">
 	                     <form:hidden path="userIdExist" />

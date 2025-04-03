@@ -7,6 +7,7 @@
   max-width: 900px; /* 원하는 표 가로 길이 설정 */
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center; /* 중앙 정렬 */
@@ -135,6 +136,9 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;  /* 표와 버튼 사이 간격 */
+  display: flex;
+  justify-content: space-between; /* 요소들을 양끝으로 배치 */
+  align-items: flex-start;
 }
 
 .page-list {
@@ -182,13 +186,13 @@
 }
 
 /* 글쓰기 버튼 오른쪽 끝으로 고정 */
-.write-button {
-  position: relative;
+/*  position: relative;
   margin-top: 30px;
   margin-left: 120px;
-  right: 0;           /* 오른쪽 끝으로 정렬 */
-  top: 50%;           /* 세로 중앙 정렬 */
-  transform: translateY(-50%); /* 정확한 세로 중앙 */
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);*/
+.write-button {
   background: #333;
   color: #fff;
   text-decoration: none;
@@ -264,6 +268,11 @@ input[disabled], textarea[disabled] {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.write-button-div{
+  text-align: right;
+  min-width: 70%;
 }
 
 .form-button {
