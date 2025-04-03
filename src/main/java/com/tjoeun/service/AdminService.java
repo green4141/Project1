@@ -1,6 +1,7 @@
 package com.tjoeun.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,14 +28,15 @@ public class AdminService {
 	@Value("${page.pagenationcount}")
 	private int pagenation_count;
 	
-	public List<UserDTO> getAllUserList(int page) {
+	public List<UserDTO> getUserList(int page, Map<String, Object> searchParam) {
 		int start = (page - 1) * page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		return userDAO.getAllUserList(rowBounds);
+		
+		return userDAO.getUserList(rowBounds, searchParam);
 	}
 	
-	public PageDTO getUserPageDTO(int page) {
-		int userCount = userDAO.getAllUserCount();
+	public PageDTO getUserPageDTO(int page, Map<String, Object> searchParam) {
+		int userCount = userDAO.getUserCount(searchParam);
 		return new PageDTO(userCount, page, page_listcount, pagenation_count);
 	}
 	

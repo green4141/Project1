@@ -1,5 +1,8 @@
 package com.tjoeun.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -27,11 +30,24 @@ public class AdminController {
 	private UserDTO loginUserDTO;
 	
 	@GetMapping("/user")
-	public String user(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
-
+	public String user(@RequestParam(required = false, defaultValue = "1")int page,
+			@RequestParam(required = false) String id,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Integer role,
+			Model model) {
+		Map<String, Object> searchParam = new HashMap<>();
+		if(id != null) searchParam.put("id", id);
+		else if(name != null) searchParam.put("name", name);
+		else if(username != null) searchParam.put("username", username);
+		else if(role != null) searchParam.put("role", role);
 		model.addAttribute("loginUserDTO", loginUserDTO);
-		model.addAttribute("userList", adminService.getAllUserList(page));
-		model.addAttribute("pageDTO", adminService.getUserPageDTO(page));
+		model.addAttribute("userList", adminService.getUserList(page, searchParam));
+		model.addAttribute("pageDTO", adminService.getUserPageDTO(page, searchParam));
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("username", username);
+		model.addAttribute("role", role);
 		return "admin/userlist";
 	}
 	
