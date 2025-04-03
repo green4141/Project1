@@ -70,7 +70,7 @@ public interface BoardMapper {
     int getBoardCount(int board_id);
     
     @Select({"<script>"
-    		+ "select count(*) from board "
+    		+ "select count(*) from v_board_user "
     		+ "<where>"
     		+ "<if test='title != null'>"
     		+ "title like concat('%', #{title}, '%')"
