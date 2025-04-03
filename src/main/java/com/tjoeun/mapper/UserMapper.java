@@ -1,6 +1,7 @@
 package com.tjoeun.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -34,6 +35,27 @@ public interface UserMapper {
 	@Select("SELECT * FROM user")
 	List<UserDTO> getAllUserInfo(RowBounds rowBounds);
 
+	// 회원 검색 목록 가져오기
+	@Select({"<script>"
+				+ "select * from user"
+				+ "<where>"
+					+ "<if test='id != null'>"
+						+ "id = #{id}"
+					+ "</if>"
+					+ "<if test='name != null'>"
+						+ "name = #{name}"
+					+ "</if>"
+					+ "<if test='username != null'>"
+						+ "username = #{username}"
+					+ "</if>"
+					+ "<if test='role != null'>"
+						+ "role = #{role}"
+					+ "</if>"
+				+ "</where>"
+				+ "order by idx desc"
+			+ "</script>"})
+	List<UserDTO> userSearch(RowBounds rowbounds, Map<String, Object> searchParam);
+	
 	// 회원정보 조회
 	@Select("SELECT * FROM user WHERE idx = #{idx}")
 	UserDTO getModifyUserInfo(int idx);
@@ -45,6 +67,27 @@ public interface UserMapper {
 	// 전체 회원 수 구하기
 	@Select("SELECT count(*) FROM user")
 	int getAllUserCount();
+	
+	// 유저 검색 수 구하기
+	@Select({"<script>"
+				+ "select count(*) from user"
+				+ "<where>"
+					+ "<if test='id != null'>"
+						+ "id = #{id}"
+					+ "</if>"
+					+ "<if test='name != null'>"
+						+ "name = #{name}"
+					+ "</if>"
+					+ "<if test='username != null'>"
+						+ "username = #{username}"
+					+ "</if>"
+					+ "<if test='role != null'>"
+						+ "role = #{role}"
+					+ "</if>"
+				+ "</where>"
+				+ "order by idx desc"
+			+ "</script>"})
+	int userSearchCount(Map<String, Object> searchParam);
 	
 	// 유저 정보 변경(어드민)
 	@Update({"<script>"
@@ -61,9 +104,7 @@ public interface UserMapper {
 						+ ", password = #{password} "
 					+ "</if>"
 				+ "</set>"
-			
 				+ "where idx = #{idx}"
-			
 			+ "</script>"})
 	void updateUser(UserDTO dto);
 	

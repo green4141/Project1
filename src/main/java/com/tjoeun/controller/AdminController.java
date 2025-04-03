@@ -1,7 +1,11 @@
 package com.tjoeun.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +31,24 @@ public class AdminController {
 	private UserDTO loginUserDTO;
 	
 	@GetMapping("/user")
-	public String user(@RequestParam(required = false, defaultValue = "1")int page, Model model) {
-
+	public String user(@RequestParam(required = false, defaultValue = "1")int page,
+			@RequestParam(required = false) String id,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Integer role,
+			Model model) {
+		Map<String, Object> searchParam = new HashMap<>();
+		if(!StringUtils.isBlank(id)) searchParam.put("id", id);
+		else if(!StringUtils.isBlank(name)) searchParam.put("name", name);
+		else if(!StringUtils.isBlank(username)) searchParam.put("username", username);
+		else if(role != null) searchParam.put("role", role);
 		model.addAttribute("loginUserDTO", loginUserDTO);
-		model.addAttribute("userList", adminService.getAllUserList(page));
-		model.addAttribute("pageDTO", adminService.getUserPageDTO(page));
+		model.addAttribute("userList", adminService.getUserList(page, searchParam));
+		model.addAttribute("pageDTO", adminService.getUserPageDTO(page, searchParam));
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("username", username);
+		model.addAttribute("role", role);
 		return "admin/userlist";
 	}
 	

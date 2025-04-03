@@ -2,6 +2,7 @@ package com.tjoeun.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -68,11 +69,11 @@ public class BoardService {
 		return name;
 	}
 
-	public List<BoardDTO> getBoardList(int board_id, int page){
+	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam) {
 		int start = (page - 1) * this.page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
 		
-		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds);
+		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds, searchParam);
 		
 		return boardDTOList;
 	}
@@ -103,8 +104,8 @@ public class BoardService {
 		boardDAO.deleteBoardInfo(idx);
 	}
 	
-	public PageDTO getBoardCount(int board_id, int currentPage) {
-		int contentCount = boardDAO.getBoardCount(board_id);
+	public PageDTO getBoardCount(int board_id, int currentPage, Map<String, Object> searchParamMap) {
+		int contentCount = boardDAO.getBoardCount(board_id, searchParamMap);
 		PageDTO pageDTO = new PageDTO(contentCount, currentPage, this.page_listcount, this.page_pagenationcount);
 		
 		return pageDTO;
