@@ -47,7 +47,7 @@ body {
 /* 첨부 이미지 스타일 */
 .board-image {
     margin-top: 25px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .board-image img {
