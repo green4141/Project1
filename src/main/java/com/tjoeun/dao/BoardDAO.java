@@ -1,6 +1,7 @@
 package com.tjoeun.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,12 @@ public class BoardDAO {
 		return name;
 	}
 	
-	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds){
-		List<BoardDTO> boardDTOList = boardMapper.getBoardList(board_id, rowBounds);
-		return boardDTOList;
+	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds, Map<String, Object> searchParam){
+		if(searchParam.isEmpty()) return boardMapper.getBoardList(board_id, rowBounds);
+		else {
+			searchParam.put("board_id", board_id);
+			return boardMapper.searchBoardList(rowBounds, searchParam);
+		}
 	}
 	
 	public BoardDTO getBoardInfo(int idx) {
@@ -44,8 +48,13 @@ public class BoardDAO {
 		boardMapper.deleteBoardInfo(idx);
 	}
 
-	public int getBoardCount(int board_id) {
-		int boardPageCount = boardMapper.getBoardCount(board_id);
+	public int getBoardCount(int board_id, Map<String, Object> searchParamMap) {
+		int boardPageCount;
+		if(searchParamMap.isEmpty()) boardPageCount = boardMapper.getBoardCount(board_id);
+		else {
+			searchParamMap.put("board_id", board_id);
+			boardPageCount = boardMapper.searchBoardCount(searchParamMap);
+		}
 		return boardPageCount;
 	}
 	

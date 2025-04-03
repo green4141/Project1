@@ -1,6 +1,7 @@
 package com.tjoeun.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -30,10 +31,9 @@ public class UserDAO {
 		return loginProcUserDTO2;
 	}
 	
-
-
-	public List<UserDTO> getAllUserList(RowBounds rowBounds) {
-		return userMapper.getAllUserInfo(rowBounds);
+	public List<UserDTO> getUserList(RowBounds rowBounds, Map<String, Object> searchParam) {
+		if(searchParam.isEmpty()) return userMapper.getAllUserInfo(rowBounds);
+		else return userMapper.userSearch(rowBounds, searchParam);
 	}
 
 	public UserDTO getModifyUserInfo(int idx){
@@ -45,8 +45,9 @@ public class UserDAO {
 		userMapper.modifyUserInfo(modifyUserDTO);
 	}
 	
-	public int getAllUserCount() {
-		return userMapper.getAllUserCount();
+	public int getUserCount(Map<String, Object> searchParameter) {
+		if(searchParameter.isEmpty()) return userMapper.getAllUserCount();
+		else return userMapper.userSearchCount(searchParameter);
 	}
 
 	public void userUpdate(UserDTO dto) {
