@@ -29,6 +29,7 @@ html, body {
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-top: 60px;
 }
 
 /* 제목 스타일 */
@@ -152,4 +153,5 @@ html, body {
 .board-modify-btn{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }

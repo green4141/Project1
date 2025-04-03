@@ -2,8 +2,9 @@
 <!-- footer -->
 <div id="footer" class="container-fluid-footer bg-dark text-white">
 	<div class="container-footer">
-		<p>http://www.TJOEUN.co.kr</p>
-		<p>사업자번호 : 000-111-222</p>
+		<h3>(주)더조은</h3>
+		<p>대표이사 : 더조은 | 주소 : 서울특별시 종로구 우정국로2길 21 9층 | 사업자번호 : 123-45-67890 | 통신판매신고번호 : 2025-서울종로-4003</p>
+        <p>제휴&마케팅 문의 : tjoeun@tjoeun.com</p>
 	</div>
 </div>
 

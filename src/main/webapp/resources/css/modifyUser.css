@@ -1,13 +1,13 @@
 /* 전체 폼 컨테이너 */
-.board-container {
-  margin-bottom: 150px; /* footer 높이보다 여유 있게 설정 */
-}
-
 .container {
   margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.board-layout{
+  margin-top: 50px;
 }
 
 /* 카드 스타일 */
