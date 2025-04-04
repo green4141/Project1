@@ -51,7 +51,7 @@
 	                <c:forEach var="boardDTO" items="${boardDTOList }" >
 	  					<tr>
 	   						<td >${boardDTO.idx }</td>
-	   						<td><a href="${root }admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage }&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">${boardDTO.title }</a></td>
+	   						<td><a href="${root }admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage }&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">${boardDTO.title }</a></td>
 	   						<td>${boardDTO.username }</td>
 	   						<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 	                        <td>${boardDTO.hits }</td>
@@ -72,12 +72,12 @@
 	                <c:choose>
 	                  <c:when test="${pageDTO.previousPage <= 0 }">
 						<li class="disabled">
-							<a href="${root }admin/board?page=${pageDTO.previousPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">이전</a>
+							<a href="${root }admin/board?page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">이전</a>
 						</li>
 	                  </c:when>
 	                  <c:otherwise>
 						<li>
-							<a href="${root }admin/board?page=${pageDTO.previousPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">이전</a>
+							<a href="${root }admin/board?page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">이전</a>
 						</li>
 	                  </c:otherwise>
 	                </c:choose>
@@ -88,7 +88,7 @@
 	    					<li class="active"><span>${index}</span></li>
 	                    </c:when>
 	                    <c:otherwise>
-	    					<li><a href="${root }admin/board?page=${index}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">${index}</a></li>
+	    					<li><a href="${root }admin/board?page=${index}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">${index}</a></li>
 	                    </c:otherwise>
 	                  </c:choose>
 	                </c:forEach>
@@ -96,12 +96,12 @@
 	                <c:choose>
 	                  <c:when test="${pageDTO.max >= pageDTO.pageCount }">
 						<li class="disabled">
-							<a href="${root }admin/board?page=${pageDTO.nextPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">다음</a>
+							<a href="${root }admin/board?page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">다음</a>
 						</li>
 	                  </c:when>
 	                  <c:otherwise>
 						<li>
-							<a href="${root }admin/board?page=${pageDTO.nextPage}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}">다음</a>
+							<a href="${root }admin/board?page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">다음</a>
 						</li>
 	                  </c:otherwise>
 	                </c:choose>
