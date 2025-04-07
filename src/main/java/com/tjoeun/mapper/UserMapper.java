@@ -20,6 +20,10 @@ public interface UserMapper {
 			    "FROM user " +
 			    "WHERE id = #{id}")
 	String checkUserId(String id);
+	@Select("SELECT username " +
+		    "FROM user " +
+		    "WHERE id = #{id}")
+	String checkUserName(String id);
 
 	// 회원 가입하기
 	@Insert("INSERT INTO tjoeun.user(name, id, password, username, role) VALUES(#{name}, #{id}, #{password}, #{username}, #{role})")

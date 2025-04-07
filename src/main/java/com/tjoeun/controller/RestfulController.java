@@ -30,4 +30,10 @@ public class RestfulController {
 	public boolean toggleFavBoard(@RequestParam int board_idx) {
 		return boardService.toggleFavBoard(board_idx);
 	}
+	
+	@GetMapping("/user/checkUserName/{username}")
+	public String checkUserName(@PathVariable String username){
+		boolean chk = userService.checkUserName(username);
+		return chk + "";
+	}
 }

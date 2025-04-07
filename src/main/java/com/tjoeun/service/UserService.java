@@ -27,6 +27,15 @@ public class UserService {
 		}
 	}
 	
+	public boolean checkUserName(String username) {
+		String serverusername = userDAO.checkUserName(username);
+
+		if (serverusername == null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	public void addUserInfo(UserDTO joinUserDTO) {
 		userDAO.addUserInfo(joinUserDTO);
 	}

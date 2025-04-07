@@ -27,6 +27,9 @@ public class UserValidator implements Validator{
 			if (userDTO.isUserIdExist() == false) {
 				errors.rejectValue("id", "DidntCheckUserId");
 			}
+			if (!userDTO.isUserNameExist() ) {
+				errors.rejectValue("username", "DidntCheckUserName");
+			}
 		}
 	}
 }
