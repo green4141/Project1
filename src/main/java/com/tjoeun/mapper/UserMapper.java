@@ -111,4 +111,23 @@ public interface UserMapper {
 	// 회원 삭제(어드민)
 	@Delete("delete from user where idx = #{idx}")
 	void deleteUser(int idx);
+	
+  
+	@Select({
+	  "<script>",
+	  "SELECT * FROM user",
+	  "<where>",
+	  "  <if test='id != null and id != \"\"'> id LIKE CONCAT('%', #{id}, '%') </if>",
+	  "  <if test='name != null and name != \"\"'> name LIKE CONCAT('%', #{name}, '%') </if>",
+	  "  <if test='username != null and username != \"\"'> username LIKE CONCAT('%', #{username}, '%') </if>",
+	  "  <if test='role != null and role != \"\"'> role = #{role} </if>",
+	  "</where>",
+	  "ORDER BY",
+	  "  <choose>",
+	  "    <when test='sort != null and order != null'> ${sort} ${order} </when>",
+	  "    <otherwise> idx DESC </otherwise>",
+	  "  </choose>",
+	  "</script>"
+	})
+	List<UserDTO> getSortedUser(RowBounds rowBounds, Map<String, Object> paramMap);
 }

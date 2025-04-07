@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
 
+<c:set var="nextNameOrder" value="${sort eq 'name' and order eq 'asc' ? 'desc' : sort eq 'name' and order eq 'desc' ? '' : 'asc'}"/>
+<c:set var="nextRoleOrder" value="${sort eq 'role' and order eq 'asc' ? 'desc' : sort eq 'role' and order eq 'desc' ? '' : 'asc'}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +43,39 @@
 				<tr>
 					<th>번호</th>
 					<th>아이디</th>
-					<th>이름</th>
+					<th>
+						<c:choose>
+							<c:when test="${nextNameOrder eq ''}">
+								<a href="${root}admin/user?page=${pageDTO.currentPage}">이름</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}">이름</a>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${sort eq 'name'}">
+							<c:choose>
+								<c:when test="${order eq 'asc'}">▲</c:when>
+								<c:when test="${order eq 'desc'}">▼</c:when>
+							</c:choose>
+						</c:if>
+					</th>
 					<th>닉네임</th>
-					<th>등급</th>
+					<th>
+						<c:choose>
+							<c:when test="${nextRoleOrder eq ''}">
+								<a href="${root}admin/user?page=${pageDTO.currentPage}">등급</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}">등급</a>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${sort eq 'role'}">
+							<c:choose>
+								<c:when test="${order eq 'asc'}">▲</c:when>
+								<c:when test="${order eq 'desc'}">▼</c:when>
+							</c:choose>
+						</c:if>
+					</th>
 					<th>수정하기</th>
 					<th>삭제하기</th>
 				</tr>
@@ -72,12 +105,12 @@
 				<c:choose> 
                     <c:when test="${pageDTO.previousPage <= 0 }">   
 					    <li class="disabled">
-						  <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}">이전</a>
+						  <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">이전</a>
 					    </li>
                       </c:when>
                     <c:otherwise>
                         <li>
-                          <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}">이전</a>
+                          <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">이전</a>
                         </li>
                     </c:otherwise>
                  </c:choose>
@@ -90,7 +123,7 @@
 		                     </c:when>
 		                     <c:otherwise>	
 			 				      <li>
-			 				   	    <a href="${root }admin/user?page=${idx}&id=${id}&name=${name}&username=${username}&role=${role}">${idx}</a>
+			 				   	    <a href="${root }admin/user?page=${idx}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">${idx}</a>
 			 				      </li>
 		                     </c:otherwise>
 	                   </c:choose>
@@ -99,12 +132,12 @@
 				<c:choose> 
                      <c:when test="${pageDTO.max >= pageDTO.pageCount }">   
 					    <li class="disabled">
-						  <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}">다음</a>
+						  <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">다음</a>
 					    </li>
                      </c:when>
                      <c:otherwise>
                        <li>
-                         <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}">다음</a>
+                         <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">다음</a>
                        </li>
                      </c:otherwise>
                 </c:choose>

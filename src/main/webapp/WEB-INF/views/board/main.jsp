@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
 
+<c:set var="nextHitsOrder" value="${sort eq 'hits' and order eq 'asc' ? 'desc' : sort eq 'hits' and order eq 'desc' ? '' : 'asc'}"/>
+<c:set var="nextFavoriteOrder" value="${sort eq 'favorite' and order eq 'asc' ? 'desc' : sort eq 'favorite' and order eq 'desc' ? '' : 'asc'}"/>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,8 +47,38 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성날짜</th>
-						<th>조회수</th>
-	                    <th>좋아요</th>
+    					<th>
+    						<c:choose>
+    							<c:when test="${nextHitsOrder eq ''}">
+    								<a href="${root}board/main?board_id=${board_id}">조회수</a>
+    							</c:when>
+    							<c:otherwise>
+    								<a href="${root}board/main?board_id=${board_id}&sort=hits&order=${nextHitsOrder}">조회수</a>
+    							</c:otherwise>
+    						</c:choose>
+    						<c:if test="${sort eq 'hits'}">
+    							<c:choose>
+    								<c:when test="${order eq 'asc'}">▲</c:when>
+    								<c:when test="${order eq 'desc'}">▼</c:when>
+    							</c:choose>
+    						</c:if>
+    					</th>
+    					<th>
+    						<c:choose>
+    							<c:when test="${nextFavoriteOrder eq ''}">
+    								<a href="${root}board/main?board_id=${board_id}">좋아요</a>
+    							</c:when>
+    							<c:otherwise>
+    								<a href="${root}board/main?board_id=${board_id}&sort=favorite&order=${nextFavoriteOrder}">좋아요</a>
+    							</c:otherwise>
+    						</c:choose>
+    						<c:if test="${sort eq 'favorite'}">
+    							<c:choose>
+    								<c:when test="${order eq 'asc'}">▲</c:when>
+    								<c:when test="${order eq 'desc'}">▼</c:when>
+    							</c:choose>
+    						</c:if>
+    					</th>
 					</tr>
 				</thead>
 				<tbody>

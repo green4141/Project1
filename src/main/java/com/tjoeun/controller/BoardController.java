@@ -41,6 +41,8 @@ public class BoardController {
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
+      @RequestParam(required = false) String sort,
+      @RequestParam(required = false) String order,
 			Model model) {
 		Map<String, Object> searchParam = new HashMap<>();
 		if(!StringUtils.isBlank(title)) {
@@ -57,6 +59,8 @@ public class BoardController {
 			model.addAttribute("startdate", startdate);
 			model.addAttribute("enddate", enddate);
 		}
+    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
 		
 		String name = boardService.getBoardInfoName(board_id);
 		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam);
@@ -68,6 +72,8 @@ public class BoardController {
 		model.addAttribute("boardDTOList", boardDTOList);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("page", page);
+    model.addAttribute("sort", sort);
+    model.addAttribute("order", order);
 		
 		return "board/main";
 	}

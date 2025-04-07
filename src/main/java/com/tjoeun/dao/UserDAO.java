@@ -61,4 +61,7 @@ public class UserDAO {
 		userMapper.deleteUser(idx);
 	}
 
+	public List<UserDTO> getSortedUser(RowBounds rowBounds, Map<String, Object> paramMap){
+		return userMapper.getSortedUser(rowBounds, paramMap);
+	}
 }

@@ -13,6 +13,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.FavoriteDTO;
+import com.tjoeun.dto.UserDTO;
 
 public interface BoardMapper {
     @Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
@@ -42,9 +43,8 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
+    		+ "board_id = #{board_id} "
     		+ "</where>"
-    		+ "and board_id = #{board_id} "
-    		+ "order by idx desc"
     		+ "</script>"})
     List<BoardDTO> searchBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
     
@@ -81,10 +81,14 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
+    		+ "board_id = #{board_id} "
     		+ "</where>"
-    		+ "and board_id = #{board_id} "
-
-    		+ "</script>"})
+        + "ORDER BY "
+        + "  <choose>"
+        + "    <when test='sort != null and order != null'> ${sort} ${order} </when>"
+        + "    <otherwise> idx DESC </otherwise>"
+        + "  </choose>"
+        + "</script>"})
     int searchBoardCount(Map<String, Object> searchparam);
 
     @Select("Select * FROM board order by idx desc")
@@ -136,5 +140,32 @@ public interface BoardMapper {
     		+ "order by idx desc"
     		+ "</script>"})
     int getAdminBoardCount(Map<String, Object> paramMap);
+    
+    @Select({
+      "<script>",
+      "SELECT * FROM v_board_user",
+      "<where>",
+      "  <if test='title != null and title != \"\"'>",
+      "    title LIKE CONCAT('%', #{title}, '%')",
+      "  </if>",
+      "  <if test='username != null and username != \"\"'>",
+      "    username = #{username}",
+      "  </if>",
+      "  <if test='startdate != null and enddate != null'>",
+      "    date BETWEEN #{startdate} AND #{enddate}",
+      "  </if>",
+      "  <if test='board_id != null'>",
+      "    board_id = #{board_id}",
+      "  </if>",
+      "</where>",
+      "ORDER BY",
+      "  <choose>",
+      "    <when test='sort != null and order != null'> ${sort} ${order} </when>",
+      "    <otherwise> idx DESC </otherwise>",
+      "  </choose>",
+      "</script>"
+	  })
+	  List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap);
+
 }
 

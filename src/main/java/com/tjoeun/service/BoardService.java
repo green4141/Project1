@@ -75,6 +75,10 @@ public class BoardService {
 		
 		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds, searchParam);
 		
+		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+			return boardDAO.getSortedBoard(rowBounds, searchParam);
+		}
+		
 		return boardDTOList;
 	}
 	
