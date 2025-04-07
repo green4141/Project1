@@ -22,8 +22,9 @@ public interface UserMapper {
 	String checkUserId(String id);
 	@Select("SELECT username " +
 		    "FROM user " +
-		    "WHERE id = #{id}")
-	String checkUserName(String id);
+		    "WHERE username = #{username}")
+	String checkUserName(String username);
+	
 
 	// 회원 가입하기
 	@Insert("INSERT INTO tjoeun.user(name, id, password, username, role) VALUES(#{name}, #{id}, #{password}, #{username}, #{role})")
@@ -127,10 +128,8 @@ public interface UserMapper {
 	  "  <if test='role != null and role != \"\"'> role = #{role} </if>",
 	  "</where>",
 	  "ORDER BY",
-	  "  <choose>",
-	  "    <when test='sort != null and order != null'> ${sort} ${order} </when>",
-	  "    <otherwise> idx DESC </otherwise>",
-	  "  </choose>",
+	  "    <if test='sort != null and order != null'> ${sort} ${order} </if>",
+	  "    idx DESC",
 	  "</script>"
 	})
 	List<UserDTO> getSortedUser(RowBounds rowBounds, Map<String, Object> paramMap);

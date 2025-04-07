@@ -32,7 +32,10 @@ public class UserDTO {
 	@Pattern(regexp="^[가-힣A-Za-z0-9]+$")
 	private String username2; // 닉네임수정
 
-    private int role;// 0: 학생, 1: 선생
+  private int role;// 0: 학생, 1: 선생
+  
+  // 닉네임 중복 확인용
+  private boolean userName2Exist;
 	
 	// 회원 가입 여부 저장
 	private boolean userIdExist = false;

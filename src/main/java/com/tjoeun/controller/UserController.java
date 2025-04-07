@@ -12,9 +12,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.UserService;
@@ -85,14 +87,18 @@ public class UserController {
 	@PostMapping("/modifyProcedure")
 	public String modifyProcedure(@Valid @ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO,
 		                          BindingResult result){
-		if(result.hasErrors()){
-			return "user/modify";			
-	  }
+		if(!modifyUserDTO.isUserName2Exist()) {
+      result.rejectValue("username2", null, "닉네임 중복 확인을 해주세요");
+  }
 
-		userService.modifyUserInfo(modifyUserDTO);
-		return "user/modify_success";
-	}
-	
+  if(result.hasErrors()){
+      return "user/modify";			
+  }
+
+  userService.modifyUserInfo(modifyUserDTO);
+  return "user/modify_success";
+}
+
 	// 로그아웃
 	@GetMapping("/logout")
 	public String logout() {
@@ -107,6 +113,13 @@ public class UserController {
 	public String cannot_login(){
 		return "user/cannot_login";
 	}
+	//닉네임 중복 확인
+	@GetMapping("/checkUserName2/{username}")
+  @ResponseBody
+  public String checkUserName(@PathVariable("username") String username) {
+      boolean isAvailable = userService.checkUserName(username);
+      return String.valueOf(isAvailable);
+  }
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
