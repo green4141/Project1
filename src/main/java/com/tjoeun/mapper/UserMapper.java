@@ -128,7 +128,7 @@ public interface UserMapper {
 	  "  <if test='role != null and role != \"\"'> role = #{role} </if>",
 	  "</where>",
 	  "ORDER BY",
-	  "    <if test='sort != null and order != null'> ${sort} ${order} </if>",
+	  "    <if test='sort != null and order != null'> ${sort} ${order}, </if>",
 	  "    idx DESC",
 	  "</script>"
 	})
