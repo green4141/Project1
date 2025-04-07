@@ -17,14 +17,14 @@
     padding: 0;
   }
 
-  /* body를 flex로 설정하여 footer를 항상 하단에 위치 */
+  /*body를 flex로 설정하여 footer를 항상 하단에 위치*/
   body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
   }
 
-  /* container 내용이 적을 때 footer가 하단에 고정되도록 */
+  /*container 내용이 적을 때 footer가 하단에 고정되도록*/
   .container {
     flex-grow: 1;
   }
