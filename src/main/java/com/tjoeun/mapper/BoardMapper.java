@@ -136,5 +136,9 @@ public interface BoardMapper {
     		+ "order by idx desc"
     		+ "</script>"})
     int getAdminBoardCount(Map<String, Object> paramMap);
+    
+    @Update("UPDATE board SET is_notice = #{isNoticeValue} WHERE idx = #{idx}")
+    void updateNoticeStatus(@Param("idx") int idx, @Param("isNoticeValue") int isNoticeValue);
+
 }
 

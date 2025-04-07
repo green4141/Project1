@@ -65,4 +65,8 @@ public class AdminService {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
 		return boardDTO;
 	}
+	public void updateNoticeStatus(int idx, int isNoticeValue) {
+		boardDAO.updateNoticeStatus(idx, isNoticeValue);
+	}
+
 }

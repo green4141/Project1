@@ -85,4 +85,8 @@ public class BoardDAO {
 	public int getAdminBoardCount(Map<String, Object> searchParam) {
 		return boardMapper.getAdminBoardCount(searchParam);
 	}
+	public void updateNoticeStatus(int idx, int isNoticeValue) {
+		boardMapper.updateNoticeStatus(idx, isNoticeValue);
+	}
+
 }

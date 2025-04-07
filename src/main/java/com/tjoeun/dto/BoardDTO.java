@@ -29,4 +29,6 @@ public class BoardDTO {
 
 	private boolean exist_favorite;
 	private int favorite;
+	
+	private int is_notice;
 }

@@ -128,4 +128,15 @@ public class AdminController {
 		model.addAttribute("work", "boardDelete");
 		return "admin/success";
 	}
+	@PostMapping("/toggleNotice")
+	public String toggleNotice(@RequestParam("idx") int idx,
+			@RequestParam(value = "is_notice", required = false) String isNotice,
+			@RequestParam("page") int page) {
+	    // 체크박스 체크: isNotice="1", 체크 해제: null
+	    int isNoticeValue = (isNotice != null) ? 1 : 0;
+	    // 공지 상태 업데이트
+	    adminService.updateNoticeStatus(idx, isNoticeValue);
+	    // 해당 게시글 다시 보기 페이지로 이동
+	    return "redirect:/admin/read?idx=" + idx + "&page=" + page;
+	}
 }
