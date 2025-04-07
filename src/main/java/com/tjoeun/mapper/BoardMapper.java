@@ -13,6 +13,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.FavoriteDTO;
+import com.tjoeun.dto.UserDTO;
 
 public interface BoardMapper {
     @Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
@@ -42,8 +43,8 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
-    		+ "</where>"
     		+ "and board_id = #{board_id} "
+    		+ "</where>"
     		+ "order by idx desc"
     		+ "</script>"})
     List<BoardDTO> searchBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
@@ -81,10 +82,14 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
-    		+ "</where>"
     		+ "and board_id = #{board_id} "
-
-    		+ "</script>"})
+    		+ "</where>"
+        + "ORDER BY "
+        
+        + "    <if test='sort != null and order != null'> ${sort} ${order}, </if>"
+        + "     idx DESC"
+        
+        + "</script>"})
     int searchBoardCount(Map<String, Object> searchparam);
 
     @Select("Select * FROM board order by idx desc")
@@ -136,5 +141,45 @@ public interface BoardMapper {
     		+ "order by idx desc"
     		+ "</script>"})
     int getAdminBoardCount(Map<String, Object> paramMap);
+    
+
+    @Update("UPDATE board SET is_notice = #{isNoticeValue} WHERE idx = #{idx}")
+    void updateNoticeStatus(@Param("idx") int idx, @Param("isNoticeValue") int isNoticeValue);
+    
+    @Select("SELECT * FROM v_board_user " +
+            "WHERE board_id = #{board_id} AND is_notice = 1 " +
+            "ORDER BY idx DESC LIMIT 3")
+    List<BoardDTO> getTopNotices(@Param("board_id") int board_id);
+    
+    @Select("SELECT * FROM v_board_user WHERE is_notice = 0 ORDER BY idx DESC")
+    List<BoardDTO> getGeneralBoardListExcludingNotices(RowBounds rowBounds);
+
+    @Select("SELECT count(*) FROM v_board_user WHERE is_notice = 0")
+    int getGeneralBoardCount();
+
+    @Select({
+      "<script>",
+      "SELECT * FROM v_board_user",
+      "<where>",
+      "  <if test='title != null and title != \"\"'>",
+      "    title LIKE CONCAT('%', #{title}, '%')",
+      "  </if>",
+      "  <if test='username != null and username != \"\"'>",
+      "    username = #{username}",
+      "  </if>",
+      "  <if test='startdate != null and enddate != null'>",
+      "    date BETWEEN #{startdate} AND #{enddate}",
+      "  </if>",
+      "  <if test='board_id != null'>",
+      "    and board_id = #{board_id}",
+      "  </if>",
+      "</where>",
+      "ORDER BY",
+      "    <if test='sort != null and order != null'> ${sort} ${order}, </if>",
+      "    idx DESC",
+      "</script>"
+	  })
+	  List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap);
+
 }
 

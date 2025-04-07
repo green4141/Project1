@@ -117,7 +117,7 @@ public class BoardService {
 		if(fileDTO != null) {
 			File file = new File(fileDTO.getServername());
 			file.delete();
-			fileDAO.deleteByIdx(fileDTO.getIdx());
+			fileDAO.delete(fileDTO.getIdx());
 		}
 		boardDAO.deleteBoardInfo(idx);
 	}

@@ -37,19 +37,31 @@ public class AdminController {
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Integer role,
+      @RequestParam(required = false) String sort,
+      @RequestParam(required = false) String order,
 			Model model) {
+		
 		Map<String, Object> searchParam = new HashMap<>();
+		
 		if(!StringUtils.isBlank(id)) searchParam.put("id", id);
 		else if(!StringUtils.isBlank(name)) searchParam.put("name", name);
 		else if(!StringUtils.isBlank(username)) searchParam.put("username", username);
 		else if(role != null) searchParam.put("role", role);
+		
+    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
+		
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("userList", adminService.getUserList(page, searchParam));
 		model.addAttribute("pageDTO", adminService.getUserPageDTO(page, searchParam));
+		
 		model.addAttribute("id", id);
 		model.addAttribute("name", name);
 		model.addAttribute("username", username);
 		model.addAttribute("role", role);
+    model.addAttribute("sort", sort);
+    model.addAttribute("order", order);
+		
 		return "admin/userlist";
 	}
 	
@@ -79,6 +91,8 @@ public class AdminController {
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
+      @RequestParam(required = false) String sort,
+      @RequestParam(required = false) String order,
 			Model model) {
 		Map<String, Object> searchParam = new HashMap<>();
 		if(!StringUtils.isBlank(title)) {
@@ -95,10 +109,14 @@ public class AdminController {
 			model.addAttribute("startdate", startdate);
 			model.addAttribute("enddate", enddate);
 		}
+    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
 		 
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("boardDTOList", adminService.getBoardList(page, searchParam));
 		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page, searchParam));
+    model.addAttribute("sort", sort);
+    model.addAttribute("order", order);
 		return "admin/boardlist";
 	}
 	@GetMapping("/read")
@@ -127,5 +145,16 @@ public class AdminController {
 		adminService.deleteBoard(idx);
 		model.addAttribute("work", "boardDelete");
 		return "admin/success";
+	}
+	@PostMapping("/toggleNotice")
+	public String toggleNotice(@RequestParam("idx") int idx,
+			@RequestParam(value = "is_notice", required = false) String isNotice,
+			@RequestParam("page") int page) {
+	    // 체크박스 체크: isNotice="1", 체크 해제: null
+	    int isNoticeValue = (isNotice != null) ? 1 : 0;
+	    // 공지 상태 업데이트
+	    adminService.updateNoticeStatus(idx, isNoticeValue);
+	    // 해당 게시글 다시 보기 페이지로 이동
+	    return "redirect:/admin/read?idx=" + idx + "&page=" + page;
 	}
 }

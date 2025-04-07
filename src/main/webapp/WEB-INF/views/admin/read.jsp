@@ -46,8 +46,29 @@
     <div class="container">
         <div class="board-container">
             <div class="board-card">
-                <div class="board-header">
-                    <h2>${readBoardDTO.title}</h2>
+                <div class="board-header" style="display: flex; justify-content: space-between; align-items: center;">
+                	<div>
+	                    <h2>
+	                    	${readBoardDTO.title}
+	                    	<!-- 공지사항 표시 -->
+	                    	<c:if test="${readBoardDTO.is_notice == 1}">
+	                    		<span style="font-size: 1rem; color: crimson; margin-left: 10px;">📢</span>
+	                    	</c:if>
+	                    </h2>
+	                </div>
+                    <!-- 관리자만 보이는 공지 설정 폼 -->
+                    <c:if test="${loginUserDTO.role == 2}">
+                    	<form action="${root}admin/toggleNotice" method="post" style="margin-top: 10px;">
+                    		<input type="hidden" name="idx" value="${readBoardDTO.idx}" />
+                    		<input type="hidden" name="page" value="${page}" />
+                    		<label>
+                    			<input type="checkbox" name="is_notice" value="1"
+                    				onchange="this.form.submit()"
+                    				<c:if test="${readBoardDTO.is_notice == 1}">checked</c:if> />
+                    			이 글을 공지로 설정
+                    		</label>
+                    	</form>
+                    </c:if>
                 </div>
                 <div class="board-info">
                     <span class="board-writer">${readBoardDTO.username}</span>

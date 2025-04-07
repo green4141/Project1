@@ -29,7 +29,7 @@ public class BoardDAO {
 	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds, Map<String, Object> searchParam) {
 		if(searchParam.isEmpty()) return boardMapper.getBoardList(board_id, rowBounds);
 		else {
-			searchParam.put("board_id", board_id);
+			
 			return boardMapper.searchBoardList(rowBounds, searchParam);
 		}
 	}
@@ -85,4 +85,24 @@ public class BoardDAO {
 	public int getAdminBoardCount(Map<String, Object> searchParam) {
 		return boardMapper.getAdminBoardCount(searchParam);
 	}
+
+	public void updateNoticeStatus(int idx, int isNoticeValue) {
+		boardMapper.updateNoticeStatus(idx, isNoticeValue);
+	}
+	
+	public List<BoardDTO> getTopNotices(int board_id) {
+		return boardMapper.getTopNotices(board_id);
+	}
+	
+	public List<BoardDTO> getGeneralBoardListExcludingNotices(RowBounds rowBounds) {
+	    return boardMapper.getGeneralBoardListExcludingNotices(rowBounds);
+	}
+	
+	public int getGeneralBoardCount() {
+	    return boardMapper.getGeneralBoardCount();
+	}
+	public List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap){
+		return boardMapper.getSortedBoard(rowBounds, paramMap);
+	}
+
 }
