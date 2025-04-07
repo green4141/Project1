@@ -88,5 +88,8 @@ public class BoardDAO {
 	public void updateNoticeStatus(int idx, int isNoticeValue) {
 		boardMapper.updateNoticeStatus(idx, isNoticeValue);
 	}
-
+	
+	public List<BoardDTO> getTopNotices(int board_id) {
+		return boardMapper.getTopNotices(board_id);
+	}
 }

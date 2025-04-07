@@ -132,4 +132,16 @@ public class BoardService {
 	      return true;
 	    }
 	}
+	
+	public List<BoardDTO> getTopNotices(int board_id) {
+	    return boardDAO.getTopNotices(board_id);
+	}
+	
+	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam, int customListCount) {
+		int start = (page - 1) * customListCount;
+		RowBounds rowBounds = new RowBounds(start, customListCount);
+
+		return boardDAO.getBoardList(board_id, rowBounds, searchParam);
+	}
+
 }

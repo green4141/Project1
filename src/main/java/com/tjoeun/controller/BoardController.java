@@ -58,8 +58,13 @@ public class BoardController {
 			model.addAttribute("enddate", enddate);
 		}
 		
+		List<BoardDTO> topNotices = boardService.getTopNotices(board_id);
+		model.addAttribute("topNotices", topNotices);
+		
+		int normalCount = 10 - topNotices.size(); // 최대 10개까지 표시되도록 조절
+		
 		String name = boardService.getBoardInfoName(board_id);
-		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam);
+		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam, normalCount);
 
 		PageDTO pageDTO = boardService.getBoardCount(board_id, page, searchParam);
 		

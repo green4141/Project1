@@ -139,6 +139,11 @@ public interface BoardMapper {
     
     @Update("UPDATE board SET is_notice = #{isNoticeValue} WHERE idx = #{idx}")
     void updateNoticeStatus(@Param("idx") int idx, @Param("isNoticeValue") int isNoticeValue);
+    
+    @Select("SELECT * FROM v_board_user " +
+            "WHERE board_id = #{board_id} AND is_notice = 1 " +
+            "ORDER BY idx DESC LIMIT 3")
+    List<BoardDTO> getTopNotices(@Param("board_id") int board_id);
 
 }
 
