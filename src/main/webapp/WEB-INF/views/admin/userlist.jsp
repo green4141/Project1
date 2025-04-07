@@ -44,14 +44,7 @@
 					<th>번호</th>
 					<th>아이디</th>
 					<th>
-						<c:choose>
-							<c:when test="${nextNameOrder eq ''}">
-								<a href="${root}admin/user?page=${pageDTO.currentPage}">이름</a>
-							</c:when>
-							<c:otherwise>
-								<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}">이름</a>
-							</c:otherwise>
-						</c:choose>
+						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}&id=${id}&name=${name}&username=${username}&role=${role}">이름</a>
 						<c:if test="${sort eq 'name'}">
 							<c:choose>
 								<c:when test="${order eq 'asc'}">▲</c:when>
@@ -61,14 +54,7 @@
 					</th>
 					<th>닉네임</th>
 					<th>
-						<c:choose>
-							<c:when test="${nextRoleOrder eq ''}">
-								<a href="${root}admin/user?page=${pageDTO.currentPage}">등급</a>
-							</c:when>
-							<c:otherwise>
-								<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}">등급</a>
-							</c:otherwise>
-						</c:choose>
+						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}&id=${id}&name=${name}&username=${username}&role=${role}">등급</a>
 						<c:if test="${sort eq 'role'}">
 							<c:choose>
 								<c:when test="${order eq 'asc'}">▲</c:when>

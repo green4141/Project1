@@ -155,7 +155,7 @@ public interface BoardMapper {
       "    date BETWEEN #{startdate} AND #{enddate}",
       "  </if>",
       "  <if test='board_id != null'>",
-      "    board_id = #{board_id}",
+      "    and board_id = #{board_id}",
       "  </if>",
       "</where>",
       "ORDER BY",

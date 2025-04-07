@@ -46,14 +46,7 @@
 						<th>작성자</th>
 						<th>작성날짜</th>
     					<th>
-    						<c:choose>
-    							<c:when test="${nextHitsOrder eq ''}">
-    								<a href="${root}admin/board?page=${pageDTO.currentPage}">조회수</a>
-    							</c:when>
-    							<c:otherwise>
-    								<a href="${root}admin/board?page=${pageDTO.currentPage}&sort=hits&order=${nextHitsOrder}">조회수</a>
-    							</c:otherwise>
-    						</c:choose>
+    						<a href="${root}admin/board?page=${pageDTO.currentPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=hits&order=${nextHitsOrder}">조회수</a>
     						<c:if test="${sort eq 'hits'}">
     							<c:choose>
     								<c:when test="${order eq 'asc'}">▲</c:when>
@@ -62,14 +55,7 @@
     						</c:if>
     					</th>
     					<th>
-    						<c:choose>
-    							<c:when test="${nextBoardIdOrder eq ''}">
-    								<a href="${root}admin/board?page=${pageDTO.currentPage}">게시판명</a>
-    							</c:when>
-    							<c:otherwise>
-    								<a href="${root}admin/board?page=${pageDTO.currentPage}&sort=board_id&order=${nextBoardIdOrder}">게시판명</a>
-    							</c:otherwise>
-    						</c:choose>
+							<a href="${root}admin/board?page=${pageDTO.currentPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=board_id&order=${nextBoardIdOrder}">게시판명</a>
     						<c:if test="${sort eq 'board_id'}">
     							<c:choose>
     								<c:when test="${order eq 'asc'}">▲</c:when>
@@ -84,7 +70,7 @@
 	                <c:forEach var="boardDTO" items="${boardDTOList }" >
 	  					<tr>
 	   						<td >${boardDTO.idx }</td>
-	   						<td><a href="${root }admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage }&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">${boardDTO.title }</a></td>
+	   						<td><a href="${root}admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">${boardDTO.title }</a></td>
 	   						<td>${boardDTO.username }</td>
 	   						<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 	                        <td>${boardDTO.hits }</td>
