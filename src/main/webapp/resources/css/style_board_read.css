@@ -8,9 +8,9 @@ body {
 }
 
 .container {
-    width: 65%;
-    max-width: 1800px;
+    width: 1280px; /* 고정된 너비로 설정 */
     padding-top: 80px;
+    padding-left: 20px;  /* 왼쪽 여백 */
     margin: 0 auto;
 }
 
