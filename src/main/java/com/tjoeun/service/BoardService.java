@@ -68,19 +68,6 @@ public class BoardService {
 		String name = boardDAO.getBoardInfoName(board_id);
 		return name;
 	}
-
-	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * this.page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		
-		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds, searchParam);
-		
-		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
-			return boardDAO.getSortedBoard(rowBounds, searchParam);
-		}
-		
-		return boardDTOList;
-	}
 	
 	public BoardDTO getBoardInfo(int idx, int user_idx) {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
@@ -136,4 +123,24 @@ public class BoardService {
 	      return true;
 	    }
 	}
+	
+	public List<BoardDTO> getTopNotices(int board_id) {
+	    return boardDAO.getTopNotices(board_id);
+	}
+	
+	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam, int customListCount) {
+		int start = (page - 1) * customListCount;
+		RowBounds rowBounds = new RowBounds(start, customListCount);
+		searchParam.put("board_id", board_id);
+		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+			return boardDAO.getSortedBoard(rowBounds, searchParam);
+		} else return boardDAO.getBoardList(board_id, rowBounds, searchParam);
+
+	}
+	
+	public List<BoardDTO> getGeneralBoardListExcludingNotices(int count) {
+	    RowBounds rowBounds = new RowBounds(0, count); // 0부터 count개 가져오기
+	    return boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+	}
+
 }
