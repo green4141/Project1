@@ -70,7 +70,7 @@
 	                <c:forEach var="boardDTO" items="${boardDTOList }" >
 	  					<tr class="${boardDTO.is_notice == 1 ? 'notice-row' : ''}">
 	   						<td >${boardDTO.idx }</td>
-<<<<<<< HEAD
+
 	   						<td>
 	   							<a href="${root }admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage }&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">
 	   							<%-- ✅ 공지사항이면 제목에 [공지] 표시하고 스타일 강조 --%>
@@ -84,9 +84,9 @@
 	   							</c:choose>
 	   							</a>
 	   						</td>
-=======
-	   						<td><a href="${root}admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">${boardDTO.title }</a></td>
->>>>>>> refs/heads/master
+
+	   					<!-- 	<td><a href="${root}admin/read?idx=${boardDTO.idx}&page=${pageDTO.currentPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">${boardDTO.title }</a></td> -->
+
 	   						<td>${boardDTO.username }</td>
 	   						<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 	                        <td>${boardDTO.hits }</td>

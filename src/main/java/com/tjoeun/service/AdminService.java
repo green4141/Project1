@@ -60,9 +60,13 @@ public class AdminService {
 	    // 공지사항은 페이징에 영향을 주지 않도록, 일반글만 독립적으로 페이징
 	    int start = (page - 1) * generalPageSize;
 	    RowBounds rowBounds = new RowBounds(start, generalPageSize);
-	    List<BoardDTO> generalList = boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+	    
+		//if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+			result.addAll( boardDAO.getSortedBoard(rowBounds, searchParam));
+	//	}
+	   // List<BoardDTO> generalList = boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
 
-	    result.addAll(generalList);
+	   // result.addAll(generalList);
 	    return result;
 	}
 	/*

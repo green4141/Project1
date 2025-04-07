@@ -29,7 +29,7 @@ public class BoardDAO {
 	public List<BoardDTO> getBoardList(int board_id, RowBounds rowBounds, Map<String, Object> searchParam) {
 		if(searchParam.isEmpty()) return boardMapper.getBoardList(board_id, rowBounds);
 		else {
-			searchParam.put("board_id", board_id);
+			
 			return boardMapper.searchBoardList(rowBounds, searchParam);
 		}
 	}
@@ -101,9 +101,6 @@ public class BoardDAO {
 	public int getGeneralBoardCount() {
 	    return boardMapper.getGeneralBoardCount();
 	}
-
-
-	
 	public List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap){
 		return boardMapper.getSortedBoard(rowBounds, paramMap);
 	}

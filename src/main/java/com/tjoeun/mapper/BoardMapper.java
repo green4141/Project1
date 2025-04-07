@@ -45,6 +45,7 @@ public interface BoardMapper {
     		+ "</if>"
     		+ "and board_id = #{board_id} "
     		+ "</where>"
+    		+ "order by idx desc"
     		+ "</script>"})
     List<BoardDTO> searchBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
     
@@ -84,10 +85,10 @@ public interface BoardMapper {
     		+ "and board_id = #{board_id} "
     		+ "</where>"
         + "ORDER BY "
-        + "  <choose>"
-        + "    <when test='sort != null and order != null'> ${sort} ${order} </when>"
-        + "    <otherwise> idx DESC </otherwise>"
-        + "  </choose>"
+        
+        + "    <if test='sort != null and order != null'> ${sort} ${order}, </if>"
+        + "     idx DESC"
+        
         + "</script>"})
     int searchBoardCount(Map<String, Object> searchparam);
 
@@ -174,10 +175,8 @@ public interface BoardMapper {
       "  </if>",
       "</where>",
       "ORDER BY",
-      "  <choose>",
-      "    <when test='sort != null and order != null'> ${sort} ${order} </when>",
-      "    <otherwise> idx DESC </otherwise>",
-      "  </choose>",
+      "    <if test='sort != null and order != null'> ${sort} ${order}, </if>",
+      "    idx DESC",
       "</script>"
 	  })
 	  List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap);
