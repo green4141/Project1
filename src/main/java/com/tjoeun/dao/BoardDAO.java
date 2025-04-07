@@ -92,4 +92,13 @@ public class BoardDAO {
 	public List<BoardDTO> getTopNotices(int board_id) {
 		return boardMapper.getTopNotices(board_id);
 	}
+	
+	public List<BoardDTO> getGeneralBoardListExcludingNotices(RowBounds rowBounds) {
+	    return boardMapper.getGeneralBoardListExcludingNotices(rowBounds);
+	}
+	
+	public int getGeneralBoardCount() {
+	    return boardMapper.getGeneralBoardCount();
+	}
+
 }

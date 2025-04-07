@@ -143,5 +143,10 @@ public class BoardService {
 
 		return boardDAO.getBoardList(board_id, rowBounds, searchParam);
 	}
+	
+	public List<BoardDTO> getGeneralBoardListExcludingNotices(int count) {
+	    RowBounds rowBounds = new RowBounds(0, count); // 0부터 count개 가져오기
+	    return boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+	}
 
 }

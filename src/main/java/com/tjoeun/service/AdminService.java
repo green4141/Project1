@@ -50,13 +50,35 @@ public class AdminService {
 		userDAO.deleteUser(idx);
 	}
 	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		return boardDAO.getAdminBoardList(rowBounds, searchParam);
+	    int pageSize = 10;
+
+	    // 공지사항은 항상 가져옴
+	    List<BoardDTO> freeNotices = boardDAO.getTopNotices(0);
+	    List<BoardDTO> teacherNotices = boardDAO.getTopNotices(1);
+	    List<BoardDTO> result = new java.util.ArrayList<>();
+	    result.addAll(freeNotices);
+	    result.addAll(teacherNotices);
+
+	    int noticeCount = result.size();
+	    int generalPageSize = pageSize - noticeCount;
+	    if (generalPageSize <= 0) generalPageSize = 1;  // 최소 1개
+
+	    // 공지사항은 페이징에 영향을 주지 않도록, 일반글만 독립적으로 페이징
+	    int start = (page - 1) * generalPageSize;
+	    RowBounds rowBounds = new RowBounds(start, generalPageSize);
+	    List<BoardDTO> generalList = boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+
+	    result.addAll(generalList);
+	    return result;
 	}
 	public PageDTO getBoardPageDTO(int page, Map<String, Object> searchParam) {
-		int boardCount = boardDAO.getAdminBoardCount(searchParam);
-		return new PageDTO(boardCount, page, page_listcount, pagenation_count);
+	    int boardCount = boardDAO.getGeneralBoardCount(); // 공지 제외 일반글 개수
+	    int noticeCount = boardDAO.getTopNotices(0).size() + boardDAO.getTopNotices(1).size();
+	    
+	    int generalPageSize = 10 - noticeCount;  // 일반글 기준 페이지당 글 수
+	    if (generalPageSize <= 0) generalPageSize = 1;
+
+	    return new PageDTO(boardCount, page, page_listcount, pagenation_count);
 	}
 	public void deleteBoard(int idx) {
 		boardDAO.deleteBoardInfo(idx);

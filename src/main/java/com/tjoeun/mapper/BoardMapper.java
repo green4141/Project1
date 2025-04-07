@@ -144,6 +144,12 @@ public interface BoardMapper {
             "WHERE board_id = #{board_id} AND is_notice = 1 " +
             "ORDER BY idx DESC LIMIT 3")
     List<BoardDTO> getTopNotices(@Param("board_id") int board_id);
+    
+    @Select("SELECT * FROM v_board_user WHERE is_notice = 0 ORDER BY idx DESC")
+    List<BoardDTO> getGeneralBoardListExcludingNotices(RowBounds rowBounds);
+
+    @Select("SELECT count(*) FROM v_board_user WHERE is_notice = 0")
+    int getGeneralBoardCount();
 
 }
 
