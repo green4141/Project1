@@ -47,11 +47,38 @@
       }
     })
   }
-  
+  function checkUserName(){
+	    let username = $("#username").val();
+	    
+	    if(id.length === 0){
+	      alert("닉네임을 입력해 주세요");
+	      return;
+	    }
+	    
+	    $.ajax({
+	      url : "${root}user/checkUserName/" + username,
+	      type : "get",
+	      dataType : "text",
+	      success : function(result){
+
+	        if(result.trim() === "true"){
+	          alert("사용할 수 있는 닉네임입니다");
+	          $("#userNameExist").val("true");
+	        }else{
+	          alert("이미 존재하는 닉네임입니다");
+	          $("#userNameExist").val("false");
+	        }
+	      }
+	    })
+	  }
   function resetUserIdExist(){
   	$("#userIdExist").val("false");
  // resetUserIdExist
   }  
+  function resetUserNameExist(){
+	  	$("#userNameExist").val("false");
+	 // resetUserIdExist
+	  }  
 </script>
 </head>
 
@@ -65,9 +92,15 @@
 		<div class="box">
 					<form:form action="${root }user/join_procedure" modelAttribute="joinUserDTO" method="post">
                         <form:hidden path="userIdExist" />
+                        <form:hidden path="userNameExist" />
 						<div class="form-block">
 							<form:label path="username">닉네임</form:label>
-							<form:input type="text" path="username" class="form-control"/>
+							<div class="input-group">
+								<form:input type="text" path="username" id="username" class="form-control" onkeypress="resetUserNameExist()" />
+								<div class="input-group-append">
+									<button type="button" class="btn btn-primary" onclick="checkUserName()">중복확인</button>         
+								</div>
+							</div>
                             <span class="error"><form:errors path="username" /></span>
 						</div>
                       <div class="form-block">

@@ -37,6 +37,9 @@ public class UserDTO {
 	// 회원 가입 여부 저장
 	private boolean userIdExist = false;
 	
+	// 닉네임 사용 여부 저장
+	private boolean userNameExist = false;
+	
 	// 로그인 상태 정보 저장
 	private boolean userLogin = false;
 	
