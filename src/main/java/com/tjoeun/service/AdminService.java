@@ -28,13 +28,6 @@ public class AdminService {
 	@Value("${page.pagenationcount}")
 	private int pagenation_count;
 	
-	public List<UserDTO> getUserList(int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		
-		return userDAO.getUserList(rowBounds, searchParam);
-	}
-	
 	public PageDTO getUserPageDTO(int page, Map<String, Object> searchParam) {
 		int userCount = userDAO.getUserCount(searchParam);
 		return new PageDTO(userCount, page, page_listcount, pagenation_count);
@@ -49,6 +42,7 @@ public class AdminService {
 	public void deleteUser(int idx) {
 		userDAO.deleteUser(idx);
 	}
+
 	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
 	    int pageSize = 10;
 
@@ -71,6 +65,18 @@ public class AdminService {
 	    result.addAll(generalList);
 	    return result;
 	}
+	/*
+	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
+		int start = (page - 1) * page_listcount;
+		RowBounds rowBounds = new RowBounds(start, page_listcount);
+		
+		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+			return boardDAO.getSortedBoard(rowBounds, searchParam);
+		}
+		
+		return boardDAO.getAdminBoardList(rowBounds, searchParam);
+	}*/
+	
 	public PageDTO getBoardPageDTO(int page, Map<String, Object> searchParam) {
 	    int boardCount = boardDAO.getGeneralBoardCount(); // 공지 제외 일반글 개수
 	    int noticeCount = boardDAO.getTopNotices(0).size() + boardDAO.getTopNotices(1).size();
@@ -87,8 +93,23 @@ public class AdminService {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
 		return boardDTO;
 	}
+
 	public void updateNoticeStatus(int idx, int isNoticeValue) {
 		boardDAO.updateNoticeStatus(idx, isNoticeValue);
 	}
+
+
+	
+	public List<UserDTO> getUserList(int page, Map<String, Object> searchParam) {
+		int start = (page - 1) * page_listcount;
+		RowBounds rowBounds = new RowBounds(start, page_listcount);
+
+		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+			return userDAO.getSortedUser(rowBounds, searchParam);
+		}
+
+		return userDAO.getUserList(rowBounds, searchParam);
+	}
+
 
 }

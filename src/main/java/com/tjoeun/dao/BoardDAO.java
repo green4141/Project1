@@ -85,6 +85,7 @@ public class BoardDAO {
 	public int getAdminBoardCount(Map<String, Object> searchParam) {
 		return boardMapper.getAdminBoardCount(searchParam);
 	}
+
 	public void updateNoticeStatus(int idx, int isNoticeValue) {
 		boardMapper.updateNoticeStatus(idx, isNoticeValue);
 	}
@@ -99,6 +100,12 @@ public class BoardDAO {
 	
 	public int getGeneralBoardCount() {
 	    return boardMapper.getGeneralBoardCount();
+	}
+
+
+	
+	public List<BoardDTO> getSortedBoard(RowBounds rowBounds, Map<String, Object> paramMap){
+		return boardMapper.getSortedBoard(rowBounds, paramMap);
 	}
 
 }
