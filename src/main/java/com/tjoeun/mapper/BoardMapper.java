@@ -43,7 +43,7 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
-    		+ "board_id = #{board_id} "
+    		+ "and board_id = #{board_id} "
     		+ "</where>"
     		+ "</script>"})
     List<BoardDTO> searchBoardList(RowBounds rowBounds, Map<String, Object> paramMap);
@@ -81,7 +81,7 @@ public interface BoardMapper {
     		+ "<if test='startdate != null'>"
     		+ "date between #{startdate} and #{enddate}"
     		+ "</if>"
-    		+ "board_id = #{board_id} "
+    		+ "and board_id = #{board_id} "
     		+ "</where>"
         + "ORDER BY "
         + "  <choose>"
