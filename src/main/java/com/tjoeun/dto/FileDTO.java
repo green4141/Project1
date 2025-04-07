@@ -14,5 +14,5 @@ public class FileDTO {
 	private String originalname;
 	private String servername;
 	private int board_idx;
-	private MultipartFile upload_file;
+	private MultipartFile uploadfile;
 }
