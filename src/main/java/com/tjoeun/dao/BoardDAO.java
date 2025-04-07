@@ -17,8 +17,8 @@ public class BoardDAO {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	public int addBoardInfo(BoardDTO writeBoardDTO) {
-		return boardMapper.addBoardInfo(writeBoardDTO);
+	public void addBoardInfo(BoardDTO writeBoardDTO) {
+		boardMapper.addBoardInfo(writeBoardDTO);
 	}
 	
 	public String getBoardInfoName(int board_id) {

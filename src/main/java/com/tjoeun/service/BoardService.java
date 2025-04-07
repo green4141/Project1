@@ -1,11 +1,16 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,13 +19,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tjoeun.dao.BoardDAO;
+import com.tjoeun.dao.FileDAO;
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.FavoriteDTO;
+import com.tjoeun.dto.FileDTO;
 import com.tjoeun.dto.PageDTO;
 import com.tjoeun.dto.UserDTO;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @PropertySource("/WEB-INF/properties/option.properties")
+@RequiredArgsConstructor
 public class BoardService {
 	
 	@Value("${path.upload}")
@@ -32,36 +42,43 @@ public class BoardService {
 	@Value("${page.pagenationcount}")
 	private int page_pagenationcount;
 	
-	@Autowired
-	private BoardDAO boardDAO;
+	private final BoardDAO boardDAO;
+	private final FileDAO fileDAO;
 	
 	@Resource(name="loginUserDTO")
 	private UserDTO loginUserDTO;
 	
-	private String saveUploadFile(MultipartFile upload_file) {
-		String file_name = System.currentTimeMillis() + "_" + upload_file.getOriginalFilename();
-		
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	
+	private FileDTO saveUploadFile(MultipartFile upload_file) {
+		String file_name = upload_file.getOriginalFilename();
+		String file_ext = FilenameUtils.getExtension(file_name);
+		String serverFileName = UUID.randomUUID().toString().replace("-", "") + "." + file_ext;
+		String uploadPath = path_upload + File.separator + sdf.format(new Date());
 		try {
-			File file = new File(path_upload + "/");
-			if(!file.exists()) file.mkdirs();
-			upload_file.transferTo(new File(path_upload + "/" + file_name));
-		}catch(Exception e) {
+			File uploadPathFile = new File(uploadPath);
+			if(!uploadPathFile.exists()) uploadPathFile.mkdirs();
+			upload_file.transferTo(new File(uploadPathFile + File.separator + serverFileName));
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return file_name;
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setOriginalname(file_name);
+		fileDTO.setServername(uploadPath + File.separator + serverFileName);
+		return fileDTO;
 	}
 	
 	public int addBoardInfo(BoardDTO writeBoardDTO) {
-		
 		MultipartFile upload_file = writeBoardDTO.getUpload_file();
-		
-		if(upload_file.getSize() > 0) {
-			String file_name = saveUploadFile(upload_file);
-			writeBoardDTO.setFile(file_name);
-		}
+		FileDTO file = null;
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
-		
-		return boardDAO.addBoardInfo(writeBoardDTO);
+		boardDAO.addBoardInfo(writeBoardDTO);
+		if(upload_file.getSize() > 0) {
+			file = saveUploadFile(upload_file);
+		}
+		if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
+		fileDAO.insert(file);
+		return writeBoardDTO.getIdx();
 	}
 	
 	public String getBoardInfoName(int board_id) {
@@ -72,42 +89,40 @@ public class BoardService {
 	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam) {
 		int start = (page - 1) * this.page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		
 		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds, searchParam);
-		
 		return boardDTOList;
 	}
 	
 	public BoardDTO getBoardInfo(int idx, int user_idx) {
 		BoardDTO boardDTO = boardDAO.getBoardInfo(idx);
-		
 		boardDTO.setExist_favorite(boardDAO.isFavBoardExists(user_idx, idx));
-		
 		return boardDTO;
 	}
 	
 	public void modifyBoardInfo(BoardDTO modifyBoardDTO) {
-		
 		MultipartFile upload_file = modifyBoardDTO.getUpload_file();
-		
-		if(upload_file.getSize() > 0) {
-			String file_name = saveUploadFile(upload_file);
-			//System.out.println("파일이름 : " + file_name);
-			
-			modifyBoardDTO.setFile(file_name);
-		}
-		
 		boardDAO.modifyBoardInfo(modifyBoardDTO);
+		if(upload_file != null && upload_file.getSize() > 0) {
+			FileDTO oldFile = fileDAO.findByBoardIdx(modifyBoardDTO.getIdx());
+			FileDTO newFile = saveUploadFile(upload_file);
+			newFile.setIdx(oldFile.getIdx());
+			fileDAO.update(newFile);
+		}
 	}
 	
 	public void deleteBoardInfo(int idx) {
+		FileDTO fileDTO = fileDAO.findByBoardIdx(idx);
+		if(fileDTO != null) {
+			File file = new File(fileDTO.getServername());
+			file.delete();
+			fileDAO.deleteByIdx(fileDTO.getIdx());
+		}
 		boardDAO.deleteBoardInfo(idx);
 	}
 	
 	public PageDTO getBoardCount(int board_id, int currentPage, Map<String, Object> searchParamMap) {
 		int contentCount = boardDAO.getBoardCount(board_id, searchParamMap);
 		PageDTO pageDTO = new PageDTO(contentCount, currentPage, this.page_listcount, this.page_pagenationcount);
-		
 		return pageDTO;
 	}
 	
@@ -132,4 +147,9 @@ public class BoardService {
 	      return true;
 	    }
 	}
+	
+//	public byte[] getFileData(int board_idx) {
+//		FileDTO fileDTO = fileDAO.findByBoardIdx(board_idx);
+//		File file = new File(fileup)
+//	}
 }
