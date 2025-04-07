@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
 
+<c:set var="nextHitsOrder" value="${sort eq 'hits' and order eq 'asc' ? 'desc' : sort eq 'hits' and order eq 'desc' ? '' : 'asc'}"/>
+<c:set var="nextFavoriteOrder" value="${sort eq 'favorite' and order eq 'asc' ? 'desc' : sort eq 'favorite' and order eq 'desc' ? '' : 'asc'}"/>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,8 +47,24 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성날짜</th>
-						<th>조회수</th>
-	                    <th>좋아요</th>
+    					<th>
+    						<a href="${root}board/main?board_id=${board_id}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=hits&order=${nextHitsOrder}">조회수</a>
+    						<c:if test="${sort eq 'hits'}">
+    							<c:choose>
+    								<c:when test="${order eq 'asc'}">▲</c:when>
+    								<c:when test="${order eq 'desc'}">▼</c:when>
+    							</c:choose>
+    						</c:if>
+    					</th>
+    					<th>
+    						<a href="${root}board/main?board_id=${board_id}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=favorite&order=${nextFavoriteOrder}">좋아요</a>
+    						<c:if test="${sort eq 'favorite'}">
+    							<c:choose>
+    								<c:when test="${order eq 'asc'}">▲</c:when>
+    								<c:when test="${order eq 'desc'}">▼</c:when>
+    							</c:choose>
+    						</c:if>
+    					</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -67,7 +86,7 @@
 					<c:forEach var="boardDTO" items="${boardDTOList }" >
 		    			<tr>
 		    				<td>${boardDTO.idx }</td>
-		    				<td><a href="${root }board/read?board_id=${board_id}&idx=${boardDTO.idx}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">${boardDTO.title }</a></td>
+		    				<td><a href="${root}board/read?board_id=${board_id}&idx=${boardDTO.idx}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">${boardDTO.title }</a></td>
 		    				<td>${boardDTO.username }</td>
 		    				<td><fmt:formatDate value="${boardDTO.date }" pattern="yyyy-MM-dd" /></td>
 		    				<td>${boardDTO.hits }</td>
@@ -84,10 +103,10 @@
 		    		<c:choose>
 		    			<c:when test="${pageDTO.previousPage <= 0 }">
 
-		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">이전</a></li>
+		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">이전</a></li>
 		    			</c:when>
 		    			<c:otherwise>
-		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">이전</a></li>
+		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.previousPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">이전</a></li>
 		    			</c:otherwise>
 		    		</c:choose>
 		    		
@@ -98,7 +117,7 @@
 		    					<li class="active"><span>${index}</span></li>
 		    				</c:when>
 		    				<c:otherwise>
-		    					<li onclick="location.href='${root }board/main?board_id=${board_id}&page=${index}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}'">${index }</li>
+		    					<li onclick="location.href='${root }board/main?board_id=${board_id}&page=${index}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}'">${index }</li>
 		    				</c:otherwise>
 		    			</c:choose>
 		    		</c:forEach>
@@ -106,10 +125,10 @@
 		    		<!-- 다음 버튼 -->
 		    		<c:choose>
 		    			<c:when test="${pageDTO.max >= pageDTO.pageCount }">
-		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">다음</a></li>
+		    				<li class="disabled"><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">다음</a></li>
 		    			</c:when>
 		    			<c:otherwise>
-		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}">다음</a></li>
+		    				<li><a href="${root }board/main?board_id=${board_id}&page=${pageDTO.nextPage}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}">다음</a></li>
 		    			</c:otherwise>
 		    		</c:choose>
 		    	</ul>
