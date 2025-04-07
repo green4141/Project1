@@ -9,10 +9,28 @@
 </div>
 
 <style>
+
+  /* 전체 페이지 높이 설정 */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*body를 flex로 설정하여 footer를 항상 하단에 위치*/
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  /*container 내용이 적을 때 footer가 하단에 고정되도록*/
+  .container {
+    flex-grow: 1;
+  }
+
+  /* footer 스타일 */
   #footer {
-    position: relative;
-    bottom: 0;
-    left: 0;
     width: 100%;
     height: 125px;
     background-color: #030066;
@@ -23,8 +41,12 @@
     padding-left: 30px;
     font-size: 14px;
     flex-shrink: 0;
-    padding-top:30px;
-    padding-bottom:30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin-top: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;  /* 화면을 넘지 않도록 숨김 */
+    overflow-y: hidden;
   }
+
 </style>
