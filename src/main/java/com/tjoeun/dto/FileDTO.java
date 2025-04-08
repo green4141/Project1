@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileDTO {
-
 	private int idx;
 	private String originalname;
 	private String servername;
