@@ -21,7 +21,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getRequestURI();
 		String parameter = request.getParameter("board_id");
-		
+		if(url.contains("/requestimage")) return true;
 		if(loginUserDTO.isUserLogin() == false) {
 			if(url.contains("/main") || url.contains("/read")) {
 				if("0".equals(parameter)) {

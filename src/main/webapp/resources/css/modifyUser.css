@@ -67,6 +67,14 @@
   border: none;
   color: white;
 }
+.btn-check-dup {
+  padding: 8px 12px;
+  background: #0080FF;
+  border: none;
+  color: white;
+  margin-left: 10px;
+  width: auto;
+}
 
 /* 버튼 정렬 */
 .text-right {
@@ -90,4 +98,18 @@
 
 .form-group div input[type="radio"] {
   width: 10%;
+}
+
+/* 오류 메시지 스타일 (입력 필드 아래로 정렬) */
+#error span {
+  color: darkgray;
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+}
+
+.error, #error {
+  min-height: 18px;
+  display: block;
 }
