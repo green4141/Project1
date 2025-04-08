@@ -87,10 +87,6 @@ public class UserController {
 	@PostMapping("/modifyProcedure")
 	public String modifyProcedure(@Valid @ModelAttribute("modifyUserDTO") UserDTO modifyUserDTO,
 		                          BindingResult result){
-		if(!modifyUserDTO.isUserName2Exist()) {
-      result.rejectValue("username2", null, "닉네임 중복 확인을 해주세요");
-  }
-
   if(result.hasErrors()){
       return "user/modify";			
   }
