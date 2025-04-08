@@ -1,5 +1,6 @@
 package com.tjoeun.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.tjoeun.dao.BoardDAO;
+import com.tjoeun.dao.FileDAO;
 import com.tjoeun.dao.UserDAO;
 import com.tjoeun.dto.BoardDTO;
+import com.tjoeun.dto.FileDTO;
 import com.tjoeun.dto.PageDTO;
 import com.tjoeun.dto.UserDTO;
 
@@ -22,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class AdminService {
 	private final UserDAO userDAO;
 	private final BoardDAO boardDAO;
+	private final FileDAO fileDAO;
+	
 	@Value("${page.listcount}")
 	private int page_listcount;
 
@@ -69,18 +74,9 @@ public class AdminService {
 	   // result.addAll(generalList);
 	    return result;
 	}
-	/*
-	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		
-		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
-			return boardDAO.getSortedBoard(rowBounds, searchParam);
-		}
-		
-		return boardDAO.getAdminBoardList(rowBounds, searchParam);
-	}*/
-	
+	public boolean isBoardHasFile(int board_idx) {
+		return fileDAO.findByBoardIdx(board_idx) != null;
+	}
 	public PageDTO getBoardPageDTO(int page, Map<String, Object> searchParam) {
 	    int boardCount = boardDAO.getGeneralBoardCount(); // 공지 제외 일반글 개수
 	    int noticeCount = boardDAO.getTopNotices(0).size() + boardDAO.getTopNotices(1).size();
@@ -91,6 +87,12 @@ public class AdminService {
 	    return new PageDTO(boardCount, page, page_listcount, pagenation_count);
 	}
 	public void deleteBoard(int idx) {
+		if(isBoardHasFile(idx)) {
+			FileDTO fileDTO = fileDAO.findByBoardIdx(idx);
+			File file = new File(fileDTO.getServername());
+			file.delete();
+			fileDAO.delete(fileDTO.getIdx());
+		}
 		boardDAO.deleteBoardInfo(idx);
 	}
 	public BoardDTO getBoardInfo(int idx) {
