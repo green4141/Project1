@@ -90,7 +90,7 @@ html, body {
 
 /* 오류 메시지 스타일 */
 .error {
-  color: red;
+  color: darkgray;
   font-size: 12px;
   font-weight: bold;
   display: block;

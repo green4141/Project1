@@ -63,7 +63,7 @@
 
 /* 에러 메시지 */
 .error {
-  color: red;
+  color: darkgray;
   font-size: 12px;
   font-weight: bold;
 }

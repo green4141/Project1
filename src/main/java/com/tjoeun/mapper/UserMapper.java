@@ -115,8 +115,7 @@ public interface UserMapper {
 	// 회원 삭제(어드민)
 	@Delete("delete from user where idx = #{idx}")
 	void deleteUser(int idx);
-	
-  
+	 
 	@Select({
 	  "<script>",
 	  "SELECT * FROM user",

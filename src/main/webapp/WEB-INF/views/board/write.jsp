@@ -22,11 +22,14 @@
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/write.css"/>
 
-<style>
-    .error { color:red; font-size:12px; font-weight:bold; }
-</style>
 </head>
 <body>
+
+<c:if test="${not empty errorMessage}">
+    <script>
+        alert("${errorMessage}");
+    </script>
+</c:if>
 
 <!-- 상단 부분 -->
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
@@ -47,7 +50,7 @@
 					</div>
 					<div class="form-block">
 						<form:label path="upload_file">첨부 이미지</form:label>
-						<form:input type="file" path="upload_file" class="form-control" accept="images/*"/>
+						<form:input type="file" path="upload_file" class="form-control" accept=".jpg,.jpeg,.png,.gif"/>
 					</div>
 					<div class="form-block">
 						<div class="text-right">

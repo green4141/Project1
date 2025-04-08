@@ -122,7 +122,12 @@ public class BoardController {
 			return "board/write";
 		}
 		
-		boardService.addBoardInfo(writeBoardDTO);
+    try {
+        boardService.addBoardInfo(writeBoardDTO);
+    } catch (IllegalArgumentException e) {
+        model.addAttribute("errorMessage", e.getMessage());
+        return "board/write";
+    }
 
 		model.addAttribute("page", page);
 
@@ -157,7 +162,16 @@ public class BoardController {
 			Model model,
 			@RequestParam("page") int page) {
 		model.addAttribute("page", page);
+		
 		if(result.hasErrors()) return "board/modify";
+		
+    try {
+      	boardService.modifyBoardInfo(modifyBoardDTO);
+	  } catch (IllegalArgumentException e) {
+	      model.addAttribute("errorMessage", e.getMessage());
+	      return "board/modify";
+	  }
+		
 		boardService.modifyBoardInfo(modifyBoardDTO);
 		return "board/modify_success";
 	}

@@ -43,7 +43,7 @@
 				<tr>
 					<th>번호</th>
 					<th>아이디</th>
-					<th>
+					<th id=sorted-link>
 						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}&id=${id}&name=${name}&username=${username}&role=${role}">이름</a>
 						<c:if test="${sort eq 'name'}">
 							<c:choose>
@@ -53,7 +53,7 @@
 						</c:if>
 					</th>
 					<th>닉네임</th>
-					<th>
+					<th id=sorted-link>
 						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}&id=${id}&name=${name}&username=${username}&role=${role}">등급</a>
 						<c:if test="${sort eq 'role'}">
 							<c:choose>

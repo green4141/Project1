@@ -1,6 +1,7 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -51,14 +52,44 @@ public class BoardService {
 		return file_name;
 	}
 	
+	// 임시 파일 생성 -> 파일 타입 -> 임시 파일 삭제
+	private boolean isValidImageFile(MultipartFile file) {
+    try {
+        // 임시 파일 생성
+        File tempFile = File.createTempFile("upload_", null);
+        file.transferTo(tempFile);
+
+        // MIME 타입 판별
+        String mimeType = Files.probeContentType(tempFile.toPath());
+        
+        // 임시 파일 삭제
+        tempFile.delete();
+
+        // 허용 MIME 타입 리스트
+        return mimeType != null && (
+        		mimeType.equals("image/jpg") ||
+            mimeType.equals("image/jpeg") ||
+            mimeType.equals("image/png") ||
+            mimeType.equals("image/gif")
+        );
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+	
 	public int addBoardInfo(BoardDTO writeBoardDTO) {
 		
 		MultipartFile upload_file = writeBoardDTO.getUpload_file();
 		
-		if(upload_file.getSize() > 0) {
-			String file_name = saveUploadFile(upload_file);
-			writeBoardDTO.setFile(file_name);
-		}
+    if (upload_file != null && upload_file.getSize() > 0) {
+      if (!isValidImageFile(upload_file)) {
+          throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
+      }
+
+      String file_name = saveUploadFile(upload_file);
+      writeBoardDTO.setFile(file_name);
+  }
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
 		
 		return boardDAO.addBoardInfo(writeBoardDTO);
@@ -82,6 +113,9 @@ public class BoardService {
 		MultipartFile upload_file = modifyBoardDTO.getUpload_file();
 		
 		if(upload_file.getSize() > 0) {
+      if (!isValidImageFile(upload_file)) {
+        throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
+      }
 			String file_name = saveUploadFile(upload_file);
 			//System.out.println("파일이름 : " + file_name);
 			

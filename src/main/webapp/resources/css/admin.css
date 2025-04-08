@@ -119,3 +119,7 @@
   color: #1a73e8;
   text-decoration: underline;
 }
+
+#sorted-link a{
+    font-weight: 600;
+}
