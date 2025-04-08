@@ -1,6 +1,8 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +12,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -68,6 +68,14 @@ public class BoardService {
 		return fileDTO;
 	}
 	
+	public byte[] loadUploadFile(int board_idx) throws IOException {
+		FileDTO fileDTO = fileDAO.findByBoardIdx(board_idx);
+		File file = new File(fileDTO.getServername());
+		FileInputStream fis = new FileInputStream(file);
+		byte[] fileBytes = fis.readAllBytes();
+		fis.close();
+		return fileBytes;
+	}
 	public int addBoardInfo(BoardDTO writeBoardDTO) {
 		MultipartFile upload_file = writeBoardDTO.getUpload_file();
 		FileDTO file = null;
@@ -86,6 +94,9 @@ public class BoardService {
 		return name;
 	}
 
+	public boolean isBoardHasFile(int board_idx) {
+		return fileDAO.findByBoardIdx(board_idx) != null;
+	}
 
 	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam) {
 		int start = (page - 1) * this.page_listcount;
@@ -109,6 +120,8 @@ public class BoardService {
 			FileDTO newFile = saveUploadFile(upload_file);
 			newFile.setIdx(oldFile.getIdx());
 			fileDAO.update(newFile);
+			File file = new File(oldFile.getServername());
+			file.delete();
 		}
 	}
 	
@@ -149,12 +162,6 @@ public class BoardService {
 	      return true;
 	    }
 	}
-	
-
-//	public byte[] getFileData(int board_idx) {
-//		FileDTO fileDTO = fileDAO.findByBoardIdx(board_idx);
-//		File file = new File(fileup)
-//	}
 
 	public List<BoardDTO> getTopNotices(int board_id) {
 	    return boardDAO.getTopNotices(board_id);
