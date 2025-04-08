@@ -1,6 +1,7 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -68,6 +70,33 @@ public class BoardService {
 		return fileDTO;
 	}
 	
+
+	// 임시 파일 생성 -> 파일 타입 -> 임시 파일 삭제
+	private boolean isValidImageFile(MultipartFile file) {
+    try {
+        // 임시 파일 생성
+        //File tempFile = File.createTempFile("upload_", null);
+        Tika tika = new Tika();
+        byte[] fileContent = file.getInputStream().readAllBytes();
+
+        // MIME 타입 판별
+        String mimeType = tika.detect(fileContent);
+
+
+        // 허용 MIME 타입 리스트
+        return mimeType != null && (
+        		mimeType.equals("image/jpg") ||
+            mimeType.equals("image/jpeg") ||
+            mimeType.equals("image/png") ||
+            mimeType.equals("image/gif")
+        );
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+	
+
 	public byte[] loadUploadFile(int board_idx) throws IOException {
 		FileDTO fileDTO = fileDAO.findByBoardIdx(board_idx);
 		File file = new File(fileDTO.getServername());
@@ -76,16 +105,21 @@ public class BoardService {
 		fis.close();
 		return fileBytes;
 	}
+
 	public int addBoardInfo(BoardDTO writeBoardDTO) {
-		MultipartFile upload_file = writeBoardDTO.getUpload_file();
-		FileDTO file = null;
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
 		boardDAO.addBoardInfo(writeBoardDTO);
-		if(upload_file.getSize() > 0) {
+		
+		MultipartFile upload_file = writeBoardDTO.getUpload_file();
+		if (upload_file != null && upload_file.getSize() > 0) {
+	    	if (!isValidImageFile(upload_file)) {
+	          	throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
+	      	}
+			FileDTO file = null;
 			file = saveUploadFile(upload_file);
+			if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
+			fileDAO.insert(file);
 		}
-		if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
-		fileDAO.insert(file);
 		return writeBoardDTO.getIdx();
 	}
 	
@@ -114,6 +148,14 @@ public class BoardService {
 	
 	public void modifyBoardInfo(BoardDTO modifyBoardDTO) {
 		MultipartFile upload_file = modifyBoardDTO.getUpload_file();
+
+		if(upload_file.getSize() > 0) {
+      if (!isValidImageFile(upload_file)) {
+        throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
+      }
+		}
+		
+
 		boardDAO.modifyBoardInfo(modifyBoardDTO);
 		if(upload_file != null && upload_file.getSize() > 0) {
 			FileDTO oldFile = fileDAO.findByBoardIdx(modifyBoardDTO.getIdx());

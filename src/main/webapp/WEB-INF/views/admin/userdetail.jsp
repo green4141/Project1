@@ -22,11 +22,6 @@
 <link rel="stylesheet" href="/css/board.css"/>
 <link rel="stylesheet" href="/css/modifyUser.css"/>
 
-
-<style>
-  .error { color:red; font-size:12px; font-weight:bold; }
-</style>
-
 </head>
 
 <body>
