@@ -30,6 +30,7 @@ import com.tjoeun.interceptor.AdminInterceptor;
 import com.tjoeun.interceptor.CheckBoardInterceptor;
 import com.tjoeun.interceptor.TopMenuInterceptor;
 import com.tjoeun.mapper.BoardMapper;
+import com.tjoeun.mapper.FileMapper;
 import com.tjoeun.mapper.ReplyMapper;
 import com.tjoeun.mapper.TopMenuMapper;
 import com.tjoeun.mapper.UserMapper;
@@ -122,6 +123,15 @@ public class ServletAppContext implements WebMvcConfigurer{
 		fatoryBean.setSqlSessionFactory(factory);
 		return fatoryBean;
 	}
+	
+	@Bean
+	public MapperFactoryBean<FileMapper> getFileMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<FileMapper> fatoryBean = new MapperFactoryBean<FileMapper>(FileMapper.class);
+		fatoryBean.setSqlSessionFactory(factory);
+		return fatoryBean;
+	}
+	
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 

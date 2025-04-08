@@ -19,7 +19,7 @@ public interface BoardMapper {
     @Insert("insert into tjoeun.board(board_id, title, content, user, file) " +
     "values(#{board_id}, #{title}, #{content}, #{user}, #{file})")
     @Options(useGeneratedKeys = true, keyProperty = "idx")
-    int addBoardInfo(BoardDTO writeBoardDTO);
+    void addBoardInfo(BoardDTO writeBoardDTO);
 
     @Select("SELECT name " + 
           "FROM boardinfo " + 
