@@ -80,9 +80,9 @@
                 <div class="board-content">
                     <pre>${readBoardDTO.content}</pre>
                 </div>
-                <c:if test="${readBoardDTO.file != null}">
+                <c:if test="${hasFile}">
                     <div class="board-image">
-                        <img src="${root}upload/${readBoardDTO.file}" alt="첨부 이미지">
+                        <img src="${root}board/requestimage?board_idx=${readBoardDTO.idx}" alt="첨부 이미지">
                     </div>
                 </c:if>
                 <br>

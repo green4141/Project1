@@ -1,5 +1,6 @@
 package com.tjoeun.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.PageDTO;
@@ -98,6 +101,7 @@ public class BoardController {
 		model.addAttribute("readBoardDTO", readBoardDTO);
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("page", page);
+		model.addAttribute("hasFile", boardService.isBoardHasFile(idx));
 		if(title != null) model.addAttribute("title", title);
 		if(username != null) model.addAttribute("username", username);
 		if(startdate != null) {
@@ -106,7 +110,16 @@ public class BoardController {
 		}
 		return "board/read";
 	}
-	
+	@GetMapping(value = "/requestimage", produces = {MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+	@ResponseBody
+	public byte[] requestImage(@RequestParam int board_idx) {
+		try {
+			return boardService.loadUploadFile(board_idx);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	@GetMapping("/write")
 	public String write(@ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
 			@RequestParam("board_id") int board_id) {
