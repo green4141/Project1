@@ -83,7 +83,7 @@
 	                    	<tfoot class="reply_useronly">
 		                    	<tr class="reply_yd">
 		                    		<td><span id="reply_username">${loginUserDTO.username }</span></td>
-		                    		<td><input type="text" id="reply_content"/></td>
+		                    		<td><input type="text" id="reply_content" maxlength="300"/></td>
 		                    		<td><button type="button" id="reply_commit" onclick="replyCommit()">댓글쓰기</button>
 		                    		<td></td>
 		                    	</tr>
@@ -136,6 +136,11 @@ const loadReply = () => {
 	})
 }
 $(document).ready(() => {
+	$("#reply_content").on('change keydown paste input', function(){
+        if(this.value.length > this.maxLength){
+          this.value = this.value.slice(0, this.maxLength);
+        }
+      });
 	loadReply()
 })
 const replyCommit = () => {
@@ -165,6 +170,7 @@ const replyupdate = (idx) => {
 }
 
 const replyupdateproc = (idx) => {
+
 	if(confirm("정말로 수정하시겠습니까?")) {
 		const content = $(`#input-content-\${idx}`).val();
 		const data = {
