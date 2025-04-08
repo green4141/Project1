@@ -62,8 +62,8 @@ public class BoardController {
 			model.addAttribute("startdate", startdate);
 			model.addAttribute("enddate", enddate);
 		}
-    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
-    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
+	    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+	    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
 		
 		List<BoardDTO> topNotices = boardService.getTopNotices(board_id);
 		model.addAttribute("topNotices", topNotices);
@@ -80,8 +80,8 @@ public class BoardController {
 		model.addAttribute("boardDTOList", boardDTOList);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("page", page);
-    model.addAttribute("sort", sort);
-    model.addAttribute("order", order);
+	    model.addAttribute("sort", sort);
+	    model.addAttribute("order", order);
 		
 		return "board/main";
 	}
@@ -130,7 +130,7 @@ public class BoardController {
 	@PostMapping("/writeProcedure")
 	public String writeProcedure(@Valid @ModelAttribute("writeBoardDTO") BoardDTO writeBoardDTO,
 			BindingResult result, Model model,
-			@RequestParam(value = "page", defaultValue = "1") int page) {
+			@RequestParam(value = "page", defaultValue = "1") int page) throws IOException {
 		if(result.hasErrors()) {
 			return "board/write";
 		}
@@ -174,7 +174,7 @@ public class BoardController {
 	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 			BindingResult result,
 			Model model,
-			@RequestParam("page") int page) {
+			@RequestParam("page") int page) throws IOException {
 		model.addAttribute("page", page);
 		model.addAttribute("idx", modifyBoardDTO.getIdx());
 		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
@@ -182,7 +182,9 @@ public class BoardController {
 			BoardDTO originalBoardDTO = boardService.getBoardInfo(modifyBoardDTO.getIdx(), loginUserDTO.getIdx());
 			modifyBoardDTO.setDate(originalBoardDTO.getDate());
 			modifyBoardDTO.setUsername(originalBoardDTO.getUsername());
+			model.addAttribute("hasFile", boardService.isBoardHasFile(modifyBoardDTO.getIdx()));
 			model.addAttribute("modifyBoardDTO", modifyBoardDTO);
+			
 			return "board/modify";
 		}
 		
