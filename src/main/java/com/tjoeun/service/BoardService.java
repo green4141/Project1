@@ -75,15 +75,13 @@ public class BoardService {
 	private boolean isValidImageFile(MultipartFile file) {
     try {
         // 임시 파일 생성
-        File tempFile = File.createTempFile("upload_", null);
+        //File tempFile = File.createTempFile("upload_", null);
         Tika tika = new Tika();
-        file.transferTo(tempFile);
+        byte[] fileContent = file.getInputStream().readAllBytes();
 
         // MIME 타입 판별
-        String mimeType = tika.detect(tempFile);
-        
-        // 임시 파일 삭제
-        tempFile.delete();
+        String mimeType = tika.detect(fileContent);
+
 
         // 허용 MIME 타입 리스트
         return mimeType != null && (
