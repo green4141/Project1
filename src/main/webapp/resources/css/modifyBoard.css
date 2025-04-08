@@ -1,23 +1,22 @@
 /* 전체 페이지 스타일 */
 html, body {
-  width: 100%;
-  height: 100vh;
   padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   font-family: "Gothic A1", sans-serif;
   background-color: #f9f9f9;
   color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* 페이지 레이아웃 */
 .board-container {
   width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 40px 0;
   background-color: #f9f9f9;
 }
 
@@ -25,11 +24,11 @@ html, body {
 .board-layout {
   width: 450px;
   padding: 30px;
+  margin: 60px auto 0 auto;
   border-radius: 12px;
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 60px;
 }
 
 /* 제목 스타일 */
