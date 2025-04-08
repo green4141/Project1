@@ -31,5 +31,17 @@ public class UserValidator implements Validator{
 				errors.rejectValue("username", "DidntCheckUserName");
 			}
 		}
+		
+		if (beanName.equals("modifyUserDTO")) {
+      if (userDTO.getPassword() == null || userDTO.getPassword2() == null ||
+          !userDTO.getPassword().equals(userDTO.getPassword2())) {
+          errors.rejectValue("password", "NotEquals.modifyUserDTO.password");
+          errors.rejectValue("password2", "NotEquals.modifyUserDTO.password2");
+      }
+
+      if (!userDTO.isUserName2Exist()) {
+          errors.rejectValue("username2", "DidntCheckUserName");
+      }
+  }
 	}
 }
