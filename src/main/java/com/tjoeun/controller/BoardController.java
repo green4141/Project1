@@ -176,6 +176,8 @@ public class BoardController {
 			Model model,
 			@RequestParam("page") int page) {
 		model.addAttribute("page", page);
+		model.addAttribute("idx", modifyBoardDTO.getIdx());
+		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
 		
 		if(result.hasErrors()) return "board/modify";
 		
