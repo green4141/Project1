@@ -166,6 +166,7 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("page", page);
+		model.addAttribute("hasFile", boardService.isBoardHasFile(idx));
 		return "board/modify";
 	}
 	
