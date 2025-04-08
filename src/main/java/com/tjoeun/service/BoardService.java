@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -75,10 +76,11 @@ public class BoardService {
     try {
         // 임시 파일 생성
         File tempFile = File.createTempFile("upload_", null);
+        Tika tika = new Tika();
         file.transferTo(tempFile);
 
         // MIME 타입 판별
-        String mimeType = Files.probeContentType(tempFile.toPath());
+        String mimeType = tika.detect(tempFile);
         
         // 임시 파일 삭제
         tempFile.delete();
@@ -107,23 +109,19 @@ public class BoardService {
 	}
 
 	public int addBoardInfo(BoardDTO writeBoardDTO) {
-		MultipartFile upload_file = writeBoardDTO.getUpload_file();
-
-    if (upload_file != null && upload_file.getSize() > 0) {
-      if (!isValidImageFile(upload_file)) {
-          throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
-      }
-  }
-
-		FileDTO file = null;
-
 		writeBoardDTO.setUser(loginUserDTO.getIdx());
 		boardDAO.addBoardInfo(writeBoardDTO);
-		if(upload_file.getSize() > 0) {
+		
+		MultipartFile upload_file = writeBoardDTO.getUpload_file();
+		if (upload_file != null && upload_file.getSize() > 0) {
+	    	if (!isValidImageFile(upload_file)) {
+	          	throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
+	      	}
+			FileDTO file = null;
 			file = saveUploadFile(upload_file);
+			if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
+			fileDAO.insert(file);
 		}
-		if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
-		fileDAO.insert(file);
 		return writeBoardDTO.getIdx();
 	}
 	
