@@ -72,8 +72,8 @@
 			<!-- 첨부 이미지 -->
 			<div class="form-block">
 				<form:label path="upload_file">첨부 이미지</form:label>
-				<c:if test="${modifyBoardDTO.file != null }">
-					<img src="${root }upload/${modifyBoardDTO.file}" width="100%"/>
+				<c:if test="${hasFile}">
+					<img src="${root }board/requestimage?board_idx=${idx}" width="100%"/>
 					<form:hidden path="file" />
 				</c:if>
 				<form:input type="file" path="upload_file" class="form-control" accept="images/*"/>

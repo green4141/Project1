@@ -124,7 +124,7 @@ public interface UserMapper {
 	  "  <if test='id != null and id != \"\"'> id LIKE CONCAT('%', #{id}, '%') </if>",
 	  "  <if test='name != null and name != \"\"'> name LIKE CONCAT('%', #{name}, '%') </if>",
 	  "  <if test='username != null and username != \"\"'> username LIKE CONCAT('%', #{username}, '%') </if>",
-	  "  <if test='role != null and role != \"\"'> role = #{role} </if>",
+	  "  <if test='role != null'> role = #{role} </if>",
 	  "</where>",
 	  "ORDER BY",
 	  "    <if test='sort != null and order != null'> ${sort} ${order}, </if>",

@@ -166,6 +166,7 @@ public class BoardController {
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("idx", idx);
 		model.addAttribute("page", page);
+		model.addAttribute("hasFile", boardService.isBoardHasFile(idx));
 		return "board/modify";
 	}
 	
@@ -175,8 +176,15 @@ public class BoardController {
 			Model model,
 			@RequestParam("page") int page) {
 		model.addAttribute("page", page);
-		
-		if(result.hasErrors()) return "board/modify";
+		model.addAttribute("idx", modifyBoardDTO.getIdx());
+		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
+		if(result.hasErrors()) {
+			BoardDTO originalBoardDTO = boardService.getBoardInfo(modifyBoardDTO.getIdx(), loginUserDTO.getIdx());
+			modifyBoardDTO.setDate(originalBoardDTO.getDate());
+			modifyBoardDTO.setUsername(originalBoardDTO.getUsername());
+			model.addAttribute("modifyBoardDTO", modifyBoardDTO);
+			return "board/modify";
+		}
 		
     try {
       	boardService.modifyBoardInfo(modifyBoardDTO);
