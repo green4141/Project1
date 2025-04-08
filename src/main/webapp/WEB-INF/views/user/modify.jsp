@@ -81,7 +81,7 @@
                     <div class="input-group">
                       <form:input path="username2" id="username2" class="form-control" onkeypress="resetUserName2Exist()" />
                       <div class="input-group-append">
-                        <button type="button" class="btn btn-primary" onclick="checkUserName2()">중복확인</button>         
+                        <button type="button" class="btn btn-check-dup" onclick="checkUserName2()">중복확인</button>         
                       </div>
                     </div>
                     <span id="error"><form:errors path="username2" /></span>
