@@ -178,8 +178,13 @@ public class BoardController {
 		model.addAttribute("page", page);
 		model.addAttribute("idx", modifyBoardDTO.getIdx());
 		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
-		
-		if(result.hasErrors()) return "board/modify";
+		if(result.hasErrors()) {
+			BoardDTO originalBoardDTO = boardService.getBoardInfo(modifyBoardDTO.getIdx(), loginUserDTO.getIdx());
+			modifyBoardDTO.setDate(originalBoardDTO.getDate());
+			modifyBoardDTO.setUsername(originalBoardDTO.getUsername());
+			model.addAttribute("modifyBoardDTO", modifyBoardDTO);
+			return "board/modify";
+		}
 		
     try {
       	boardService.modifyBoardInfo(modifyBoardDTO);
