@@ -151,6 +151,7 @@ const content = $("#reply_content").val()
 		data: JSON.stringify(data),
 		contentType: "application/json; charset=utf-8",
 		success: (arg) => {
+			$("#reply_content").val("");
 			loadReply();
 		}
 	})
