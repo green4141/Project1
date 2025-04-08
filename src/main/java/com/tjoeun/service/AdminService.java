@@ -82,7 +82,21 @@ public class AdminService {
 	}*/
 	
 	public PageDTO getBoardPageDTO(int page, Map<String, Object> searchParam) {
-	    int boardCount = boardDAO.getGeneralBoardCount(); // 공지 제외 일반글 개수
+	    int boardCount;
+	    boolean hasSearch = searchParam != null && (
+	        searchParam.containsKey("title") ||
+	        searchParam.containsKey("username") ||
+	        searchParam.containsKey("startdate") // 날짜 검색도 포함
+	    );
+
+	    if (hasSearch) {
+	        // 검색 조건이 있으면 조건을 기반으로 count
+	        boardCount = boardDAO.getAdminBoardCount(searchParam);
+	    } else {
+	        // 검색 조건이 없으면 기존처럼 전체 일반글 count
+	        boardCount = boardDAO.getGeneralBoardCount();
+	    }
+	    
 	    int noticeCount = boardDAO.getTopNotices(0).size() + boardDAO.getTopNotices(1).size();
 	    
 	    int generalPageSize = 10 - noticeCount;  // 일반글 기준 페이지당 글 수
