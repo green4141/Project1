@@ -165,7 +165,7 @@ const replyupdate = (idx) => {
 	const $span = $(`#content-\${idx}`)
 	const content = $span.text();
 	const $td = $span.parent();
-	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}"/>`)
+	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}" maxlength="300"/>`)
 	$(`#reply_update_\${idx}`).attr("onclick", `replyupdateproc(\${idx})`)
 }
 
