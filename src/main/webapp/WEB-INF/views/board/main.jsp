@@ -73,7 +73,7 @@
 						<tr class="notice-row">
 							<td>${notice.idx}</td>
 							<td>
-								<a href="${root}board/read?board_id=${board_id}&idx=${notice.idx}&page=1">
+								<a href="${root}board/read?board_id=${board_id}&idx=${notice.idx}&page=${page}">
 								<strong style="color: crimson;">[공지] ${notice.title}</strong>
 								</a>
 							</td>
