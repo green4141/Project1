@@ -47,7 +47,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성날짜</th>
-    					<th>
+    					<th id=sorted-link>
     						<a href="${root}board/main?board_id=${board_id}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=hits&order=${nextHitsOrder}">조회수</a>
     						<c:if test="${sort eq 'hits'}">
     							<c:choose>
@@ -56,7 +56,7 @@
     							</c:choose>
     						</c:if>
     					</th>
-    					<th>
+    					<th id=sorted-link>
     						<a href="${root}board/main?board_id=${board_id}&page=${page}&title=${title}&username=${username}&startdate=${startdate}&enddate=${enddate}&sort=favorite&order=${nextFavoriteOrder}">좋아요</a>
     						<c:if test="${sort eq 'favorite'}">
     							<c:choose>
