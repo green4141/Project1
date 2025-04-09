@@ -27,7 +27,7 @@ public class AdminService {
 	private final BoardDAO boardDAO;
 	private final FileDAO fileDAO;
 	
-	@Value("${page.listcount}")
+	@Value("${page.adminlistcount}")
 	private int page_listcount;
 
 	@Value("${page.pagenationcount}")
@@ -49,7 +49,8 @@ public class AdminService {
 	}
 
 	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
-	    int pageSize = 10;
+			//page_listcount
+	    int pageSize = 15;
 
 	    // 공지사항은 항상 가져옴
 	    List<BoardDTO> freeNotices = boardDAO.getTopNotices(0);
