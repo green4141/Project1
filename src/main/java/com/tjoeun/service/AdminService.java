@@ -1,6 +1,8 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -125,6 +127,19 @@ public class AdminService {
 		int start = (page - 1) * page_listcount;
 		RowBounds rowBounds = new RowBounds(start, page_listcount);
 
+		if (searchParam.containsKey("id")) {
+			String encoded = (String) searchParam.get("id");
+			searchParam.put("id", decodeBase64(encoded));
+		}
+		if (searchParam.containsKey("name")) {
+			String encoded = (String) searchParam.get("name");
+			searchParam.put("name", decodeBase64(encoded));
+		}
+		if (searchParam.containsKey("username")) {
+			String encoded = (String) searchParam.get("username");
+			searchParam.put("username", decodeBase64(encoded));
+		}
+		
 		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
 			return userDAO.getSortedUser(rowBounds, searchParam);
 		}
@@ -133,4 +148,20 @@ public class AdminService {
 	}
 
 
+	public String decodeBase64(String value) {
+		try {
+			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
+	
+	public String escapeForLikeQuery(String keyword) {
+		if (keyword == null) return null;
+		return keyword
+			.replace("\\", "\\\\")
+			.replace("_", "\\_")
+			.replace("%", "\\%");
+	}
+	
 }

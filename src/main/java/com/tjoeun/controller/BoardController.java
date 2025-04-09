@@ -1,6 +1,8 @@
 package com.tjoeun.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +37,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Resource(name="loginUserDTO")
-    private UserDTO loginUserDTO;
+  private UserDTO loginUserDTO;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
@@ -48,12 +50,17 @@ public class BoardController {
       @RequestParam(required = false) String order,
 			Model model) {
 		Map<String, Object> searchParam = new HashMap<>();
-		if(!StringUtils.isBlank(title)) {
-			searchParam.put("title", title);
+		if (!StringUtils.isBlank(title)) {
+			String decodedTitle = boardService.decodeBase64(title);
+			String escapedTitle = boardService.escapeForLikeQuery(decodedTitle);
+			searchParam.put("title", escapedTitle);
 			model.addAttribute("title", title);
 		}
-		if(!StringUtils.isBlank(username)) {
-			searchParam.put("username", username);
+
+		if (!StringUtils.isBlank(username)) {
+			String decodedUsername = boardService.decodeBase64(username);
+			String escapedUsername = boardService.escapeForLikeQuery(decodedUsername);
+			searchParam.put("username", escapedUsername);
 			model.addAttribute("username", username);
 		}
 		if(startdate != null) {

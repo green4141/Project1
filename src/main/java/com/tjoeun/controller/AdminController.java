@@ -86,39 +86,46 @@ public class AdminController {
 		return "admin/success";
 	}
 	@GetMapping("/board")
-	public String board(@RequestParam(required = false, defaultValue = "1")int page,
+	public String board(@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false) String title,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
-	      @RequestParam(required = false) String sort,
-	      @RequestParam(required = false) String order,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
+
 		Map<String, Object> searchParam = new HashMap<>();
-		if(!StringUtils.isBlank(title)) {
-			searchParam.put("title", title);
+		if (!StringUtils.isBlank(title)) {
+			String decodedTitle = adminService.decodeBase64(title);
+			String escapedTitle = adminService.escapeForLikeQuery(decodedTitle);
+			searchParam.put("title", escapedTitle);
 			model.addAttribute("title", title);
 		}
-		if(!StringUtils.isBlank(username)) {
-			searchParam.put("username", username);
+		if (!StringUtils.isBlank(username)) {
+			String decodedUsername = adminService.decodeBase64(username);
+			String escapedUsername = adminService.escapeForLikeQuery(decodedUsername);
+			searchParam.put("username", escapedUsername);
 			model.addAttribute("username", username);
 		}
-		if(startdate != null) {
+		if (startdate != null) {
 			searchParam.put("startdate", new Date(startdate));
 			searchParam.put("enddate", new Date(enddate));
 			model.addAttribute("startdate", startdate);
 			model.addAttribute("enddate", enddate);
 		}
-	    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
-	    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
-		 
+		if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+		if (!StringUtils.isBlank(order)) searchParam.put("order", order);
+
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("boardDTOList", adminService.getBoardList(page, searchParam));
 		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page, searchParam));
-	    model.addAttribute("sort", sort);
-	    model.addAttribute("order", order);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
+
 		return "admin/boardlist";
 	}
+
 	@GetMapping("/read")
 	public String read(@RequestParam("idx") int idx,
 			@RequestParam("page") int page,

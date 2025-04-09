@@ -1,10 +1,12 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -222,6 +224,22 @@ public class BoardService {
 	public List<BoardDTO> getGeneralBoardListExcludingNotices(int count) {
 	    RowBounds rowBounds = new RowBounds(0, count); // 0부터 count개 가져오기
 	    return boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+	}
+	
+	public String decodeBase64(String value) {
+		try {
+			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
+	
+	public String escapeForLikeQuery(String keyword) {
+		if (keyword == null) return null;
+		return keyword
+			.replace("\\", "\\\\")
+			.replace("_", "\\_")
+			.replace("%", "\\%");
 	}
 
 }
