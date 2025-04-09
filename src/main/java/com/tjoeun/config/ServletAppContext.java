@@ -42,6 +42,7 @@ import com.tjoeun.service.TopMenuService;
 @ComponentScan("com.tjoeun.controller")
 @ComponentScan("com.tjoeun.dao")
 @ComponentScan("com.tjoeun.service")
+@ComponentScan("com.tjoeun.validator")
 @PropertySource("/WEB-INF/properties/db.properties")
 @PropertySource("/WEB-INF/properties/option.properties")
 public class ServletAppContext implements WebMvcConfigurer{

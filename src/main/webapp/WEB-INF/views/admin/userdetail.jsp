@@ -21,7 +21,6 @@
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
 <link rel="stylesheet" href="/css/modifyUser.css"/>
-
 </head>
 
 <body>
@@ -72,12 +71,12 @@
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
 					<form:password path="password" class="form-control"/>
-	                         <span class="error"><form:errors path="password" /></span>
+	                <span id="error"><form:errors path="password" /></span>
 				</div>
 				<div class="form-group">
 					<form:label path="password2">비밀번호 확인</form:label>
 					<form:password path="password2" class="form-control"/>
-	                         <span class="error"><form:errors path="password2" /></span>
+	                <span id="error"><form:errors path="password2" /></span>
 				</div>
 				<div class="form-group">
 					<div class="text-right">

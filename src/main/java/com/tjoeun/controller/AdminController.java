@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,7 @@ import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.AdminService;
 import com.tjoeun.service.BoardService;
+import com.tjoeun.validator.AdminUserValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +34,9 @@ public class AdminController {
 	private final AdminService adminService;
 	@Resource(name = "loginUserDTO")
 	private UserDTO loginUserDTO;
+	
+	@Autowired
+	private AdminUserValidator adminUserValidator;
 	
 	@GetMapping("/user")
 	public String user(@RequestParam(required = false, defaultValue = "1")int page,
@@ -71,12 +78,25 @@ public class AdminController {
 		return "admin/userdetail";
 	}
 	
-	@PostMapping("/updateproc")
-	public String userDetailProc(@ModelAttribute("joinUserDTO") UserDTO userDTO, Model model) {
-		model.addAttribute("idx", userDTO.getIdx());
-		model.addAttribute("work", "userUpdate");
-		adminService.userUpdate(userDTO);
-		return "admin/success";
+	@PostMapping("/updateproc") 
+	public String userDetailProc(
+	    @Valid @ModelAttribute("joinUserDTO") UserDTO userDTO,
+	    BindingResult bindingResult,
+	    Model model) {
+
+	    adminUserValidator.validate(userDTO, bindingResult);
+
+	    if (bindingResult.hasErrors()) {
+	        model.addAttribute("idx", userDTO.getIdx());
+	        model.addAttribute("work", "userUpdate");
+	        model.addAttribute("user", userDTO);
+	        return "admin/userdetail";
+	    }
+
+	    adminService.userUpdate(userDTO);
+	    model.addAttribute("idx", userDTO.getIdx());
+	    model.addAttribute("work", "userUpdate");
+	    return "admin/success";
 	}
 	
 	@GetMapping("/userdelete")
