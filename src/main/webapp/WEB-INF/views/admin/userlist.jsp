@@ -80,7 +80,32 @@
                           	<c:otherwise>관리자</c:otherwise>
                           </c:choose>
                           </td>
-                          <td><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
+                          <td>
+                          <c:url var="detailUrl" value="/admin/userdetail">
+                              <c:param name="idx" value="${userDTO.idx}" />
+                              <c:param name="page" value="${pageDTO.currentPage}" />
+                              <c:if test="${not empty param.id}">
+                                  <c:param name="id" value="${param.id}" />
+                              </c:if>
+                              <c:if test="${not empty param.name}">
+                                  <c:param name="name" value="${param.name}" />
+                              </c:if>
+                              <c:if test="${not empty param.username}">
+                                  <c:param name="username" value="${param.username}" />
+                              </c:if>
+                              <c:if test="${not empty param.role}">
+                                  <c:param name="role" value="${param.role}" />
+                              </c:if>
+                              <c:if test="${not empty param.sort}">
+                                  <c:param name="sort" value="${param.sort}" />
+                              </c:if>
+                              <c:if test="${not empty param.order}">
+                                  <c:param name="order" value="${param.order}" />
+                              </c:if>
+                          </c:url>
+                          
+                          <button type="button" onclick="location.href='${detailUrl}'">수정하기</button>
+                          
                           <td><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button>
   					</tr>
                   </c:forEach>
