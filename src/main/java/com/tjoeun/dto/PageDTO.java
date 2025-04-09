@@ -51,7 +51,7 @@ public class PageDTO {
 		     50 ~ 59  /  10  : 50     			  51        60		         
 		               .....................
 		*/
-    this.min = ((currentPage - 1)	/ page_listcount) * page_listcount + 1;
+    this.min = ((currentPage - 1)	/ page_pagenationcount) * page_pagenationcount + 1;
     this.max = this.min + page_pagenationcount - 1;
     
     // 한 페이지 당 10 개의 게시글을 보여주는 경우,
