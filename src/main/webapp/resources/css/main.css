@@ -59,6 +59,12 @@
   text-decoration: none;
   color: #333;
   font-weight: bold;
+  word-break: break-word; 
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 365px;
 }
 
 .main-board-list a:hover {

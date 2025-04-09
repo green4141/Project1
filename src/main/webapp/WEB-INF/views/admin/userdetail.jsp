@@ -21,7 +21,6 @@
 <link rel="stylesheet" href="/css/top_menu.css"/>
 <link rel="stylesheet" href="/css/board.css"/>
 <link rel="stylesheet" href="/css/modifyUser.css"/>
-
 </head>
 
 <body>
@@ -72,18 +71,19 @@
 				<div class="form-group">
 					<form:label path="password">비밀번호</form:label>
 					<form:password path="password" class="form-control"/>
-	                         <span class="error"><form:errors path="password" /></span>
+	                <span id="error"><form:errors path="password" /></span>
 				</div>
 				<div class="form-group">
 					<form:label path="password2">비밀번호 확인</form:label>
 					<form:password path="password2" class="form-control"/>
-	                         <span class="error"><form:errors path="password2" /></span>
+	                <span id="error"><form:errors path="password2" /></span>
 				</div>
 				<div class="form-group">
 					<div class="text-right">
 						<form:button class="btn btn-primary">수정하기</form:button>
-					</div>
+                        <button class="btn btn-primary" type="button" onclick="location.href='/admin/user?page=${param.page}&id=${param.id}&name=${param.name}&username=${param.username}&role=${param.role}&sort=${param.sort}&order=${param.order}'">목록으로</button>
 				</div>
+            </div>
 			</form:form>
 		</div>
 	</div>
