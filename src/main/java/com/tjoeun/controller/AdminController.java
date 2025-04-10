@@ -32,12 +32,11 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
-	@Resource(name = "loginUserDTO")
-	private UserDTO loginUserDTO;
-	
-	@Autowired
 	private AdminUserValidator adminUserValidator;
 	
+	@Resource(name = "loginUserDTO")
+	private UserDTO loginUserDTO;
+
 	@GetMapping("/user")
 	public String user(@RequestParam(required = false, defaultValue = "1")int page,
 			@RequestParam(required = false) String id,
