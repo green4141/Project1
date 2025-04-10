@@ -80,7 +80,7 @@ public class AdminController {
 	
 	@PostMapping("/updateproc") 
 	public String userDetailProc(
-	    @Valid @ModelAttribute("joinUserDTO") UserDTO userDTO,
+	    @ModelAttribute("joinUserDTO") UserDTO userDTO,
 	    BindingResult bindingResult,
 	    Model model) {
 
