@@ -18,7 +18,7 @@
   <body class="page-wrapper">
     <script>
       alert("게시글이 삭제되었습니다");
-      location.href="${root}board/main?board_id=${board_id}";
+      location.href="${root}board/main?board_id=${board_id}&page=${page}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}";
     </script>
   </body>
 </html>

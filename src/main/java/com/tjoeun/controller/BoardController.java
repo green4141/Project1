@@ -157,6 +157,12 @@ public class BoardController {
 			@RequestParam("idx") int idx,
 			@RequestParam("page") int page,
 			@ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
 		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 
@@ -172,6 +178,13 @@ public class BoardController {
 		model.addAttribute("idx", idx);
 		model.addAttribute("page", page);
 		model.addAttribute("hasFile", boardService.isBoardHasFile(idx));
+		model.addAttribute("title", title);
+		model.addAttribute("username", username);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
+	//	model.addAttribute(tmpBoardDTO)
 		return "board/modify";
 	}
 	
@@ -179,10 +192,22 @@ public class BoardController {
 	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 			BindingResult result,
 			Model model,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			@RequestParam("page") int page) throws IOException {
 		model.addAttribute("page", page);
 		model.addAttribute("idx", modifyBoardDTO.getIdx());
 		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
+		model.addAttribute("title", boardService.encodeBase64(title));
+		model.addAttribute("username", boardService.encodeBase64(username));
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		if(result.hasErrors()) {
 			BoardDTO originalBoardDTO = boardService.getBoardInfo(modifyBoardDTO.getIdx(), loginUserDTO.getIdx());
 			modifyBoardDTO.setDate(originalBoardDTO.getDate());
@@ -207,7 +232,22 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("board_id") int board_id,
 			@RequestParam("idx") int idx,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
+			@RequestParam("page") int page,
 			Model model) {
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("page", page);
+		model.addAttribute("title", title);
+		model.addAttribute("username", username);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		boardService.deleteBoardInfo(idx);
 		model.addAttribute("board_id", board_id);
 		return "board/delete";

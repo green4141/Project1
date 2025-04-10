@@ -223,12 +223,20 @@ public class BoardService {
 	
 	public String decodeBase64(String value) {
 		try {
+			if(value == null) return null;
 			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
 		} catch (IllegalArgumentException e) {
 			return value;
 		}
 	}
-	
+	public String encodeBase64(String value) {
+		try {
+			if(value == null) return null;
+			return new String(Base64.getEncoder().encode(value.getBytes()), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
 	public String escapeForLikeQuery(String keyword) {
 		if (keyword == null) return null;
 		return keyword
