@@ -22,6 +22,12 @@ public class AdminUserValidator implements Validator {
         	if (userDTO.getPassword().length() < 4 || userDTO.getPassword().length() > 20) {
             errors.rejectValue("password", "Size.adminUserDTO.password");
           }
+        	if (!userDTO.getPassword().matches("[A-Za-z0-9]*")) {
+            errors.rejectValue("password", "Pattern.adminUserDTO.password");
+            }
+        	if (!userDTO.getPassword2().matches("[A-Za-z0-9]*")) {
+            errors.rejectValue("password2", "Pattern.adminUserDTO.password2");
+            }
   
           if (userDTO.getPassword2().length() < 4 || userDTO.getPassword2().length() > 20) {
               errors.rejectValue("password2", "Size.adminUserDTO.password2");
