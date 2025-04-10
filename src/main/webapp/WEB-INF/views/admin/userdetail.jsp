@@ -81,7 +81,6 @@
 				<div class="form-group">
 					<div class="text-right">
 						<form:button class="btn btn-primary">수정하기</form:button>
-                        <button class="btn btn-primary" type="button" onclick="location.href='/admin/user?page=${param.page}&id=${param.id}&name=${param.name}&username=${param.username}&role=${param.role}&sort=${param.sort}&order=${param.order}'">목록으로</button>
 				</div>
             </div>
 			</form:form>
