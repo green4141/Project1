@@ -192,8 +192,8 @@ public class BoardController {
 	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 			BindingResult result,
 			Model model,
-			@RequestParam(required = false) String title,
-			@RequestParam(required = false) String username,
+			@RequestParam(required = false) String search_title,
+			@RequestParam(required = false) String search_username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
 			@RequestParam(required = false) String sort,
@@ -202,8 +202,8 @@ public class BoardController {
 		model.addAttribute("page", page);
 		model.addAttribute("idx", modifyBoardDTO.getIdx());
 		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
-		model.addAttribute("title", boardService.encodeBase64(title));
-		model.addAttribute("username", boardService.encodeBase64(username));
+		model.addAttribute("title", search_title);
+		model.addAttribute("username", search_username);
 		model.addAttribute("startdate", startdate);
 		model.addAttribute("enddate", enddate);
 		model.addAttribute("sort", sort);
