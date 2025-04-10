@@ -35,7 +35,7 @@ public interface BoardMapper {
     		+ "SELECT * from v_board_user "
     		+ "<where>"
     		+ "<if test='title != null'>"
-    		+ "title like concat('%',#{title},'%')"
+    		+ "title like concat('%',#{title},'%') ESCAPE '\\\\' "
     		+ "</if>"
     		+ "<if test='username != null'>"
     		+ "username = #{username}"
@@ -74,7 +74,7 @@ public interface BoardMapper {
     		+ "select count(*) from v_board_user "
     		+ "<where>"
     		+ "<if test='title != null'>"
-    		+ "title like concat('%', #{title}, '%')"
+    		+ "title like concat('%', #{title}, '%') ESCAPE '\\\\' "
     		+ "</if>"
     		+ "<if test='username != null'>"
     		+ "username = #{username}"
@@ -112,7 +112,7 @@ public interface BoardMapper {
     		+ "SELECT * from v_board_user "
     		+ "<where>"
     		+ "<if test='title != null'>"
-    		+ "title like concat('%',#{title},'%')"
+    		+ "title like concat('%',#{title},'%') ESCAPE '\\\\' "
     		+ "</if>"
     		+ "<if test='username != null'>"
     		+ "username = #{username}"
@@ -129,7 +129,7 @@ public interface BoardMapper {
     		+ "SELECT count(*) from v_board_user "
     		+ "<where>"
     		+ "<if test='title != null'>"
-    		+ "title like concat('%',#{title},'%')"
+    		+ "title like concat('%',#{title},'%') ESCAPE '\\\\' "
     		+ "</if>"
     		+ "<if test='username != null'>"
     		+ "username = #{username}"
@@ -162,7 +162,7 @@ public interface BoardMapper {
       "SELECT * FROM v_board_user",
       "<where>",
       "  <if test='title != null and title != \"\"'>",
-      "    title LIKE CONCAT('%', #{title}, '%')",
+      "    title LIKE CONCAT('%', #{title}, '%') ESCAPE '\\\\' ",
       "  </if>",
       "  <if test='username != null and username != \"\"'>",
       "    username = #{username}",

@@ -1,6 +1,8 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,9 @@ public class AdminService {
 	private final FileDAO fileDAO;
 	
 	@Value("${page.adminlistcount}")
+	private int page_adminlistcount;
+	
+	@Value("${page.listcount}")
 	private int page_listcount;
 
 	@Value("${page.pagenationcount}")
@@ -35,7 +40,7 @@ public class AdminService {
 	
 	public PageDTO getUserPageDTO(int page, Map<String, Object> searchParam) {
 		int userCount = userDAO.getUserCount(searchParam);
-		return new PageDTO(userCount, page, page_listcount, pagenation_count);
+		return new PageDTO(userCount, page, page_adminlistcount, pagenation_count);
 	}
 	
 	public UserDTO getUserByIdx(int idx) {
@@ -49,8 +54,6 @@ public class AdminService {
 	}
 
 	public List<BoardDTO> getBoardList(int page, Map<String, Object> searchParam) {
-			//page_listcount
-	    int pageSize = 15;
 
 	    // 공지사항은 항상 가져옴
 	    List<BoardDTO> freeNotices = boardDAO.getTopNotices(0);
@@ -60,7 +63,7 @@ public class AdminService {
 	    result.addAll(teacherNotices);
 
 	    int noticeCount = result.size();
-	    int generalPageSize = pageSize - noticeCount;
+	    int generalPageSize = page_adminlistcount - noticeCount;
 	    if (generalPageSize <= 0) generalPageSize = 1;  // 최소 1개
 
 	    // 공지사항은 페이징에 영향을 주지 않도록, 일반글만 독립적으로 페이징
@@ -96,10 +99,10 @@ public class AdminService {
 	    
 	    int noticeCount = boardDAO.getTopNotices(0).size() + boardDAO.getTopNotices(1).size();
 	    
-	    int generalPageSize = 10 - noticeCount;  // 일반글 기준 페이지당 글 수
+	    int generalPageSize = page_listcount - noticeCount;  // 일반글 기준 페이지당 글 수
 	    if (generalPageSize <= 0) generalPageSize = 1;
 
-	    return new PageDTO(boardCount, page, page_listcount, pagenation_count);
+	    return new PageDTO(boardCount, page, page_adminlistcount, pagenation_count);
 	}
 	public void deleteBoard(int idx) {
 		if(isBoardHasFile(idx)) {
@@ -122,9 +125,22 @@ public class AdminService {
 
 	
 	public List<UserDTO> getUserList(int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
+		int start = (page - 1) * page_adminlistcount;
+		RowBounds rowBounds = new RowBounds(start, page_adminlistcount);
 
+		if (searchParam.containsKey("id")) {
+			String encoded = (String) searchParam.get("id");
+			searchParam.put("id", decodeBase64(encoded));
+		}
+		if (searchParam.containsKey("name")) {
+			String encoded = (String) searchParam.get("name");
+			searchParam.put("name", decodeBase64(encoded));
+		}
+		if (searchParam.containsKey("username")) {
+			String encoded = (String) searchParam.get("username");
+			searchParam.put("username", decodeBase64(encoded));
+		}
+		
 		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
 			return userDAO.getSortedUser(rowBounds, searchParam);
 		}
@@ -133,4 +149,20 @@ public class AdminService {
 	}
 
 
+	public String decodeBase64(String value) {
+		try {
+			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
+	
+	public String escapeForLikeQuery(String keyword) {
+		if (keyword == null) return null;
+		return keyword
+			.replace("\\", "\\\\")
+			.replace("_", "\\_")
+			.replace("%", "\\%");
+	}
+	
 }

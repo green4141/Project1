@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,7 @@ import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.AdminService;
 import com.tjoeun.service.BoardService;
+import com.tjoeun.validator.AdminUserValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,9 +32,11 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private AdminUserValidator adminUserValidator;
+	
 	@Resource(name = "loginUserDTO")
 	private UserDTO loginUserDTO;
-	
+
 	@GetMapping("/user")
 	public String user(@RequestParam(required = false, defaultValue = "1")int page,
 			@RequestParam(required = false) String id,
@@ -66,17 +72,54 @@ public class AdminController {
 	}
 	
 	@GetMapping("/userdetail")
-	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO, Model model) {
+	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO,
+			@RequestParam(required = false) String id,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) String search_role,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
+			Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("username", username);
+		model.addAttribute("search_role", search_role);
+	    model.addAttribute("sort", sort);
+	    model.addAttribute("order", order);
 		model.addAttribute("user", adminService.getUserByIdx(idx));
 		return "admin/userdetail";
 	}
 	
-	@PostMapping("/updateproc")
-	public String userDetailProc(@ModelAttribute("joinUserDTO") UserDTO userDTO, Model model) {
-		model.addAttribute("idx", userDTO.getIdx());
-		model.addAttribute("work", "userUpdate");
-		adminService.userUpdate(userDTO);
-		return "admin/success";
+	@PostMapping("/updateproc") 
+	public String userDetailProc(
+	    @ModelAttribute("joinUserDTO") UserDTO userDTO,
+		@RequestParam(required = false) String search_id,
+		@RequestParam(required = false) String search_name,
+		@RequestParam(required = false) String search_username,
+		@RequestParam(required = false) String search_role,
+		@RequestParam(required = false) String search_order,
+		@RequestParam(required = false) String search_sort,
+	    BindingResult bindingResult,
+	    Model model) {
+		
+	    model.addAttribute("id", search_id);
+		model.addAttribute("name", search_name);
+		model.addAttribute("username", search_username);
+		model.addAttribute("search_role", search_role);
+	    model.addAttribute("sort", search_sort);
+	    model.addAttribute("order", search_order);
+	    adminUserValidator.validate(userDTO, bindingResult);
+	    if (bindingResult.hasErrors()) {
+	        model.addAttribute("idx", userDTO.getIdx());
+	        model.addAttribute("work", "userUpdate");
+	        model.addAttribute("user", userDTO);
+	        return "admin/userdetail";
+	    }
+
+	    adminService.userUpdate(userDTO);
+	    model.addAttribute("idx", userDTO.getIdx());
+	    model.addAttribute("work", "userUpdate");
+	    return "admin/success";
 	}
 	
 	@GetMapping("/userdelete")
@@ -86,39 +129,46 @@ public class AdminController {
 		return "admin/success";
 	}
 	@GetMapping("/board")
-	public String board(@RequestParam(required = false, defaultValue = "1")int page,
+	public String board(@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false) String title,
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
-	      @RequestParam(required = false) String sort,
-	      @RequestParam(required = false) String order,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
+
 		Map<String, Object> searchParam = new HashMap<>();
-		if(!StringUtils.isBlank(title)) {
-			searchParam.put("title", title);
+		if (!StringUtils.isBlank(title)) {
+			String decodedTitle = adminService.decodeBase64(title);
+			String escapedTitle = adminService.escapeForLikeQuery(decodedTitle);
+			searchParam.put("title", escapedTitle);
 			model.addAttribute("title", title);
 		}
-		if(!StringUtils.isBlank(username)) {
-			searchParam.put("username", username);
+		if (!StringUtils.isBlank(username)) {
+			String decodedUsername = adminService.decodeBase64(username);
+			String escapedUsername = adminService.escapeForLikeQuery(decodedUsername);
+			searchParam.put("username", escapedUsername);
 			model.addAttribute("username", username);
 		}
-		if(startdate != null) {
+		if (startdate != null) {
 			searchParam.put("startdate", new Date(startdate));
 			searchParam.put("enddate", new Date(enddate));
 			model.addAttribute("startdate", startdate);
 			model.addAttribute("enddate", enddate);
 		}
-	    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
-	    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
-		 
+		if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
+		if (!StringUtils.isBlank(order)) searchParam.put("order", order);
+
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("boardDTOList", adminService.getBoardList(page, searchParam));
 		model.addAttribute("pageDTO", adminService.getBoardPageDTO(page, searchParam));
-	    model.addAttribute("sort", sort);
-	    model.addAttribute("order", order);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
+
 		return "admin/boardlist";
 	}
+
 	@GetMapping("/read")
 	public String read(@RequestParam("idx") int idx,
 			@RequestParam("page") int page,
@@ -126,6 +176,8 @@ public class AdminController {
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
 		if(!StringUtils.isBlank(title)) model.addAttribute("title", title);
 		if(!StringUtils.isBlank(username)) model.addAttribute("username", username);
@@ -139,6 +191,8 @@ public class AdminController {
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("page", page);
 		model.addAttribute("hasFile", adminService.isBoardHasFile(idx));
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		return "admin/read";
 	}
 	@GetMapping("/delete")

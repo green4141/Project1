@@ -1,10 +1,12 @@
 package com.tjoeun.service;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -133,10 +135,15 @@ public class BoardService {
 	}
 
 	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam) {
-		int start = (page - 1) * this.page_listcount;
-		RowBounds rowBounds = new RowBounds(start, page_listcount);
-		List<BoardDTO> boardDTOList = boardDAO.getBoardList(board_id, rowBounds, searchParam);
-		return boardDTOList;
+		int noticeCount = boardDAO.getTopNotices(board_id).size();
+		int generalCount = page_listcount - noticeCount;
+		int start = (page - 1) * generalCount;
+		RowBounds rowBounds = new RowBounds(start, generalCount);
+		
+		searchParam.put("board_id", board_id);
+		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
+		return boardDAO.getSortedBoard(rowBounds, searchParam);
+		} else return boardDAO.getBoardList(board_id, rowBounds, searchParam);
 	}
 
 	
@@ -209,19 +216,33 @@ public class BoardService {
 	    return boardDAO.getTopNotices(board_id);
 	}
 	
-	public List<BoardDTO> getBoardList(int board_id, int page, Map<String, Object> searchParam, int customListCount) {
-		int start = (page - 1) * customListCount;
-		RowBounds rowBounds = new RowBounds(start, customListCount);
-		searchParam.put("board_id", board_id);
-		if (searchParam.containsKey("sort") && searchParam.containsKey("order")) {
-			return boardDAO.getSortedBoard(rowBounds, searchParam);
-		} else return boardDAO.getBoardList(board_id, rowBounds, searchParam);
-
-	}
-	
 	public List<BoardDTO> getGeneralBoardListExcludingNotices(int count) {
 	    RowBounds rowBounds = new RowBounds(0, count); // 0부터 count개 가져오기
 	    return boardDAO.getGeneralBoardListExcludingNotices(rowBounds);
+	}
+	
+	public String decodeBase64(String value) {
+		try {
+			if(value == null) return null;
+			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
+	public String encodeBase64(String value) {
+		try {
+			if(value == null) return null;
+			return new String(Base64.getEncoder().encode(value.getBytes()), StandardCharsets.UTF_8);
+		} catch (IllegalArgumentException e) {
+			return value;
+		}
+	}
+	public String escapeForLikeQuery(String keyword) {
+		if (keyword == null) return null;
+		return keyword
+			.replace("\\", "\\\\")
+			.replace("_", "\\_")
+			.replace("%", "\\%");
 	}
 
 }

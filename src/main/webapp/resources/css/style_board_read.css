@@ -29,6 +29,7 @@ body {
     padding-bottom: 15px;
     border-bottom: 2px solid #ddd;
     margin-bottom: 15px;
+    word-break: break-word; /* 긴 단어도 줄바꿈 */
 }
 
 .board-info {

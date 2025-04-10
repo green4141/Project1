@@ -40,7 +40,7 @@
                     <form:hidden path="board_id" />
 					<div class="form-block">
 						<form:label path="title">제목</form:label>
-						<form:input path="title" class="form-control"/>
+						<form:input path="title" class="form-control" maxlength="200"/>
                         <span class="error"><form:errors path="title" /></span>
 					</div>
 					<div class="form-block">

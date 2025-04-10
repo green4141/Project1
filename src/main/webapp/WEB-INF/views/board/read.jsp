@@ -95,10 +95,10 @@
 					<div class="form-group">
 						<div class="text-right">
 
-							<a href="${root }board/main?board_id=${board_id}&page=${page}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}" class="btn btn-primary">목록보기</a>
+							<a href="${root }board/main?board_id=${board_id}&page=${page}&title=${title}&username=${username }&startdate=${param.startdate}&enddate=${param.enddate}&sort=${param.sort}&order=${param.order}" class="btn btn-primary">목록보기</a>
                             <c:if test="${readBoardDTO.user == loginUserDTO.idx}" >
-							  <a href="${root }board/modify?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">수정하기</a>
-							  <a href="${root }board/delete?board_id=${board_id}&idx=${idx}" class="btn btn-danger">삭제하기</a>
+							  <a href="${root }board/modify?board_id=${board_id}&idx=${idx}&page=${page}&title=${title}&username=${username }&startdate=${param.startdate}&enddate=${param.enddate}&sort=${param.sort}&order=${param.order}" class="btn btn-info">수정하기</a>
+							  <a href="${root }board/delete?board_id=${board_id}&idx=${idx}&page=${page}&title=${title}&username=${username }&startdate=${param.startdate}&enddate=${param.enddate}&sort=${param.sort}&order=${param.order}" class="btn btn-danger">삭제하기</a>
                             </c:if>
 						</div>
 					</div>
@@ -122,11 +122,15 @@ const loadReply = () => {
 			$tbody.empty()
 			let html = "";
 			arg.forEach((item) => {
-				html += `<tr class="tr-\${item.idx}"><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
+				html += `<tr class="tr-\${item.idx}">
+							<td>\${item.username}</td>
+							<td><span id="content-\${item.idx}">\${item.content}</span></td>`
 				if(${loginUserDTO.idx} == item.user_idx) {
-					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
+					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td>
+					<td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
 				} else {
-					html += `<td></td><td></td>`
+					html += `<td></td>
+					<td></td>`
 				}
 				html += `</tr>`
 			})	

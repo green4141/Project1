@@ -63,6 +63,7 @@
 
 #admin-list td:nth-child(2) {
   text-align: left;
+  word-break: break-word;
 }
 
 /* 마지막 열의 오른쪽 선 제거 (깔끔함 유지) */

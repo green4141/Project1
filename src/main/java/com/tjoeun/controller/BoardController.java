@@ -35,7 +35,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@Resource(name="loginUserDTO")
-    private UserDTO loginUserDTO;
+  private UserDTO loginUserDTO;
 	
 	@GetMapping("/main")
 	public String main(@RequestParam("board_id") int board_id,
@@ -48,12 +48,17 @@ public class BoardController {
       @RequestParam(required = false) String order,
 			Model model) {
 		Map<String, Object> searchParam = new HashMap<>();
-		if(!StringUtils.isBlank(title)) {
-			searchParam.put("title", title);
+		if (!StringUtils.isBlank(title)) {
+			String decodedTitle = boardService.decodeBase64(title);
+			String escapedTitle = boardService.escapeForLikeQuery(decodedTitle);
+			searchParam.put("title", escapedTitle);
 			model.addAttribute("title", title);
 		}
-		if(!StringUtils.isBlank(username)) {
-			searchParam.put("username", username);
+
+		if (!StringUtils.isBlank(username)) {
+			String decodedUsername = boardService.decodeBase64(username);
+			String escapedUsername = boardService.escapeForLikeQuery(decodedUsername);
+			searchParam.put("username", escapedUsername);
 			model.addAttribute("username", username);
 		}
 		if(startdate != null) {
@@ -68,10 +73,8 @@ public class BoardController {
 		List<BoardDTO> topNotices = boardService.getTopNotices(board_id);
 		model.addAttribute("topNotices", topNotices);
 		
-		int normalCount = 10 - topNotices.size(); // 최대 10개까지 표시되도록 조절
-		
 		String name = boardService.getBoardInfoName(board_id);
-		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam, normalCount);
+		List<BoardDTO> boardDTOList = boardService.getBoardList(board_id, page, searchParam);
 
 		PageDTO pageDTO = boardService.getBoardCount(board_id, page, searchParam);
 		
@@ -152,6 +155,12 @@ public class BoardController {
 			@RequestParam("idx") int idx,
 			@RequestParam("page") int page,
 			@ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
 		BoardDTO tmpBoardDTO = boardService.getBoardInfo(idx, loginUserDTO.getIdx());
 
@@ -167,6 +176,13 @@ public class BoardController {
 		model.addAttribute("idx", idx);
 		model.addAttribute("page", page);
 		model.addAttribute("hasFile", boardService.isBoardHasFile(idx));
+		model.addAttribute("title", title);
+		model.addAttribute("username", username);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
+	//	model.addAttribute(tmpBoardDTO)
 		return "board/modify";
 	}
 	
@@ -174,10 +190,22 @@ public class BoardController {
 	public String modifyProcedure(@Valid @ModelAttribute("modifyBoardDTO") BoardDTO modifyBoardDTO,
 			BindingResult result,
 			Model model,
+			@RequestParam(required = false) String search_title,
+			@RequestParam(required = false) String search_username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			@RequestParam("page") int page) throws IOException {
 		model.addAttribute("page", page);
 		model.addAttribute("idx", modifyBoardDTO.getIdx());
 		model.addAttribute("board_id", modifyBoardDTO.getBoard_id());
+		model.addAttribute("title", search_title);
+		model.addAttribute("username", search_username);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		if(result.hasErrors()) {
 			BoardDTO originalBoardDTO = boardService.getBoardInfo(modifyBoardDTO.getIdx(), loginUserDTO.getIdx());
 			modifyBoardDTO.setDate(originalBoardDTO.getDate());
@@ -202,7 +230,22 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("board_id") int board_id,
 			@RequestParam("idx") int idx,
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) Long startdate,
+			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
+			@RequestParam("page") int page,
 			Model model) {
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("page", page);
+		model.addAttribute("title", title);
+		model.addAttribute("username", username);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		boardService.deleteBoardInfo(idx);
 		model.addAttribute("board_id", board_id);
 		return "board/delete";
