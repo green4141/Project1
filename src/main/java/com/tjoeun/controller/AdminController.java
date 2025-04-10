@@ -102,14 +102,14 @@ public class AdminController {
 		@RequestParam(required = false) String search_sort,
 	    BindingResult bindingResult,
 	    Model model) {
-
+		
 	    model.addAttribute("id", search_id);
 		model.addAttribute("name", search_name);
 		model.addAttribute("username", search_username);
 		model.addAttribute("search_role", search_role);
 	    model.addAttribute("sort", search_sort);
 	    model.addAttribute("order", search_order);
-	    
+	    adminUserValidator.validate(userDTO, bindingResult);
 	    if (bindingResult.hasErrors()) {
 	        model.addAttribute("idx", userDTO.getIdx());
 	        model.addAttribute("work", "userUpdate");
