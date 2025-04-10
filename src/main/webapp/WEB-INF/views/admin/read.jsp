@@ -106,7 +106,7 @@
                     <br>
 					<div class="form-group">
 						<div class="text-right">
-							<a href="${root }admin/board?page=${page}&title=${title}&username=${username }&startdate=${startdate}&enddate=${enddate}" class="btn btn-primary">목록보기</a>
+							<a href="${root }admin/board?page=${page}&title=${title}&username=${username }&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}" class="btn btn-primary">목록보기</a>
 							<a href="${root }admin/delete?idx=${idx}" class="btn btn-danger">삭제하기</a>
 						</div>
 					</div>

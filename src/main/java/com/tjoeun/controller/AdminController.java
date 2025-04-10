@@ -191,6 +191,8 @@ public class AdminController {
 		model.addAttribute("loginUserDTO", loginUserDTO);
 		model.addAttribute("page", page);
 		model.addAttribute("hasFile", adminService.isBoardHasFile(idx));
+		model.addAttribute("sort", sort);
+		model.addAttribute("order", order);
 		return "admin/read";
 	}
 	@GetMapping("/delete")
