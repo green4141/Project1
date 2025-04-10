@@ -122,11 +122,15 @@ const loadReply = () => {
 			$tbody.empty()
 			let html = "";
 			arg.forEach((item) => {
-				html += `<tr class="tr-\${item.idx}"><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
+				html += `<tr class="tr-\${item.idx}">
+							<td>\${item.username}</td>
+							<td><span id="content-\${item.idx}">\${item.content}</span></td>`
 				if(${loginUserDTO.idx} == item.user_idx) {
-					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
+					html += `<td class='reply_useronly'><button type='button' onclick='replyupdate(\${item.idx})' id='reply_update_\${item.idx}'>수정하기</button></td>
+					<td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
 				} else {
-					html += `<td></td><td></td>`
+					html += `<td></td>
+					<td></td>`
 				}
 				html += `</tr>`
 			})	
