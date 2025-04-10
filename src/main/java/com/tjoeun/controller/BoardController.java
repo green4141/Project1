@@ -216,14 +216,12 @@ public class BoardController {
 			return "board/modify";
 		}
 		
-    try {
-      	boardService.modifyBoardInfo(modifyBoardDTO);
-	  } catch (IllegalArgumentException e) {
-	      model.addAttribute("errorMessage", e.getMessage());
-	      return "board/modify";
-	  }
-		
-		boardService.modifyBoardInfo(modifyBoardDTO);
+	    try {
+	      	boardService.modifyBoardInfo(modifyBoardDTO);
+		  } catch (IllegalArgumentException e) {
+		      model.addAttribute("errorMessage", e.getMessage());
+		      return "board/modify";
+		  }
 		return "board/modify_success";
 	}
 	
