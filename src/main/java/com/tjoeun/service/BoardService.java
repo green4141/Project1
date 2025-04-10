@@ -71,33 +71,6 @@ public class BoardService {
 		fileDTO.setServername(uploadPath + File.separator + serverFileName);
 		return fileDTO;
 	}
-	
-
-	// 임시 파일 생성 -> 파일 타입 -> 임시 파일 삭제
-	private boolean isValidImageFile(MultipartFile file) {
-    try {
-        // 임시 파일 생성
-        //File tempFile = File.createTempFile("upload_", null);
-        Tika tika = new Tika();
-        byte[] fileContent = file.getInputStream().readAllBytes();
-
-        // MIME 타입 판별
-        String mimeType = tika.detect(fileContent);
-
-
-        // 허용 MIME 타입 리스트
-        return mimeType != null && (
-        		mimeType.equals("image/jpg") ||
-            mimeType.equals("image/jpeg") ||
-            mimeType.equals("image/png") ||
-            mimeType.equals("image/gif")
-        );
-    } catch (Exception e) {
-        e.printStackTrace();
-        return false;
-    }
-}
-	
 
 	public byte[] loadUploadFile(int board_idx) throws IOException {
 		FileDTO fileDTO = fileDAO.findByBoardIdx(board_idx);
@@ -114,9 +87,6 @@ public class BoardService {
 		
 		MultipartFile upload_file = writeBoardDTO.getUpload_file();
 		if (upload_file != null && upload_file.getSize() > 0) {
-	    	if (!isValidImageFile(upload_file)) {
-	          	throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
-	      	}
 			FileDTO file = null;
 			file = saveUploadFile(upload_file);
 			if(file != null) file.setBoard_idx(writeBoardDTO.getIdx());
@@ -157,20 +127,20 @@ public class BoardService {
 		MultipartFile upload_file = modifyBoardDTO.getUpload_file();
 
 		if(upload_file.getSize() > 0) {
-      if (!isValidImageFile(upload_file)) {
-        throw new IllegalArgumentException("허용되지 않은 파일 형식입니다. (jpg, jpeg, png, gif만 가능)");
-      }
-		}
-		
-
-		boardDAO.modifyBoardInfo(modifyBoardDTO);
-		if(upload_file != null && upload_file.getSize() > 0) {
-			FileDTO oldFile = fileDAO.findByBoardIdx(modifyBoardDTO.getIdx());
-			FileDTO newFile = saveUploadFile(upload_file);
-			newFile.setIdx(oldFile.getIdx());
-			fileDAO.update(newFile);
-			File file = new File(oldFile.getServername());
-			file.delete();
+			boardDAO.modifyBoardInfo(modifyBoardDTO);
+			if(upload_file != null && upload_file.getSize() > 0) {
+				FileDTO oldFile = fileDAO.findByBoardIdx(modifyBoardDTO.getIdx());
+				FileDTO newFile = saveUploadFile(upload_file);
+				newFile.setBoard_idx(modifyBoardDTO.getIdx());
+				if(oldFile != null) {
+					newFile.setIdx(oldFile.getIdx());
+					fileDAO.update(newFile);
+					File file = new File(oldFile.getServername());
+					file.delete();
+				} else {
+					fileDAO.insert(newFile);
+				}
+			}
 		}
 	}
 	
