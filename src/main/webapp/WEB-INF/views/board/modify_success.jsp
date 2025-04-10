@@ -18,7 +18,7 @@
   <body>
     <script>
     	alert("수정이 완료되었습니다");
-    	location.href="${root}board/read?board_id=${modifyBoardDTO.board_id}&idx=${modifyBoardDTO.idx}&page=${page}";
+    	location.href="${root}board/read?board_id=${modifyBoardDTO.board_id}&idx=${modifyBoardDTO.idx}&page=${page}&page=${page}&title=${title}&content=${content}&startdate=${startdate}&enddate=${enddate}&sort=${sort}&order=${order}";
     </script>
   </body>
 </html>

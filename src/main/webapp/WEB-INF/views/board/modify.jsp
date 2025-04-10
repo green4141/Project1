@@ -44,6 +44,8 @@
 		<form:form action="${root }board/modifyProcedure" modelAttribute="modifyBoardDTO" method="post" enctype="multipart/form-data">
 			<form:hidden path="idx" />
 			<form:hidden path="board_id" />
+			<input type="hidden" name="sort" value="${sort }" />
+			<input type="hidden" name="order" value="${order }" />
 			<input type="hidden" name="page" value="${page }" />
 			
 			<!-- 작성자 -->
@@ -82,7 +84,7 @@
 			<!-- 수정완료 -->
 			<div class="form-block board-modify-btn" style="text-align:right; margin-top:20px;">
 				<form:button class="btn btn-primary">수정완료</form:button>
-				<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}" class="btn btn-info">취소</a>
+				<a href="${root }board/read?board_id=${board_id}&idx=${idx}&page=${page}&title=${title}&content=${content}&startdate=${param.startdate}&enddate=${param.enddate}&sort=${param.sort}&order=${param.order}" class="btn btn-info">취소</a>
 			</div>
 
     		</form:form>
