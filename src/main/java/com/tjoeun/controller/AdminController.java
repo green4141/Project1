@@ -73,19 +73,43 @@ public class AdminController {
 	}
 	
 	@GetMapping("/userdetail")
-	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO, Model model) {
+	public String userDetail(@RequestParam int idx, @ModelAttribute("joinUserDTO")UserDTO userDTO,
+			@RequestParam(required = false) String id,
+			@RequestParam(required = false) String name,
+			@RequestParam(required = false) String username,
+			@RequestParam(required = false) String search_role,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
+			Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("username", username);
+		model.addAttribute("search_role", search_role);
+	    model.addAttribute("sort", sort);
+	    model.addAttribute("order", order);
 		model.addAttribute("user", adminService.getUserByIdx(idx));
 		return "admin/userdetail";
 	}
 	
 	@PostMapping("/updateproc") 
 	public String userDetailProc(
-	    @Valid @ModelAttribute("joinUserDTO") UserDTO userDTO,
+	    @ModelAttribute("joinUserDTO") UserDTO userDTO,
+		@RequestParam(required = false) String search_id,
+		@RequestParam(required = false) String search_name,
+		@RequestParam(required = false) String search_username,
+		@RequestParam(required = false) String search_role,
+		@RequestParam(required = false) String search_order,
+		@RequestParam(required = false) String search_sort,
 	    BindingResult bindingResult,
 	    Model model) {
 
-	    adminUserValidator.validate(userDTO, bindingResult);
-
+	    model.addAttribute("id", search_id);
+		model.addAttribute("name", search_name);
+		model.addAttribute("username", search_username);
+		model.addAttribute("search_role", search_role);
+	    model.addAttribute("sort", search_sort);
+	    model.addAttribute("order", search_order);
+	    
 	    if (bindingResult.hasErrors()) {
 	        model.addAttribute("idx", userDTO.getIdx());
 	        model.addAttribute("work", "userUpdate");
@@ -153,6 +177,8 @@ public class AdminController {
 			@RequestParam(required = false) String username,
 			@RequestParam(required = false) Long startdate,
 			@RequestParam(required = false) Long enddate,
+			@RequestParam(required = false) String sort,
+			@RequestParam(required = false) String order,
 			Model model) {
 		if(!StringUtils.isBlank(title)) model.addAttribute("title", title);
 		if(!StringUtils.isBlank(username)) model.addAttribute("username", username);

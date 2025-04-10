@@ -22,13 +22,13 @@
 <script>
 alert("작업이 완료되었습니다.")
 <c:if test="${work == 'userUpdate'}">
-location.href='/admin/userdetail?idx=${idx}'
+location.href='/admin/userdetail?idx=${idx}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}'
 </c:if>
 <c:if test="${work == 'boardDelete'}">
-location.href='/admin/board'
+location.href='/admin/board?id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}'
 </c:if>
 <c:if test="${work == 'userDelete'}">
-location.href='/admin/user'
+location.href='/admin/user?id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}'
 </c:if>
 </script>
 </html>

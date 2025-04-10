@@ -44,7 +44,7 @@
 					<th>번호</th>
 					<th>아이디</th>
 					<th id=sorted-link>
-						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}&id=${id}&name=${name}&username=${username}&role=${role}">이름</a>
+						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=name&order=${nextNameOrder}&id=${id}&name=${name}&username=${username}&search_role=${search_role}">이름</a>
 						<c:if test="${sort eq 'name'}">
 							<c:choose>
 								<c:when test="${order eq 'asc'}">▲</c:when>
@@ -54,7 +54,7 @@
 					</th>
 					<th>닉네임</th>
 					<th id=sorted-link>
-						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}&id=${id}&name=${name}&username=${username}&role=${role}">등급</a>
+						<a href="${root}admin/user?page=${pageDTO.currentPage}&sort=role&order=${nextRoleOrder}&id=${id}&name=${name}&username=${username}&search_role=${search_role}">등급</a>
 						<c:if test="${sort eq 'role'}">
 							<c:choose>
 								<c:when test="${order eq 'asc'}">▲</c:when>
@@ -80,8 +80,8 @@
                           	<c:otherwise>관리자</c:otherwise>
                           </c:choose>
                           </td>
-                          <td><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }'">수정하기</button>
-                          <td><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }'">삭제하기</button>
+                          <td><button type="button" onclick="location.href='/admin/userdetail?idx=${userDTO.idx }&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}'">수정하기</button>
+                          <td><button type="button" onclick="location.href='/admin/userdelete?idx=${userDTO.idx }&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}'">삭제하기</button>
   					</tr>
                   </c:forEach>
 			</tbody>
@@ -91,12 +91,12 @@
 				<c:choose> 
                     <c:when test="${pageDTO.previousPage <= 0 }">   
 					    <li class="disabled">
-						  <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">이전</a>
+						  <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}">이전</a>
 					    </li>
                       </c:when>
                     <c:otherwise>
                         <li>
-                          <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">이전</a>
+                          <a href="${root }admin/user?page=${pageDTO.previousPage}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}">이전</a>
                         </li>
                     </c:otherwise>
                  </c:choose>
@@ -109,7 +109,7 @@
 		                     </c:when>
 		                     <c:otherwise>	
 			 				      <li>
-			 				   	    <a href="${root }admin/user?page=${idx}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">${idx}</a>
+			 				   	    <a href="${root }admin/user?page=${idx}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}">${idx}</a>
 			 				      </li>
 		                     </c:otherwise>
 	                   </c:choose>
@@ -118,12 +118,12 @@
 				<c:choose> 
                      <c:when test="${pageDTO.max >= pageDTO.pageCount }">   
 					    <li class="disabled">
-						  <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">다음</a>
+						  <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}">다음</a>
 					    </li>
                      </c:when>
                      <c:otherwise>
                        <li>
-                         <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&role=${role}&sort=${sort}&order=${order}">다음</a>
+                         <a href="${root }admin/user?page=${pageDTO.nextPage}&id=${id}&name=${name}&username=${username}&search_role=${search_role}&sort=${sort}&order=${order}">다음</a>
                        </li>
                      </c:otherwise>
                 </c:choose>
@@ -134,7 +134,7 @@
 					<option value="id" selected>아이디</option>
 					<option value="name">이름</option>
 					<option value="username">닉네임</option>
-					<option value="role">등급</option>
+					<option value="search_role">등급</option>
 				</select> 
 				<input type="text" id="search"/>
 				<select id="role" style="display:none;">

@@ -34,6 +34,12 @@
 			<form:form action="${root }admin/updateproc" modelAttribute="joinUserDTO" method="post">
 	                     <form:hidden path="userIdExist" />
 	                     <form:hidden path="idx" value="${user.idx }"/>
+	                     <input type="hidden" name="search_id" value="${id }"/>
+	                     <input type="hidden" name="search_name" value="${name }"/>
+	                     <input type="hidden" name="search_username" value="${username }"/>
+	                     <input type="hidden" name="search_role" value="${search_role }"/>
+	                     <input type="hidden" name="search_order" value="${order }"/>
+	                     <input type="hidden" name="search_sort" value="${sort }"/>
 				<div class="form-group">
 					<form:label path="username">닉네임</form:label>
 					<form:input type="text" path="username" class="form-control" readonly="true" value="${user.username }"/>
@@ -52,8 +58,8 @@
 	                   
 	                           <form:radiobutton path="role" value="1" id="teacher" checked="${user.role == 1? 'checked':'' }"/>
 	                           <label for="teacher">선생님</label>
-	                           <form:radiobutton path="role" value="2" id="teacher" checked="${user.role == 2? 'checked':'' }"/>
-	                           <label for="teacher">관리자</label>
+	                           <form:radiobutton path="role" value="2" id="admin" checked="${user.role == 2? 'checked':'' }"/>
+	                           <label for="admin">관리자</label>
 	                       </div>
 	                       <span class="error"><form:errors path="role" /></span>
 	                   </div>
