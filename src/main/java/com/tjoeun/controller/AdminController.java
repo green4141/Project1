@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tjoeun.dto.BoardDTO;
 import com.tjoeun.dto.UserDTO;
 import com.tjoeun.service.AdminService;
-import com.tjoeun.service.BoardService;
 import com.tjoeun.validator.AdminUserValidator;
 
 import lombok.RequiredArgsConstructor;
