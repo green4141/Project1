@@ -56,15 +56,24 @@ $(() => {
 		const search = $("#search").val();
 		let searchquery = "";
 
-		if (selected == "id") {
-			searchquery = `id=${encodeBase64(search)}`
-		} else if (selected == "name") {
-			searchquery = `name=${encodeBase64(search)}`
-		} else if (selected == "username") {
-			searchquery = `username=${encodeBase64(search)}`
-		} else {
-			searchquery = `role=${$("#role option:selected").val()}`
+		switch(selected) {
+			case "id" : {
+				searchquery = `id=${encodeBase64(search)}`
+				break
+			}
+			case "name": {
+				searchquery = `name=${encodeBase64(search)}`
+				break
+			}
+			case "username": {
+				searchquery = `username=${encodeBase64(search)}`
+				break
+			}
+			default: {
+				searchquery = `role=${$("#role option:selected").val()}`
+			}
 		}
+		
 		location.href = `/admin/user?${searchquery}`
 	})
 })
