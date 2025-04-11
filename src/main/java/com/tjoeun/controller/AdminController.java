@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
-	private AdminUserValidator adminUserValidator;
+	private final AdminUserValidator adminUserValidator;
 	
 	@Resource(name = "loginUserDTO")
 	private UserDTO loginUserDTO;
