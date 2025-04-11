@@ -42,7 +42,8 @@ $(() => {
 
 	$("#searchfield").on("change", () => {
 		const selected = $("#searchfield option:selected").val()
-		if (selected == "role") {
+		console.log(selected)
+		if (selected == "search_role") {
 			$("#search").hide();
 			$("#role").show();
 		} else {
