@@ -34,10 +34,10 @@ $(() => {
 	} else if (searchParam.get("username")) {
 		$("#searchfield").val("username").prop("selected", true)
 		$("#search").val(decodeBase64(searchParam.get("username")))
-	} else if (searchParam.get("role")) {
-		$("#searchfield").val("role").prop("selected", true)
+	} else if (searchParam.get("search_role")) {
+		$("#searchfield").val("search_role").prop("selected", true)
 		$("#search").hide()
-		$("#role").val(searchParam.get("role")).prop("selected", true).show()
+		$("#search_role").val(searchParam.get("search_role")).prop("selected", true).show()
 	}
 
 	$("#searchfield").on("change", () => {
@@ -45,10 +45,10 @@ $(() => {
 		console.log(selected)
 		if (selected == "search_role") {
 			$("#search").hide();
-			$("#role").show();
+			$("#search_role").show();
 		} else {
 			$("#search").show();
-			$("#role").hide();
+			$("#search_role").hide();
 		}
 	})
 
@@ -71,7 +71,7 @@ $(() => {
 				break
 			}
 			default: {
-				searchquery = `role=${$("#role option:selected").val()}`
+				searchquery = `search_role=${$("#search_role option:selected").val()}`
 			}
 		}
 		

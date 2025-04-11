@@ -38,7 +38,7 @@ public class AdminController {
 			@RequestParam(required = false) String id,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String username,
-			@RequestParam(required = false) Integer role,
+			@RequestParam(required = false) Integer search_role,
 		    @RequestParam(required = false) String sort,
 		    @RequestParam(required = false) String order,
 			Model model) {
@@ -48,7 +48,7 @@ public class AdminController {
 		if(!StringUtils.isBlank(id)) searchParam.put("id", id);
 		else if(!StringUtils.isBlank(name)) searchParam.put("name", name);
 		else if(!StringUtils.isBlank(username)) searchParam.put("username", username);
-		else if(role != null) searchParam.put("role", role);
+		else if(search_role != null) searchParam.put("role", search_role);
 		
 	    if (!StringUtils.isBlank(sort)) searchParam.put("sort", sort);
 	    if (!StringUtils.isBlank(order)) searchParam.put("order", order);
@@ -60,7 +60,7 @@ public class AdminController {
 		model.addAttribute("id", id);
 		model.addAttribute("name", name);
 		model.addAttribute("username", username);
-		model.addAttribute("role", role);
+		model.addAttribute("role", search_role);
 	    model.addAttribute("sort", sort);
 	    model.addAttribute("order", order);
 		

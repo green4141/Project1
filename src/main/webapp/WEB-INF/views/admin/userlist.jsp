@@ -137,7 +137,7 @@
 					<option value="search_role">등급</option>
 				</select> 
 				<input type="text" id="search"/>
-				<select id="role" style="display:none;">
+				<select id="search_role" style="display:none;">
 					<option value="0">학생</option>
 					<option value="1">선생님</option>
 					<option value="2">관리자</option>
