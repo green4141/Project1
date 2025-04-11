@@ -92,6 +92,7 @@
                         <div>
                             <form:radiobutton path="role" value="0" disabled="true" /> 학생
                             <form:radiobutton path="role" value="1" disabled="true" /> 교사
+                            <form:radiobutton path="role" value="2" disabled="true" /> 관리자
                         </div>
                     </div>
 					<div class="form-group">
