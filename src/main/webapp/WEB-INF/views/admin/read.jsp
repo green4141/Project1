@@ -18,6 +18,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${root }js/board.js"></script>
 <script>
     function toggleFavorite(isFavorite, board_idx) {
         const url = "/board/toggleFavBoard?board_idx=" + board_idx;
@@ -121,25 +122,33 @@
 
 </body>
 <script>
-$(document).ready(() => {
+const loadReply = () => {
 	$.ajax({
 		url: "${root}reply/select?board_idx=${readBoardDTO.idx}",
 		type: "GET",
 		success: (arg) => {
+			const $tbody = $("#reply tbody")
+			$tbody.empty()
 			let html = "";
 			arg.forEach((item) => {
-				html += `<tr class="tr-\${item.idx}"><td>\${item.username}</td><td><span id="content-\${item.idx}">\${item.content}</span></td>`
-				//if(${loginUserDTO.idx} == item.user_idx) {
-					html += `<td class='reply_useronly'></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
-				//} else {
-				//	html += `<td></td><td></td>`
-				//}
+				html += `<tr class="tr-\${item.idx}">
+							<td>\${item.username}</td>
+							<td><span id="content-\${item.idx}">\${item.content}</span></td>
+					<td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(\${item.idx})'>삭제하기</button></td>`
 				html += `</tr>`
 			})	
-			$("#reply tbody").append(html)
+			$tbody.append(html)
 
 		}
 	})
+}
+$(document).ready(() => {
+	$("#reply_content").on('change keydown paste input', function(){
+        if(this.value.length > this.maxLength){
+          this.value = this.value.slice(0, this.maxLength);
+        }
+      });
+	loadReply()
 })
 const replyCommit = () => {
 const content = $("#reply_content").val()
@@ -154,8 +163,8 @@ const content = $("#reply_content").val()
 		data: JSON.stringify(data),
 		contentType: "application/json; charset=utf-8",
 		success: (arg) => {
-			$("tbody").append("<tr class='tr-" + arg + "'><td>${loginUserDTO.username}</td><td><span id='content-" + arg + "'>" + content + "</span></td><td class='reply_useronly'><button type='button' onclick='replyupdate(" + arg + ")' id='reply_update_" + arg + "'>수정하기</button></td><td class='reply_useronly'><button type='button' class='reply_delete_btn' onclick='replyDelete(" + arg + ")'>삭제하기</button></td></tr>")
 			$("#reply_content").val("");
+			loadReply();
 		}
 	})
 }
@@ -163,11 +172,12 @@ const replyupdate = (idx) => {
 	const $span = $(`#content-\${idx}`)
 	const content = $span.text();
 	const $td = $span.parent();
-	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}"/>`)
+	$td.html(`<input type="text" id="input-content-\${idx}" value="\${content}" maxlength="300"/>`)
 	$(`#reply_update_\${idx}`).attr("onclick", `replyupdateproc(\${idx})`)
 }
 
 const replyupdateproc = (idx) => {
+
 	if(confirm("정말로 수정하시겠습니까?")) {
 		const content = $(`#input-content-\${idx}`).val();
 		const data = {
@@ -182,9 +192,7 @@ const replyupdateproc = (idx) => {
 			contentType: "application/json; charset=utf-8",
 			success: () => {
 				alert("수정에 성공했습니다.")
-				const $td = $(`#input-content-\${idx}`).parent()
-				$td.html(`<span id='content-\${idx}'>\${content}</span>`)
-				$(`#reply_update_\${idx}`).attr("onclick", `replyupdate(\${idx})`)
+				loadReply();
 			}
 		})
 	} else return false
@@ -198,7 +206,7 @@ if(confirm("정말로 삭제하시겠습니까?"))
 		contentType: "application/json; charset=utf-8",
 		success: () => {
 			alert("삭제에 성공했습니다.")
-			$(`.tr-\${idx}`).remove()
+			loadReply();
 		}
 	})
 	else return false;
