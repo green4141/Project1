@@ -151,7 +151,7 @@ public class AdminService {
 
 	public String decodeBase64(String value) {
 		try {
-			return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
+			return new String(Base64.getDecoder().decode(value.replace("_","+")), StandardCharsets.UTF_8);
 		} catch (IllegalArgumentException e) {
 			return value;
 		}

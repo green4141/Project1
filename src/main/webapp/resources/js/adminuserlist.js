@@ -5,12 +5,12 @@ function encodeBase64(str) {
     for (let i = 0; i < bytes.length; i++) {
         binary += String.fromCharCode(bytes[i]);
     }
-    return encodeURIComponent(btoa(binary));
+    return encodeURIComponent(btoa(binary).replace("+", "_"));
 }
 
 function decodeBase64(str) {
     try {
-        const binary = atob(decodeURIComponent(str));
+        const binary = atob(decodeURIComponent(str).replace("_", "+"));
         const bytes = new Uint8Array(binary.length);
         for (let i = 0; i < binary.length; i++) {
             bytes[i] = binary.charCodeAt(i);
