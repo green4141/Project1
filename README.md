@@ -7,7 +7,7 @@
 <br/><br/><br/>
 
 ## 기술 스택  
-### src="https://img.shields.io/badge/HTML5-20232A?style=for-the-badge&logo=html5&logoColor=61DAFB"/></a><img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white"/></a><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/><img src="https://img.shields.io/badge/MariaDB-005C84?style=for-the-badge&logo=mariadb&logoColor=white"/></a><img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+### <src="https://img.shields.io/badge/HTML5-20232A?style=for-the-badge&logo=html5&logoColor=61DAFB"/></a><img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white"/></a><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/><img src="https://img.shields.io/badge/MariaDB-005C84?style=for-the-badge&logo=mariadb&logoColor=white"/></a><img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <br/><br/><br/>
     
 
