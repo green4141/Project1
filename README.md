@@ -1,5 +1,5 @@
 # [김일이삼] Tjoeun Academy Board
-2025 더조은 아카데미 1차 프로젝트 HYANGWOMAN UNIV 2024-Capstone<br/><br/><br/>
+2025 더조은 아카데미 1차 프로젝트<br/><br/><br/>
   
   
 ## 서비스 소개  
