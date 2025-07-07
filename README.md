@@ -8,7 +8,25 @@
 <br/><br/><br/>
   
 ## 실행방법
+Tomcat v9.0<br/>
+스프링 서버 구동을 위한 Apache Tomcat<br/><br/>
 
+MariaDB v10.11.6<br/>
+데이터 보관 및 처리를 위한 데이터베이스<br/><br/>
+
+JAVA v11<br/>
+Spring 5.2.2버전과 합이 좋은 버전<br/><br/>
+
+Spring 5.2.2 RELEASE<br/>
+MVC 웹서버 (백엔드 및 프론트엔드)<br/><br/>
+
+Nginx v1.22.1<br/>
+서버 리버스 프록시 구현<br/>
+한 대의 기기로 여러 서비스에 접근제어<br/><br/>
+
+Docker v28.0.0<br/>
+가상 환경을 통해 한 대의 기기로<br/>
+여러 서비스를 구동
 <br/><br/><br/>
 
 ## 기술 스택  
